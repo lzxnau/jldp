@@ -2,3 +2,5 @@
 [JLDP RTD Link](https://jldp.readthedocs.io)
 
 update: 20231118
+
+load into Ubuntu
