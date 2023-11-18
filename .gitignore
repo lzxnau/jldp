@@ -2,24 +2,30 @@
 !/.gitignore
 !/LICENSE
 !/README.md
-!/.readthedocs.yaml
-!/requirements.txt
 !/doc/
+!/cfg/
 !/src/
 
 /doc/**/*
-!/doc/README.rst
 !/doc/README.md
+
+/cfg/**/*
+!/cfg/readthedocs.yaml
+!/cfg/requirements.txt
+!/cfg/pip*.txt
 
 /src/**/*
 !/src/**/*/
 !/src/conf.py
-!/src/**/*.rst
-!/src/**/*.md
+!/src/index.md
 !/src/_static/css/*.css
 !/src/_static/js/*.js
-!/src/pns/*/**/*.py
-!/src/jpl/*/**/*.ipynb
+!/src/_templates/autosummary/*.rst
+!/src/jlpy/**/*.py
+!/src/jlpy/**/index.rst
+!/src/jlpy/**/index.md
+!/src/jljl/**/*.ipynb
+!/src/jljl/**/index.md
+!/src/jlmd/**/*.md
 
-/src/pns/**/_*/
-/src/jpl/**/.ipynb_checkpoints/
+/src/jljl/**/.ipynb_checkpoints/

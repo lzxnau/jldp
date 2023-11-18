@@ -1,0 +1,107 @@
+.fgr {
+    color: red;
+}
+
+.bgr {
+    background: red;
+}
+
+.fgg {
+    color: green;
+}
+
+.bgg {
+    background: green;
+}
+
+.fgy {
+    color: yellow;
+}
+
+.bgy {
+    background: yellow;
+}
+
+.fgb {
+    color: blue;
+}
+
+.bgb {
+    color: white;
+    background: blue;
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.pcls {
+    color: #73D0FF;
+    background-color: #000504;
+    border-radius: 5px;
+    padding: 1px 2px;
+}
+
+.pfxn {
+    color: #FFD173;
+    background-color: #000504;
+    border-radius: 5px;
+    padding: 1px 2px;
+}
+
+.wpg {
+    color: green;
+    border-style: solid;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    border-radius: 5px;
+    padding: 1px 2px;
+}
+
+.wpr {
+    color: red;
+    background-color: yellow;
+    border-style: solid;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    border-radius: 5px;
+    padding: 1px 2px;
+}
+
+.blc {
+    border-style: solid;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 4px 2px;
+}
+
+.bls {
+    border-top-style: solid;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    padding: 2px;
+}
+
+.bldl {
+    border-style: solid;
+    border-width: 1px;
+    border-color: cornflowerblue;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+}
+
+.ddc {
+    border-style: none;
+}
+
+.ddt {
+    border-color: cornflowerblue;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.ddb {
+    padding: 0;
+}
