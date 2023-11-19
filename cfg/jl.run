@@ -2,9 +2,11 @@
 
 cd $JLDPDIR
 docker pull $JLDPIMG
+export CFG="jupyter_server_config.json"
 docker run -it --rm --name Jupyter -h Jupyter \
        --network dnet --ip 10.10.0.13 \
        -p 8888:8888 \
+       -v $JLDPDIR/img/jl/$CFG:/root/.jupyter/$CFG \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
-       $JLDPIMG bash
+       $JLDPIMG img/jl/dock.run
