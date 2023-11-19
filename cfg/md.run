@@ -7,4 +7,3 @@ docker run -it --rm --name JLDP -h JLDP \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
        $JLDPIMG img/md/dock.run
-
