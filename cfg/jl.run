@@ -2,8 +2,8 @@
 
 cd $JLDPDIR
 docker pull $JLDPIMG
-docker run -it --rm --name JLDP -h JLDP \
-       --network dnet --ip 10.10.0.11 \
+docker run -it --rm --name Jupyter -h Jupyter \
+       --network dnet --ip 10.10.0.13 \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
-       $JLDPIMG bash
+       $JLDPIMG img/jl/dock.run

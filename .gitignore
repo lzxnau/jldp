@@ -17,7 +17,6 @@
 
 /img/**/*
 !/img/pack.py
-!/img/pip*.txt
 !/img/*/
 !/img/*/dock.run
 !/img/*/requirements.txt

@@ -1,9 +1,7 @@
 #!/usr/bin/bash
 
-cd $JLDPDIR
-docker pull $JLDPIMG
-docker run -it --rm --name JLDP -h JLDP \
-       --network dnet --ip 10.10.0.11 \
-       -v $JLDPDIR:/app -w /app \
-       -e TZ=Australia/Sydney \
-       $JLDPIMG bash
+cd img/jl
+python -m venv venv
+source venv/bin/activate
+pip install --no-cache-dir -r requirements.txt
+
