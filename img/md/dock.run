@@ -18,5 +18,9 @@ if [ "$PIP_CHANGES" == "True" ]; then
 fi
 
 rm venv/up.txt
-deactivate
 cd $APP
+export PATH=$PATH:$(APP)/img/md/venv/bin
+
+sphinx-build -M html src doc
+
+deactivate
