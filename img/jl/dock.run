@@ -20,12 +20,12 @@ rm venv/up.txt
 cd /app
 export PATH=$PATH:/app/img/jl/venv/bin
 
-jupyter server password
-cp /root/.jupyter/jupyter_server_config.json ./
+# jupyter server password
+# cp /root/.jupyter/jupyter_server_config.json ./
 
 export PYTHONPATH=/app/src/jlpy
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 jupyter-lab --no-browser --allow-root --notebook-dir=src/jljl
-  --config="jupyter_server_config.json" --ip='0.0.0.0'
+  --config=img/jl/jupyter_server_config.json --ip='0.0.0.0'
 
 deactivate
