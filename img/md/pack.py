@@ -5,18 +5,12 @@ apps += ' Sphinx myst-parser sphinx_rtd_theme sphinx_gallery'
 apps += ' sphinx_design sphinxcontrib-mermaid nbsphinx ipykernel'
 apps += ' sphinx-copybutton sphinx-togglebutton'
 
-# Develop Packages
-apps += ' numpy pandas matplotlib seaborn scipy scikit-learn'
-apps += ' opencv-python albumentations'
-apps += ' torch torchtext torchaudio torchvision'
-
-
 def writeFx(d: dict) -> bool:
   if len(d) == 0:
     return False
-  
+
   name = 'requirements.txt'
-  
+
   with open(name, 'r') as fr:
     lines = fr.readlines()
     for i, line in enumerate(lines):
@@ -27,12 +21,11 @@ def writeFx(d: dict) -> bool:
       key = line[0:index]
       if key in d:
         lines[i] = line.replace(line[index + 2:], d[key] + '\n')
-  
+
   with open(name, 'w') as fw:
     fw.writelines(lines)
-  
-  return True
 
+  return True
 
 def check(lines: list) -> None:
   fd = dict()
@@ -40,9 +33,9 @@ def check(lines: list) -> None:
     wl = line.split()
     if wl[0] in apps:
       fd[wl[0]] = wl[2]
-  
+
   rt = writeFx(fd)
-  
+
   if rt == 0:
     print('PIP_CHANGES=False')
   else:
