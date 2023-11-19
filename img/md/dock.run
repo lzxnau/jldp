@@ -4,7 +4,7 @@ cd img/md
 source venv/bin/activate
 pip list -o > venv/up.txt
 
-eval "$(python pack.py)"
+eval "$(python /app/img/pack.py)"
 
 echo "PIP Changes: $PIP_CHANGES"
 if [ "$PIP_CHANGES" == "True" ]; then

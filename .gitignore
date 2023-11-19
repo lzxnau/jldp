@@ -16,10 +16,10 @@
 !/cfg/*.run
 
 /img/**/*
+!/img/pack.py
 !/img/pip*.txt
 !/img/*/
 !/img/*/dock.run
-!/img/*/pack.py
 !/img/*/requirements.txt
 
 /src/**/*
