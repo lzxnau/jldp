@@ -1,6 +1,5 @@
 #!/usr/bin/bash
 
-export APP=/app
 cd img/md
 source venv/bin/activate
 pip list -o > venv/up.txt
@@ -10,7 +9,7 @@ eval "$(python pack.py)"
 echo "PIP Changes: $PIP_CHANGES"
 if [ "$PIP_CHANGES" == "True" ]; then
     deactivate
-    cp -f requirements.txt $(APP)/cfg/
+    cp -f requirements.txt /app/cfg/
     rm -rf venv
     python -m venv venv
     source venv/bin/activate
@@ -18,9 +17,9 @@ if [ "$PIP_CHANGES" == "True" ]; then
 fi
 
 rm venv/up.txt
-cd $APP
-export PATH=$PATH:$(APP)/img/md/venv/bin
+cd /app
+export PATH=$PATH:/app/img/md/venv/bin
 
-sphinx-build -M html $(APP)/src $(APP)/doc
+sphinx-build -M html /app/src /app/doc
 
 deactivate
