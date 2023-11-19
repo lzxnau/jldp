@@ -21,8 +21,7 @@
 !/img/*/dock.run
 !/img/*/requirements.txt
 !/img/jl/jupyter/
-!/img/jl/jupyter/**/*
-
+!/img/jl/jupyter/jupyter_server_config.json
 
 /src/**/*
 !/src/**/*/
