@@ -7,4 +7,4 @@ docker run -it --rm --name WEB -h WEB \
        -p 8080:80 \
        -v $JLDPDIR/doc/html:/usr/share/nginx/html:ro \
        -e TZ=Australia/Sydney \
-       nginx:alpine-slim ash
+       nginx:alpine-slim
