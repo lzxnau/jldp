@@ -21,6 +21,6 @@ rm venv/up.txt
 cd $APP
 export PATH=$PATH:$(APP)/img/md/venv/bin
 
-sphinx-build -M html $(APP)/src $(APP)/doc
+sphinx-build -M html ./src ./doc
 
 deactivate
