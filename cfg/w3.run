@@ -2,7 +2,7 @@
 
 cd $JLDPDIR
 docker pull nginx:alpine-slim
-docker run -d --rm --name WEB -h WEB \
+docker run -it --rm --name WEB -h WEB \
        --network dnet --ip 10.10.0.12 \
        -p 8080:80 \
        -v $JLDPDIR/doc/html:/usr/share/nginx/html:ro \
