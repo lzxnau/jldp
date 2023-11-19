@@ -56,7 +56,7 @@ def getPList() -> None:
       plist.append(key)
 
 def main() -> None:
-  getPlist()
+  getPList()
   with open(uname, 'r') as f:
     lines = f.readlines()
     check(lines)
