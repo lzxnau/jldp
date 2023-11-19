@@ -4,7 +4,7 @@ cd $JLDPDIR
 docker pull $JLDPIMG
 docker run -it --rm --name Jupyter -h Jupyter \
        --network dnet --ip 10.10.0.13 \
-       -p 8080:80 \
+       -p 8888:8888 \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
        $JLDPIMG img/jl/dock.run

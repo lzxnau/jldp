@@ -20,6 +20,8 @@ rm venv/up.txt
 cd /app
 export PATH=$PATH:/app/img/jl/venv/bin
 
+jupyter server password --config=juptyer_server_config.json
+
 export PYTHONPATH=/app/src/jlpy
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 jupyter-lab --no-browser --allow-root \
