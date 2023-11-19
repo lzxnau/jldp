@@ -7,4 +7,4 @@ docker run -it --rm --name Jupyter -h Jupyter \
        -p 8888:8888 \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
-       $JLDPIMG img/jl/dock.run
+       $JLDPIMG bash
