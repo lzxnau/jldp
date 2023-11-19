@@ -18,7 +18,8 @@
 /img/**/*
 !/img/pip*.txt
 !/img/*/
-!/img/*/*.run
+!/img/*/dock.run
+!/img/*/pack.py
 
 /src/**/*
 !/src/**/*/
