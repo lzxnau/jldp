@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-export APP=$pwd
+export APP=/app
 cd img/md
 source venv/bin/activate
 pip list -o > venv/up.txt
@@ -21,6 +21,6 @@ rm venv/up.txt
 cd $APP
 export PATH=$PATH:$(APP)/img/md/venv/bin
 
-sphinx-build -M html ./src ./doc
+sphinx-build -M html $(APP)/src $(APP)/doc
 
 deactivate
