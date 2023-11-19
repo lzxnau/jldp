@@ -1,3 +1,5 @@
 #!/usr/bin/bash
 
-ls
+source img/md/venv/bin/activate
+pip list -o
+
