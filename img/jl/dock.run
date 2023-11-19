@@ -1,6 +1,22 @@
 #!/usr/bin/bash
 
 cd img/jl
-python -m venv venv
 source venv/bin/activate
-pip install --cache-dir cache -r requirements.txt
+pip list -o > venv/up.txt
+
+eval "$(python /app/img/pack.py)"
+
+echo "PIP Changes: $PIP_CHANGES"
+if [ "$PIP_CHANGES" == "True" ]; then
+    deactivate
+    rm -rf venv
+    python -m venv venv
+    source venv/bin/activate
+    pip install --cache-dir cache -r requirements.txt
+fi
+
+rm venv/up.txt
+cd /app
+export PATH=$PATH:/app/img/jl/venv/bin
+
+deactivate
