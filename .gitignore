@@ -4,6 +4,7 @@
 !/README.md
 !/doc/
 !/cfg/
+!/img/
 !/src/
 
 /doc/**/*
@@ -12,7 +13,12 @@
 /cfg/**/*
 !/cfg/readthedocs.yaml
 !/cfg/requirements.txt
-!/cfg/pip*.txt
+!/cfg/*.run
+
+/img/**/*
+!/img/pip*.txt
+!/img/*/
+!/img/*/*.run
 
 /src/**/*
 !/src/**/*/
