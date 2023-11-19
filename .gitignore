@@ -20,6 +20,7 @@
 !/img/*/
 !/img/*/dock.run
 !/img/*/pack.py
+!/img/*/requirements.txt
 
 /src/**/*
 !/src/**/*/

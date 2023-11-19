@@ -1,5 +1,5 @@
 #!/usr/bin/bash
 
 source img/md/venv/bin/activate
-pip list -o
+pip install --no-cache-dir -r img/md/requirements.txt
 
