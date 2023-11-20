@@ -2,6 +2,7 @@
 
 cd img/py
 source venv/bin/activate
+pip install opencv-python-headless
 pip install --cache-dir cache -r requirements.txt
 pip list -o > venv/up.txt
 
