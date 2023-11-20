@@ -1,9 +1,31 @@
 #!/usr/bin/bash
 
-cd $JLDPDIR
-docker pull $JLDPIMG
-docker run -it --rm --name JLDP -h JLDP \
-       --network dnet --ip 10.10.0.11 \
-       -v $JLDPDIR:/app -w /app \
-       -e TZ=Australia/Sydney \
-       $JLDPIMG bash
+cd img/py
+
+python -m venv venv
+source venv/bin/activate
+pip install --cache-dir cache -r requirements.txt
+deactivate
+
+source venv/bin/activate
+pip install --cache-dir cache -r requirements.txt
+pip list -o > venv/up.txt
+
+eval "$(python /app/img/pack.py)"
+
+echo "PIP Changes: $PIP_CHANGES"
+if [ "$PIP_CHANGES" == "True" ]; then
+    deactivate
+    rm -rf venv
+    python -m venv venv
+    source venv/bin/activate
+    pip install --cache-dir cache -r requirements.txt
+fi
+
+rm venv/up.txt
+cd /app/src/jljl
+
+pyrun=(
+    "/app/src/jlpy/pytorch/examples/cv/ic/lions_cheetahs.py")
+
+python ${pyrun[0]}
