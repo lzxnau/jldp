@@ -1,12 +1,6 @@
 #!/usr/bin/bash
 
 cd img/py
-
-python -m venv venv
-source venv/bin/activate
-pip install --cache-dir cache -r requirements.txt
-deactivate
-
 source venv/bin/activate
 pip install --cache-dir cache -r requirements.txt
 pip list -o > venv/up.txt
