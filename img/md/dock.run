@@ -19,8 +19,6 @@ fi
 
 rm venv/up.txt
 cd /app
+
 export PATH=$PATH:/app/img/md/venv/bin
-
 sphinx-build -M html /app/src /app/doc
-
-deactivate
