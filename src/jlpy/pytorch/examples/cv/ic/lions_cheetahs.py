@@ -24,7 +24,9 @@ from torch.utils.data import (
 )
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
+
 # end import
+
 
 class Cfg:
     """
@@ -121,7 +123,7 @@ class Explore:
         dfs = dfs.sample(frac=1).reset_index(drop=True)
 
         # Step 4
-        fig, ax = plt.subplots(2, 3, figsize=(10, 6))
+        _, ax = plt.subplots(2, 3, figsize=(10, 6))
 
         # Step 5
         for i in range(2):
