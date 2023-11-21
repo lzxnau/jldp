@@ -16,7 +16,7 @@ import random as rand
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import cv2 as cv2
+import cv2
 from torch import tensor
 from torch.utils.data import (
     Dataset,
@@ -24,12 +24,9 @@ from torch.utils.data import (
 )
 import albumentations as A
 from albumentations.pytorch import ToTensorV2
-
-
 # end import
 
-
-class cfg:
+class Cfg:
     """
     Static configurations for the project.
 
@@ -58,36 +55,38 @@ class cfg:
     batch_size = 8
 
     @staticmethod
-    def loadDF() -> pd.DataFrame:
+    def loadDF() -> None:
         """
     Load data into a pandas dataframe.
-    
+
     From the local drive, extract all file paths and their corresponding \
     labels, and save them in a pandas DataFrame with two columns: file_path\
     and label.
-    
-    :return: A pandas DataFrame instance.
-    :rtype: pd.DataFrame
     """
-        if cfg.img_df is None:
+        if Cfg.img_df is None:
             data = []
-            sub_paths = [join(cfg.img_path, x) for x in cfg.sub_dirs]
-            for s, l in zip(sub_paths, cfg.labels):
+            sub_paths = [join(Cfg.img_path, x) for x in Cfg.sub_dirs]
+            for s, l in zip(sub_paths, Cfg.labels):
                 for f in os.listdir(s):
                     if ".jpg" in f and isfile(p := join(s, f)):
                         data.append((p, l))
-            cfg.img_df = pd.DataFrame(data, columns=["file_path", "label"])
+            Cfg.img_df = pd.DataFrame(data, columns=["file_path", "label"])
 
-        return cfg.img_df
+    @classmethod
+    def __class__getitem__(cls, name):
+        """
+        Return class attribute.
+        """
+        return cls[name]
 
 
 class Explore:
     """
   Prepare and Explore Data.
-  
+
   This is the first step to explore the source data and to become familiar \
   with the data.
-  
+
   .. card::
   """
 
@@ -96,8 +95,8 @@ class Explore:
         """
         Count images by the category of the labels.
         """
-        print(cfg.loadDF().groupby(["label"]).count())
-        sns.countplot(cfg.loadDF(), x="label")
+        print(Cfg.img_df.groupby(["label"]).count())
+        sns.countplot(Cfg.loadDF(), x="label")
 
     @staticmethod
     def sampImgs() -> None:
@@ -112,7 +111,7 @@ class Explore:
         6. Plotting the figures.
         """
         # Step 1
-        dfg = cfg.loadDF().groupby("label")
+        dfg = Cfg.loadDF().groupby("label")
 
         # Step 2
         dfs = dfg.apply(lambda x: x.sample(3, replace=False))
@@ -154,11 +153,11 @@ class ImgsDataset(Dataset):
         """
         ImgsDataset constractor.
         """
-        self.file_paths = cfg.loadDF()["file_path"].values
-        self.labels = cfg.loadDF()["label"].values
+        self.file_paths = Cfg[img_df]["file_path"].values
+        self.labels = Cfg.img_df["label"].values
         self.transform = A.Compose(
             [
-                A.Resize(cfg.img_size, cfg.img_size),
+                A.Resize(Cfg.img_size, Cfg.img_size),
                 ToTensorV2(),
             ]
         )
@@ -205,7 +204,7 @@ class ImgsDataset(Dataset):
 
         Optional method for testing purposes.
         """
-        dl = DataLoader(self, batch_size=cfg.batch_size, shuffle=True, num_workers=0)
+        dl = DataLoader(self, batch_size=Cfg.batch_size, shuffle=True, num_workers=0)
         for batch_img, batch_label in dl:
             print(batch_img.shape)
             print(batch_label.shape)
@@ -213,5 +212,6 @@ class ImgsDataset(Dataset):
 
 
 if __name__ == "__main__":
+    Cfg.loadDF()
     ids = ImgsDataset()
     ids.sampDemo()
