@@ -5,5 +5,5 @@
    :toctree: _modules
    :recursive:
 
-   ic
+   examples.cv.ic
 ```
