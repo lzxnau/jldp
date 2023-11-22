@@ -56,30 +56,33 @@ class Cfg:
     img_df = None
     batch_size = 8
 
-    @staticmethod
-    def loadDF() -> None:
+    @classmethod
+    def load_df(cls) -> None:
         """
-    Load data into a pandas dataframe.
+        Load data into a pandas dataframe.
 
-    From the local drive, extract all file paths and their corresponding \
-    labels, and save them in a pandas DataFrame with two columns: file_path\
-    and label.
-    """
-        if Cfg.img_df is None:
+        From the local drive, extract all file paths and their corresponding \
+        labels, and save them in a pandas DataFrame with two columns: file_path\
+        and label.
+        """
+        if cls.img_df is None:
             data = []
-            sub_paths = [join(Cfg.img_path, x) for x in Cfg.sub_dirs]
-            for s, l in zip(sub_paths, Cfg.labels):
+            sub_paths = [join(cls.img_path, x) for x in cls.sub_dirs]
+            for s, l in zip(sub_paths, cls.labels):
                 for f in os.listdir(s):
                     if ".jpg" in f and isfile(p := join(s, f)):
                         data.append((p, l))
-            Cfg.img_df = pd.DataFrame(data, columns=["file_path", "label"])
+            cls.img_df = pd.DataFrame(data, columns=["file_path", "label"])
 
     @classmethod
-    def __class__getitem__(cls, name):
+    def get_df(cls) -> pd.DataFrame:
         """
         Return class attribute.
         """
-        return cls[name]
+        if not cls.img_df:
+            cls.load_df()
+
+        return cls.img_df
 
 
 class Explore:
@@ -93,15 +96,15 @@ class Explore:
   """
 
     @staticmethod
-    def cntImgs() -> None:
+    def cnt_imgs() -> None:
         """
         Count images by the category of the labels.
         """
-        print(Cfg.img_df.groupby(["label"]).count())
-        sns.countplot(Cfg.loadDF(), x="label")
+        print(Cfg.get_df().groupby(["label"]).count())
+        sns.countplot(Cfg.get_df(), x="label")
 
     @staticmethod
-    def sampImgs() -> None:
+    def samp_imgs() -> None:
         """
         Show sample images from the category of each label.
 
@@ -113,7 +116,7 @@ class Explore:
         6. Plotting the figures.
         """
         # Step 1
-        dfg = Cfg.loadDF().groupby("label")
+        dfg = Cfg.get_df().groupby("label")
 
         # Step 2
         dfs = dfg.apply(lambda x: x.sample(3, replace=False))
@@ -137,7 +140,7 @@ class Explore:
 
                 ax[i, j].imshow(image)
                 ax[i, j].set_title(
-                    f"Label: {label} ({'Lion' if label == 0 else 'Cheetah'})"
+                    f"Label: {label} ({'Lion' if not label else 'Cheetah'})"
                 )
                 ax[i, j].axis("off")
 
@@ -155,8 +158,9 @@ class ImgsDataset(Dataset):
         """
         ImgsDataset constractor.
         """
-        self.file_paths = Cfg[img_df]["file_path"].values
-        self.labels = Cfg.img_df["label"].values
+        df = Cfg.get_df()
+        self.file_paths = df.loc[:, "file_path"].values
+        self.labels = df.loc[:, "label"].values
         self.transform = A.Compose(
             [
                 A.Resize(Cfg.img_size, Cfg.img_size),
@@ -189,7 +193,7 @@ class ImgsDataset(Dataset):
 
         return image, label
 
-    def sampDemo(self) -> None:
+    def samp_demo(self) -> None:
         """
         Print five demo samples from the ImgsDataset.
 
@@ -198,15 +202,17 @@ class ImgsDataset(Dataset):
         s = math.floor(len(self.labels) / 5)
         for i in range(5):
             j = rand.randint(i * s, i * s + s)
-            print(self.__getitem__(j))
+            print(self[j])
 
-    def batchDemo(self) -> None:
+    def batch_demo(self) -> None:
         """
         Print demo batch info from the Dataloader.
 
         Optional method for testing purposes.
         """
-        dl = DataLoader(self, batch_size=Cfg.batch_size, shuffle=True, num_workers=0)
+        dl = DataLoader(
+            self, batch_size=Cfg.batch_size, shuffle=True, num_workers=0
+        )
         for batch_img, batch_label in dl:
             print(batch_img.shape)
             print(batch_label.shape)
@@ -214,6 +220,5 @@ class ImgsDataset(Dataset):
 
 
 if __name__ == "__main__":
-    Cfg.loadDF()
     ids = ImgsDataset()
-    ids.sampDemo()
+    ids.samp_demo()
