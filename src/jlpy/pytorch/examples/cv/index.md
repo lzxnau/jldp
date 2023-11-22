@@ -1,9 +1,9 @@
-# pytorch.example.cv
+# example.cv
 
 ```{eval-rst}
 .. autosummary::
    :toctree: _modules
    :recursive:
 
-   ic
+   examples.cv.ic
 ```
