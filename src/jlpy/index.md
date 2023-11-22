@@ -1,4 +1,4 @@
-# JLPY
+# JLPy
 
 Python Package API Documents.
 
