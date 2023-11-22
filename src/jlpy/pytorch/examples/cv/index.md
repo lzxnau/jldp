@@ -5,5 +5,5 @@
    :toctree: _modules
    :recursive:
 
-   # pytorch.examples.cv.ic
+   examples.cv.ic
 ```
