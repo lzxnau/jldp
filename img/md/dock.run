@@ -21,4 +21,7 @@ rm venv/up.txt
 cd /app
 
 export PATH=$PATH:/app/img/md/venv/bin
+rm -rf doc/html
+rm -rf doc/doctrees
+find src/jlpy -type d -name "_modules" -exec rm -rf {} +
 sphinx-build -M html /app/src /app/doc
