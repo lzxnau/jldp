@@ -1,7 +1,7 @@
 import os
 import sys
 
-nps = os.path.abspath('../src/pns')
+nps = os.path.abspath('../src/jlpy')
 sys.path.insert(0, nps)
 
 # -- Project information -----------------------------------------------------
