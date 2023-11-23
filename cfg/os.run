@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source ~/pyvenv/dev311/venv/bin/activate
+
+pyrun=(
+    "../jlpy/pytorch/examples/cv/ic/lions_cheetahs.py")
+
+cd src/jljl
+python3.11 ${pyrun[0]}
+cd $JLDPDIR
+deactivate
