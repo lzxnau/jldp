@@ -16,12 +16,14 @@ import random as rand
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 # import cv2
 from torch import tensor
 from torch.utils.data import (
     Dataset,
     DataLoader,
 )
+
 # import albumentations as A
 # from albumentations.pytorch import ToTensorV2
 
@@ -133,6 +135,7 @@ class Explore:
             for j in range(3):
                 label = dfs.label[i * 3 + j]
                 file_path = dfs.file_path[i * 3 + j]
+                print(file_path)
 
                 # image = cv2.imread(file_path)
                 # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
