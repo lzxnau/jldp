@@ -166,13 +166,6 @@ class ImgsDataset(Dataset):
         self.labels = df.loc[:, "label"].values
         self.transform = None
 
-        """A.Compose(
-            [
-                A.Resize(Cfg.img_size, Cfg.img_size),
-                ToTensorV2(),
-            ]
-        )"""
-
     def __len__(self) -> int:
         """
         Get the size of the dataset.
