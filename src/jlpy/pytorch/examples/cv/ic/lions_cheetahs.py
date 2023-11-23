@@ -81,7 +81,7 @@ class Cfg:
         """
         Return class attribute.
         """
-        if not cls.img_df:
+        if cls.img_df is None:
             cls.load_df()
 
         return cls.img_df
