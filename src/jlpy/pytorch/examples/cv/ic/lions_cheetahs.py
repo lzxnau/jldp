@@ -16,7 +16,7 @@ import random as rand
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import cv2
+# import cv2
 from torch import tensor
 from torch.utils.data import (
     Dataset,
@@ -134,10 +134,10 @@ class Explore:
                 label = dfs.label[i * 3 + j]
                 file_path = dfs.file_path[i * 3 + j]
 
-                image = cv2.imread(file_path)
-                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                image = cv2.resize(image, (256, 256))
-
+                # image = cv2.imread(file_path)
+                # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                # image = cv2.resize(image, (256, 256))
+                image = None
                 ax[i, j].imshow(image)
                 ax[i, j].set_title(
                     f"Label: {label} ({'Lion' if not label else 'Cheetah'})"
@@ -186,10 +186,11 @@ class ImgsDataset(Dataset):
         :rtype: tuple[tensor, int]
         """
         label = self.labels[idx]
-        image = cv2.imread(self.file_paths[idx])
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        image = self.transform(image=image)["image"]
+        # image = cv2.imread(self.file_paths[idx])
+        # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        # image = self.transform(image=image)["image"]
         # image = image / 255
+        image = None
 
         return image, label
 
