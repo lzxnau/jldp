@@ -39,3 +39,4 @@
 !/src/jlmd/**/*.md
 
 /src/jljl/**/.ipynb_checkpoints/
+flycheck*
