@@ -24,8 +24,8 @@ from torch.utils.data import (
     DataLoader,
 )
 
-# import albumentations as A
-# from albumentations.pytorch import ToTensorV2
+import albumentations as A
+from albumentations.pytorch import ToTensorV2
 
 # end import
 
@@ -164,7 +164,12 @@ class ImgsDataset(Dataset):
         df = Cfg.get_df()
         self.file_paths = df.loc[:, "file_path"].values
         self.labels = df.loc[:, "label"].values
-        self.transform = None
+        self.transform = A.Compose(
+            [
+                A.Resize(Cfg.img_size, Cfg.img_size),
+                ToTensorV2(),
+            ]
+        )
 
     def __len__(self) -> int:
         """
@@ -184,11 +189,10 @@ class ImgsDataset(Dataset):
         :rtype: tuple[tensor, int]
         """
         label = self.labels[idx]
-        # image = cv2.imread(self.file_paths[idx])
-        # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # image = self.transform(image=image)["image"]
-        # image = image / 255
-        image = None
+        image = cv2.imread(self.file_paths[idx])
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = self.transform(image=image)["image"]
+        image = image / 255
 
         return image, label
 
