@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 cd $JLDPDIR
-docker pull $JLDPIMG
 docker run -it --rm --name Jupyter -h Jupyter \
        --network dnet --ip 10.10.0.13 \
        -p 8888:8888 \

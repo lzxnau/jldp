@@ -18,6 +18,7 @@
 /img/**/*
 !/img/pack.py
 !/img/*/
+!/img/*/init.run
 !/img/*/dock.run
 !/img/*/requirements.txt
 !/img/jl/jupyter/

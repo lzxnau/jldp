@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 cd $JLDPDIR
-docker pull $JLDPIMG
 docker run -it --rm --name Markdown -h Markdown \
        --network dnet --ip 10.10.0.11 \
        -v $JLDPDIR:/app -w /app \

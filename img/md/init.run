@@ -1,0 +1,20 @@
+#!/usr/bin/bash
+
+cd img/md
+rm -rf venv
+python -m venv venv
+source venv/bin/activate
+pip install --cache-dir cache -r requirements.txt
+pip list -o > venv/up.txt
+
+eval "$(python /app/img/pack.py)"
+
+echo "PIP Changes: $PIP_CHANGES"
+if [ "$PIP_CHANGES" == "True" ]; then
+    deactivate
+    cp -f requirements.txt /app/cfg/
+    rm -rf venv
+    python -m venv venv
+    source venv/bin/activate
+    pip install --cache-dir cache -r requirements.txt
+fi
