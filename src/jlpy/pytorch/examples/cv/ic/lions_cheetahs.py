@@ -51,7 +51,7 @@ class Cfg:
     .. card::
     """
 
-    img_path = "../../res/images"
+    img_path = os.environ.get("JLDPDIR") + "/res/images"
     sub_dirs = ("Lions", "Cheetahs")
     labels = (0, 1)
     img_size = 256

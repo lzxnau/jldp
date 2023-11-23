@@ -4,6 +4,7 @@ source img/jl/venv/bin/activate
 
 export PATH=$PATH:/app/img/jl/venv/bin
 export PYTHONPATH=/app/src/jlpy
+export JLDPDIR=/app
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 jupyter-lab --no-browser --allow-root --notebook-dir=src/jljl \
   --ip='0.0.0.0'

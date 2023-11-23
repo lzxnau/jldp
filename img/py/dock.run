@@ -5,5 +5,5 @@ source img/py/venv/bin/activate
 pyrun=(
     "/app/src/jlpy/pytorch/examples/cv/ic/lions_cheetahs.py")
 
-cd /app/src/jljl
+export JLDPDIR=/app
 python ${pyrun[0]}
