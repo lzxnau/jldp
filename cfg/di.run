@@ -23,3 +23,5 @@ docker run -it --rm --name Python -h Python \
        $JLDPIMG img/py/init.run
 
 docker pull nginx:alpine-slim
+
+echo "Init Done."

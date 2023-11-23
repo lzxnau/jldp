@@ -4,7 +4,7 @@ cd img/jl
 rm -rf venv
 python -m venv venv
 source venv/bin/activate
-pip install --cache-dir cache -r requirements.txt
+pip install --cache-dir /app/img/cache -r requirements.txt
 pip list -o > venv/up.txt
 
 eval "$(python /app/img/pack.py)"
@@ -15,5 +15,5 @@ if [ "$PIP_CHANGES" == "True" ]; then
     rm -rf venv
     python -m venv venv
     source venv/bin/activate
-    pip install --cache-dir cache -r requirements.txt
+    pip install --cache-dir /app/img/cache -r requirements.txt
 fi
