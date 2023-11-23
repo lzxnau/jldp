@@ -135,7 +135,6 @@ class Explore:
             for j in range(3):
                 label = dfs.label[i * 3 + j]
                 file_path = dfs.file_path[i * 3 + j]
-                print(file_path)
 
                 image = cv2.imread(file_path)
                 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -223,5 +222,7 @@ class ImgsDataset(Dataset):
 
 
 if __name__ == "__main__":
-    ids = ImgsDataset()
-    ids.samp_demo()
+    Explore.cnt_imgs()
+    Explore.samp_imgs()
+    # ids = ImgsDataset()
+    # ids.samp_demo()
