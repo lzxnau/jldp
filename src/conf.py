@@ -1,8 +1,8 @@
 import os
 import sys
 
-# nps = os.path.abspath('../src')
-# sys.path.insert(0, nps)
+nps = os.path.abspath('../src')
+sys.path.insert(0, nps)
 
 # -- Project information -----------------------------------------------------
 project = 'JLDP'
