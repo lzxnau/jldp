@@ -17,7 +17,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# import cv2
+import cv2
 from torch import tensor
 from torch.utils.data import (
     Dataset,
@@ -137,10 +137,10 @@ class Explore:
                 file_path = dfs.file_path[i * 3 + j]
                 print(file_path)
 
-                # image = cv2.imread(file_path)
-                # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                # image = cv2.resize(image, (256, 256))
-                image = None
+                image = cv2.imread(file_path)
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                image = cv2.resize(image, (256, 256))
+
                 ax[i, j].imshow(image)
                 ax[i, j].set_title(
                     f"Label: {label} ({'Lion' if not label else 'Cheetah'})"

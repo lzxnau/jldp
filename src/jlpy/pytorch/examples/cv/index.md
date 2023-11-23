@@ -1,4 +1,4 @@
-# example.cv
+# examples.cv
 
 ```{eval-rst}
 .. autosummary::
