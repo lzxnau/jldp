@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
-apt-get update && apt-get install haskell-platform -y
+apt-get update && apt-get install pandoc -y
+
 source img/md/venv/bin/activate
 
 export PATH=$PATH:/app/img/md/venv/bin
