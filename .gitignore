@@ -11,7 +11,7 @@
 !/doc/README.md
 
 /cfg/**/*
-!/cfg/readthedocs.yaml
+!/cfg/.readthedocs.yaml
 !/cfg/requirements.txt
 !/cfg/*.run
 
