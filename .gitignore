@@ -37,6 +37,8 @@
 !/src/jljl/**/*.ipynb
 !/src/jljl/**/index.md
 !/src/jlmd/**/*.md
+!/src/jlmd/ubuntu/init.el
+!/src/jlmd/ubuntu/bashrc
 
 /src/jljl/**/.ipynb_checkpoints/
 flycheck*
