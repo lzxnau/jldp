@@ -1,8 +1,8 @@
 import os
 import sys
 
-# pypath = os.environ.get("JLDPDIR") + "/src/jlpy"
-sys.path.insert(0, "src/jlpy")
+pypath = os.path.abspath('jlpy')
+sys.path.insert(0, pypath)
 
 # -- Project information -----------------------------------------------------
 project = "JLDP"
