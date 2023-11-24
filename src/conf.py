@@ -8,8 +8,8 @@ sys.path.insert(0, pypath)
 project = "JLDP"
 copyright = "2023, JLDP"
 author = "JLDP"
-release = "2023.11.04"
-version = "2023.11.04.3"
+release = "2023.11.24"
+version = "2023.11.24.5"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
