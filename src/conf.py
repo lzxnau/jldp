@@ -2,7 +2,7 @@ import os
 import sys
 
 # pypath = os.environ.get("JLDPDIR") + "/src/jlpy"
-sys.path.insert(0, "jlpy")
+sys.path.insert(0, "src/jlpy")
 
 # -- Project information -----------------------------------------------------
 project = "JLDP"
