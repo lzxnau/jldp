@@ -1,5 +1,7 @@
 #!/usr/bin/bash
 
+apt-get update && apt-get install node -y
+
 source img/jl/venv/bin/activate
 
 export PATH=$PATH:/app/img/jl/venv/bin
