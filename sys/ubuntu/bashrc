@@ -142,10 +142,11 @@ source "$OSH"/oh-my-bash.sh
 
 export LANG=en_US.UTF-8
 
-export JLDPDIR="$HOME/repo/jldp"
-export JLDPIMG="python:3.11-bookworm"
-export PATH="$PATH:$JLDPDIR/cfg"
-
 alias ls="ls -alho --color=auto --group-directories-first"
 alias gitu="git add . && git commit -m 'update' && git push"
 alias gitp="git pull"
+
+# project jldp
+export JLDPDIR="$HOME/repo/jldp"
+export JLDPIMG="python:3.11-bookworm"
+export PATH="$PATH:$JLDPDIR/cfg"
