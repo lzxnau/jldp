@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+cd $JLDPDIR
+docker run -it --rm --name Bash -h Bash \
+       --network dnet --ip 10.10.0.10 \
+       -v $JLDPDIR:/app -w /app \
+       -e TZ=Australia/Sydney \
+       $JLDPIMG bash
