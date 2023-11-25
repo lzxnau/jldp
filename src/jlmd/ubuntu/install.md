@@ -7,3 +7,5 @@
 5. Update github ssh key for ubuntu.
 6. git clone -c core.sshcommand="ssh -i ~/.ssh/private.key" giturl.
 7. update git config for local repo.
+8. install on-my-bash.
+9. install emacs-nox.
