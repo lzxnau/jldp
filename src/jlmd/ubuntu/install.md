@@ -9,3 +9,6 @@
 7. update git config for local repo.
 8. install on-my-bash.
 9. install emacs-nox.
+10. move .bashrc and init.el to $HOME.
+11. install docker-engine and setup docker network dnet.
+12. add user to docker group for sudo.
