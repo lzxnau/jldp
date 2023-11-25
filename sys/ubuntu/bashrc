@@ -141,8 +141,9 @@ source "$OSH"/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 export LANG=en_US.UTF-8
+export TZ=Australia/Sydney
 
-alias lsa="ls -alho --color=auto --group-directories-first"
+alias lsa="ls -aAlh --group-directories-first"
 alias gitu="git add . && git commit -m 'update' && git push"
 alias gitp="git pull"
 
@@ -150,3 +151,5 @@ alias gitp="git pull"
 export JLDPDIR="$HOME/repo/jldp"
 export JLDPIMG="python:3.11-bookworm"
 export PATH="$PATH:$JLDPDIR/cfg"
+
+alias up="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
