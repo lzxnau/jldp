@@ -39,13 +39,14 @@ In the terminology of machine learning:
 :::
 
 :::{card}
-Linear Regression Model: {math}`{\hat{\mathbf{y}}} = \mathbf{X} \mathbf{w} + b` 
+Linear Regression Model: {math}`{\hat{\mathbf{y}}} = \mathbf{X} \mathbf{w} + b`
 ^^^
 1. {math}`\mathbf{X}`: Design Matrix
    {math}`\mathbf{X} \in \mathbb{R}^{n \times d}`. Here, {math}`\mathbf{X}`
    contains one row for every example and one column for every feature.
-2. The goal of linear regression is to find the weight vector
-   {math}`\mathbf{X}` and the bias term {math}`b`.
+2. Element-wise Operations: Matrix broadcasting with vector.
+3. The goal of linear regression is to find the weight vector
+   {math}`\mathbf{w}` and the bias term {math}`b`.
 :::
 
 ## Regression
