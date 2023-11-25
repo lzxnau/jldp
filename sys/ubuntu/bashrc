@@ -142,7 +142,7 @@ source "$OSH"/oh-my-bash.sh
 
 export LANG=en_US.UTF-8
 
-alias ls="ls -alho --color=auto --group-directories-first"
+alias lsa="ls -alho --color=auto --group-directories-first"
 alias gitu="git add . && git commit -m 'update' && git push"
 alias gitp="git pull"
 
