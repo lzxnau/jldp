@@ -24,6 +24,8 @@
 !/img/*/requirements.txt
 !/img/jl/jupyter/
 !/img/jl/jupyter/jupyter_server_config.json
+!/img/jl/share/
+!/img/jl/share/notebook_secret
 
 /src/**/*
 !/src/**/*/
