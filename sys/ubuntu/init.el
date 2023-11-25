@@ -1,7 +1,7 @@
-;;; package --- macOS init.el
+;;; package --- ubuntu init.el
 
 ;; Author:  Jeffrey Liu
-;; Version: 2023.11.22.16
+;; Version: 2023.11.25.01
 
 ;;; Commentary:
 
@@ -94,8 +94,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(pyvenv python-black flycheck yasnippet-snippets yasnippet ace-window
-            markdown-mode markdown delight which-key helm auto-package-update)))
+   '(flycheck ace-window delight which-key helm auto-package-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -228,8 +227,6 @@
   :delight
   (company-mode)
   :hook
-  (python-mode . company-mode)
-  (markdown-mode . company-mode)
   (sh-mode . company-mode)
   (emacs-lisp-mode . company-mode)
   :config
@@ -244,67 +241,11 @@
   :bind
   ("C-c f" . flycheck-list-errors)
   :hook
-  (python-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
-
-(use-package markdown-mode
-  :ensure t
-  :defer t
-  :delight
-  (markdown-mode "Md"))
-
-(use-package python-black
-  :ensure t
-  :bind
-  ("C-c b" . python-black-buffer)
-  :config
-  (setq python-black-extra-args '("-l" "79" "-t" "py37")))
-
-(use-package yasnippet
-  :ensure t
-  :commands
-  (yas-reload-all)
-  :delight
-  (yas-minor-mode)
-  :bind
-  (:map yas-minor-mode-map
-        ("C-c y" . yas-expand))
-  :hook
-  (python-mode . yas-minor-mode)
-  (markdown-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
-
-(use-package yasnippet-snippets
-  :ensure t
-  :defer t)
-
-(use-package pyvenv
-  :ensure t
-  :config
-  (pyvenv-mode t)
-  (pyvenv-activate "~/pyvenv/dev311/venv"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package emacs
-  :commands
-  (uhd)
-  :init
-  (defun uhd()
-    "init window layout uhd"
-    (interactive)
-    (split-window-right 82)
-    (windmove-right)
-    (split-window-below -15)
-    (split-window-right 82)
-    (windmove-right)
-    (split-window-below)
-    (windmove-down)
-    (windmove-down)
-    (ibuffer)
-    (windmove-left)
-    )
   :bind
   ("C-c h" . beginning-of-buffer)
   ("C-c e" . end-of-buffer)
@@ -340,12 +281,9 @@
           ("\\*compilation\\*"
            display-buffer-no-window
            (allow-no-window . t))))
-  (uhd)
   :delight
   (visual-line-mode)
   (emacs-lisp-mode "EL")
-  (rst-mode "RST")
-  (python-mode "Py")
   (lisp-interaction-mode "LI")
   (eldoc-mode))
 
