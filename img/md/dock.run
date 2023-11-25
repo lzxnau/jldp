@@ -9,4 +9,5 @@ export JLDPDIR=/app
 rm -rf doc/html
 rm -rf doc/doctrees
 find src/jlpy -type d -name "_modules" -exec rm -rf {} +
+find src/jljl -type d -name ".ipynb_checkpoints" -exec rm -rf {} +
 sphinx-build -M html /app/src /app/doc
