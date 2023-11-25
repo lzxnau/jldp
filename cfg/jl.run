@@ -5,6 +5,7 @@ docker run -it --rm --name Jupyter -h Jupyter \
        --network dnet --ip 10.10.0.13 \
        -p 8888:8888 \
        -v $JLDPDIR/img/jl/jupyter:/root/.jupyter \
+       -v $JLDPDIR/img/jl/share:/root/.local/share/jupyter \
        -v $JLDPDIR:/app -w /app \
        -e TZ=Australia/Sydney \
        $JLDPIMG img/jl/dock.run
