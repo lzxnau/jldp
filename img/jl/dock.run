@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-apt-get update && apt-get install node -y
+apt-get update && apt-get install nodejs -y
 
 source img/jl/venv/bin/activate
 
