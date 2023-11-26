@@ -5,7 +5,7 @@ Classify lion or cheetah images using a pre-trained Deep Learning model with
 the PyTorch framework.
 
 :Authors: JLPy
-:Version: 2023.11.04.02
+:Version: 2023.11.26.03
 
 """
 # start import
@@ -15,18 +15,11 @@ import math
 import random as rand
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-
+import seaborn as sns  # type: ignore
 import cv2
-from torch import tensor
-from torch.utils.data import (
-    Dataset,
-    DataLoader,
-)
-
-import albumentations as A
-from albumentations.pytorch import ToTensorV2
-
+from torch.utils.data import Dataset, DataLoader
+import albumentations as al  # type: ignore
+from albumentations.pytorch import ToTensorV2  # type: ignore
 # end import
 
 
@@ -51,11 +44,14 @@ class Cfg:
     .. card::
     """
 
-    img_path = os.environ.get("JLDPDIR") + "/res/images"
+    if jldp := os.environ.get("JLDPDIR"):
+        img_path = jldp + "/res/images"
+    else:
+        img_path = "../res/images"
     sub_dirs = ("Lions", "Cheetahs")
     labels = (0, 1)
     img_size = 256
-    img_df = None
+    img_df = pd.DataFrame([])
     batch_size = 8
 
     @classmethod
@@ -63,45 +59,39 @@ class Cfg:
         """
         Load data into a pandas dataframe.
 
-        From the local drive, extract all file paths and their corresponding \
-        labels, and save them in a pandas DataFrame with two columns: file_path\
+        From the local drive, extract all file paths and their corresponding
+        labels, and save them in a pandas DataFrame with two columns: file_path
         and label.
         """
-        if cls.img_df is None:
-            data = []
-            sub_paths = [join(cls.img_path, x) for x in cls.sub_dirs]
-            for s, l in zip(sub_paths, cls.labels):
-                for f in os.listdir(s):
-                    if ".jpg" in f and isfile(p := join(s, f)):
-                        data.append((p, l))
-            cls.img_df = pd.DataFrame(data, columns=["file_path", "label"])
+        data = []
+        sub_paths = [join(cls.img_path, x) for x in cls.sub_dirs]
+        for s, la in zip(sub_paths, cls.labels):
+            for f in os.listdir(s):
+                if ".jpg" in f and isfile(p := join(s, f)):
+                    data.append((p, la))
+        cls.img_df = pd.DataFrame(data, columns=["file_path", "label"])
 
     @classmethod
     def get_df(cls) -> pd.DataFrame:
-        """
-        Return class attribute.
-        """
-        if cls.img_df is None:
+        """Return class attribute."""
+        if cls.img_df.empty:
             cls.load_df()
-
         return cls.img_df
 
 
 class Explore:
     """
-  Prepare and Explore Data.
+    Prepare and Explore Data.
 
-  This is the first step to explore the source data and to become familiar \
-  with the data.
+    This is the first step to explore the source data and to become familiar
+    with the data.
 
-  .. card::
-  """
+    .. card::
+    """
 
     @staticmethod
     def cnt_imgs() -> None:
-        """
-        Count images by the category of the labels.
-        """
+        """Count images by the category of the labels."""
         print(Cfg.get_df().groupby(["label"]).count())
         sns.countplot(Cfg.get_df(), x="label")
 
@@ -152,20 +142,16 @@ class Explore:
 
 
 class ImgsDataset(Dataset):
-    """
-    A custom subclass of Dataset for loading the images.
-    """
+    """A custom subclass of Dataset for loading the images."""
 
     def __init__(self) -> None:
-        """
-        ImgsDataset constractor.
-        """
-        df = Cfg.get_df()
-        self.file_paths = df.loc[:, "file_path"].values
-        self.labels = df.loc[:, "label"].values
-        self.transform = A.Compose(
+        """ImgsDataset constractor."""
+        mdf = Cfg.get_df()
+        self.file_paths = mdf.loc[:, "file_path"].to_numpy()
+        self.labels = mdf.loc[:, "label"].to_numpy()
+        self.transform = al.Compose(
             [
-                A.Resize(Cfg.img_size, Cfg.img_size),
+                al.Resize(Cfg.img_size, Cfg.img_size),
                 ToTensorV2(),
             ]
         )
@@ -179,7 +165,7 @@ class ImgsDataset(Dataset):
         """
         return len(self.file_paths)
 
-    def __getitem__(self, idx: int) -> tuple[tensor, int]:
+    def __getitem__(self, idx: int):
         """
         Get one element of the dataset.
 
@@ -192,7 +178,6 @@ class ImgsDataset(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = self.transform(image=image)["image"]
         image = image / 255
-
         return image, label
 
     def samp_demo(self) -> None:
