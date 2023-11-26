@@ -1,0 +1,37 @@
+[tool.ruff]
+exclude = [
+    ".git",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+]
+
+line-length = 80
+indent-width = 4
+
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "UP", "D", "PL", "NPY", "PD", "N", "I"]
+ignore = ["D203", "D212"]
+
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.format]
+quote-style = "double"
+
+indent-style = "space"
+
+skip-magic-trailing-comma = false
+
+line-ending = "auto"
