@@ -73,7 +73,7 @@
                           (rename-buffer
                             (generate-new-buffer-name dired-directory))))
   :config
-  (setq dired-listing-switches "-alho --group-directories-first")
+  (setq dired-listing-switches "-aAlh --color=always --group-directories-first")
   (put 'dired-find-alternate-file 'disabled nil))
 
 (use-package sh-script
@@ -94,7 +94,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(flycheck ace-window delight which-key helm auto-package-update)))
+   '(company flycheck ace-window delight which-key helm auto-package-update)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -264,7 +264,6 @@
   (column-number-mode 1)
   (global-visual-line-mode 1)
   (global-auto-revert-mode 1)
-  (indent-tabs-mode -1)
   (global-hl-line-mode 1)
   (setq tab-width 2)
   (setq inhibit-startup-message t)
