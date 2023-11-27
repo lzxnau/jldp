@@ -1,8 +1,9 @@
-# JLPy
+# JLPY
 
-Python Package API Documents.
+JLPY Python Package API Documents
 
 :::{toctree}
-:maxdepth: 1
+:maxdepth: 2
+python/index
 pytorch/index
 :::
