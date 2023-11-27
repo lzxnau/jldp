@@ -1,23 +1,23 @@
 [tool.ruff]
 exclude = [
     ".git",
-    ".pytype",
+    ".idea",
+    ".mypy_cache",
+    ".ropeproject",
     ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "_build",
-    "buck-out",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
+    "cfg"
+    "doc",
+    "img",
+    "res",
+    "src/jljl",
+    "src/jlmd",
+    "sys/ubuntu",
 ]
 
 line-length = 80
 indent-width = 4
 target-version = "py311"
+unsafe-fixes = true
 
 [tool.ruff.lint]
 select = ["F", "E", "W", "UP", "D", "PL", "NPY", "PD", "N", "I"]
