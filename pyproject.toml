@@ -34,6 +34,12 @@ line-ending = "auto"
 [tool.mypy]
 python_version = "3.11"
 
+[[tool.mypy.overrides]]
+module = [
+    "pytorch.*",
+]
+ignore_missing_imports = true
+
 [tool.pylsp-mypy]
 enabled = true
 live_mode = true
