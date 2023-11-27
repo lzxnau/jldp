@@ -2,30 +2,40 @@
 
 Pytorch Package API Documents
 
-## Pytorch Base
+---
+
+Pytorch Base
 
 :::{toctree}
 :maxdepth: 2
 base/index
 :::
 
-## Pytorch Vision
+---
+
+Pytorch Vision
 
 :::{toctree}
 :maxdepth: 2
 vision/index
 :::
 
-## Pytorch Text
+---
+
+Pytorch Text
 
 :::{toctree}
 :maxdepth: 2
 text/index
 :::
 
-## Pytorch Audio
+---
+
+Pytorch Audio
 
 :::{toctree}
 :maxdepth: 2
 audio/index
 :::
+
+---
