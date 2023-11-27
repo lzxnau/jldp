@@ -7,7 +7,7 @@ Version: 2023.11.27.05
 import os
 import sys
 
-pypath = os.path.abspath("jlpy")
+pypath = os.path.abspath(".")
 sys.path.insert(0, pypath)
 
 # -- Project information -----------------------------------------------------
@@ -46,6 +46,7 @@ html_css_files = [
 
 html_theme_options = {
     'collapse_navigation': False,
+    'navigation_depth': 3,
 }
 
 
