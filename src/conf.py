@@ -1,7 +1,13 @@
+"""
+Sphinx and MyST Project Configuration.
+
+Author: JLDP
+Version: 2023.11.27.05
+"""
 import os
 import sys
 
-pypath = os.path.abspath('jlpy')
+pypath = os.path.abspath("jlpy")
 sys.path.insert(0, pypath)
 
 # -- Project information -----------------------------------------------------
