@@ -1,6 +1,4 @@
-"""
-Jupyter Lab Test Python Script.
-"""
+"""Jupyter Lab Test Python Script."""
 
 import pytorch.examples.cv.ic.lions_cheetahs as lc
 
