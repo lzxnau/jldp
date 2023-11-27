@@ -5,7 +5,7 @@ exclude = [
     ".mypy_cache",
     ".ropeproject",
     ".ruff_cache",
-    "cfg"
+    "cfg",
     "doc",
     "img",
     "res",
