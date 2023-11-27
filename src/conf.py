@@ -44,6 +44,11 @@ html_css_files = [
     "css/custom.css",
 ]
 
+html_theme_options = {
+    'collapse_navigation': False,
+}
+
+
 myst_number_code_blocks = ["python"]
 # myst_fence_as_directive = ["mermaid"]
 myst_enable_extensions = [
