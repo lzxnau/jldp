@@ -37,5 +37,3 @@ Pytorch Audio
 :maxdepth: 2
 audio/index
 :::
-
----
