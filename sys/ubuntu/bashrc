@@ -147,8 +147,8 @@ export LC_CTYPE=en_US.UTF-8
 
 export TZ=Australia/Sydney
 
-alias lsa="ls -aAlh --color=always --group-directories-first"
-alias lsrt="ls -aAlhR --color=always --group-directories-first"
+alias lsa="ls -aAlhF --color=always --group-directories-first"
+alias lsrt="ls -aAlhFR --color=always --group-directories-first"
 
 lsr() {
     local dir="$1"
