@@ -1,6 +1,6 @@
 FROM buildpack-deps:bookworm
 
-LABEL MAINTAINER "pne with Python Node.js and Emacs"
+LABEL MAINTAINER "PNE with Python Node.js and Emacs"
 
 ENV USER_NAME=pne
 ENV USER_PASSWORD=pnepne
@@ -22,7 +22,7 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 RUN set -eux; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
-    	sudo curl git \
+        sudo curl git \
         libbluetooth-dev \
         tk-dev \
         uuid-dev \
@@ -97,6 +97,27 @@ RUN set -eux; \
                 [ ! -e "/usr/local/bin/$dst" ]; \
                 ln -svT "$src" "/usr/local/bin/$dst"; \
         done
+
+ENV PYTHON_PIP_VERSION 23.2.1
+ENV PYTHON_SETUPTOOLS_VERSION 65.5.1
+ENV PYTHON_GET_PIP_URL \
+https://github.com/pypa/get-pip/raw/4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
+ENV PYTHON_GET_PIP_SHA256 \
+9cc01665956d22b3bf057ae8287b035827bfd895da235bcea200ab3b811790b6
+
+RUN set -eux; \
+        wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
+        echo "$PYTHON_GET_PIP_SHA256 *get-pip.py" | sha256sum -c -; \
+        export PYTHONDONTWRITEBYTECODE=1; \
+        python get-pip.py \
+               --disable-pip-version-check \
+               --no-cache-dir \
+               --no-compile \
+               "pip==$PYTHON_PIP_VERSION" \
+               "setuptools==$PYTHON_SETUPTOOLS_VERSION" \
+        ; \
+        rm -f get-pip.py; \
+        pip --version
 
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
