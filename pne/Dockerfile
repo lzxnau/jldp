@@ -186,16 +186,20 @@ ENV EMACS_VERSION=29.1
 
 RUN set -eux; \
         curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
-            | tar -xzv
-#        apt install -y \
+            | tar -xzv; \
+        apt install -y \
 #            apt-transport-https \
 #            ca-certificates \
 #            gnupg-agent \
 #            software-properties-common \
+             libgnutls28-dev \
+             libjansson-dev \
 #            gcc-10 libgccjit0 libgccjit-10-dev \
 #            libjansson4 libjansson-dev
 
 # ENV CC="gcc-10"
+# ./configure --with-native-compilation --without-sound --without-x \
+# --without-compress-install --with-json --with-mailutils
 
 ################################################################################
 # End: emacs
