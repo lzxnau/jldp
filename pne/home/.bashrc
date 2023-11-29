@@ -140,6 +140,12 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_CTYPE=C.UTF-8
+# export LC_ALL=C
+export TZ=Australia/Sydney
+
 alias lsa="ls -aAlhF --color=always --group-directories-first"
 alias lsrt="ls -aAlhFR --color=always --group-directories-first"
 
