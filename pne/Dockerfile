@@ -196,7 +196,7 @@ RUN cd /emacs-$EMACS_VERSION && ./autogen.sh && \
        ./configure --with-native-compilation --without-sound --without-x \
                    --without-compress-install --with-json --with-mailutils
 
-RUN make -j 4 && make install
+RUN cd /emacs-$EMACS_VERSION && make -j 4 && make install
 
 RUN unset EMACS_VERSION
 ################################################################################
