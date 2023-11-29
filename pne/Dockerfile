@@ -44,7 +44,7 @@ RUN set -eux; \
         rm -rf "$GNUPGHOME" python.tar.xz.asc; \
         mkdir -p /usr/src/python; \
         tar --extract --directory /usr/src/python --strip-components=1 \
-	--file python.tar.xz; \
+            --file python.tar.xz; \
         rm python.tar.xz; \
         cd /usr/src/python; \
         gnuArch="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)"; \
