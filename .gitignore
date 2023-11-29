@@ -16,6 +16,7 @@
 /pne/**/*
 !/pne/Dockerfile
 !/pne/pne.run
+!/pne/home/
 !/pne/home/.bashrc
 
 /cfg/**/*
