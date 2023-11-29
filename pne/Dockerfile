@@ -6,6 +6,8 @@ ENV USER_NAME=pne
 ENV USER_PASSWORD=pnepne
 ENV USER_UID=1000
 ENV USER_GID=1000
+
+ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Australia/Sydney
 
 ENV LANG C.UTF-8
@@ -101,5 +103,6 @@ WORKDIR /home/$USER_NAME
 RUN bash -c "$(curl -fsSL \
 https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
+ENV DEBIAN_FRONTEND=
 RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 CMD ["bash"]
