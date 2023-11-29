@@ -139,3 +139,14 @@ source "$OSH"/oh-my-bash.sh
 # Example aliases
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
+
+alias lsa="ls -aAlhF --color=always --group-directories-first"
+alias lsrt="ls -aAlhFR --color=always --group-directories-first"
+
+lsr() {
+    local dir="$1"
+    lsrt $dir | grep -v -E "^total "
+}
+
+alias gitu="git add . && git commit -m 'update' && git push"
+alias gitp="git pull"
