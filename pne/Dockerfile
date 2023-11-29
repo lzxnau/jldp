@@ -185,7 +185,7 @@ RUN npm install -g npm@10.2.4 && npm -g update
 ENV EMACS_VERSION=29.1
 
 RUN set -eux; \
-        curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.xz \
+        curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
              | tar -xzv; \
         ls
 
