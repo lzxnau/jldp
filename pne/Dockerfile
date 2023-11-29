@@ -20,7 +20,7 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y sudo curl git \
+    apt-get install -y sudo curl git wget \
         libbluetooth-dev \
         tk-dev \
         uuid-dev \
