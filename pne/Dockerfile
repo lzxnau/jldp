@@ -191,6 +191,7 @@ RUN apt install -y \
 #            ca-certificates \
 #            gnupg-agent \
 #            software-properties-common \
+             libgccjit-12-dev \
              libgnutls28-dev \
              libjansson-dev
 #            gcc-10 libgccjit0 libgccjit-10-dev \
