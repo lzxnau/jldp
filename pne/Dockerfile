@@ -12,9 +12,13 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 
 RUN set -eux; \
     apt-get update; \
+    apt-get install -y sudo; \
     apt-get upgrade -y; \
-    apt-get autoremove
+    apt-get autoremove; \
+    rm -rf /var/lib/apt/lists/*
 
+RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
 WORKDIR /home/$USER_NAME
+RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 CMD ["bash"]
