@@ -20,5 +20,9 @@ RUN set -eux; \
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
 WORKDIR /home/$USER_NAME
+
+RUN bash -c "$(curl -fsSL \
+https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
 RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 CMD ["bash"]
