@@ -1,5 +1,6 @@
 #! /usr/bin/bash
 
+cd pne
 export PNEIMG=pne:3.11.6.20.10.0.29.1
 docker build -t $PNEIMG .
 
@@ -7,3 +8,5 @@ docker run -it --rm --name PNE -h PNE \
        --network dnet --ip 10.10.0.2 \
        -e TZ=Australia/Sydney \
        $PNEIMG
+
+cd ..
