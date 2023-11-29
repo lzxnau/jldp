@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM buildpack-deps:bookworm
 
 LABEL MAINTAINER "pne with Python Node.js and Emacs"
 
@@ -7,9 +7,10 @@ ENV USER_PASSWORD=pnepne
 ENV USER_UID=1000
 ENV USER_GID=1000
 
-ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=Australia/Sydney
+# ENV DEBIAN_FRONTEND=noninteractive
+# ENV TZ=Australia/Sydney
 
+ENV PATH /usr/local/bin:$PATH
 ENV LANG C.UTF-8
 ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
 ENV PYTHON_VERSION 3.11.6
@@ -20,7 +21,8 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y sudo curl git wget \
+    apt-get install -y --no-install-recommends \
+    	sudo curl git \
         libbluetooth-dev \
         tk-dev \
         uuid-dev \
