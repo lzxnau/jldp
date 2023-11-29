@@ -8,9 +8,14 @@
 !/img/
 !/src/
 !/sys/
+!/pne/
 
 /doc/**/*
 !/doc/README.md
+
+/pne/**/*
+!/pne/Dockerfile
+!/pne/run
 
 /cfg/**/*
 !/cfg/.readthedocs.yaml
