@@ -174,6 +174,11 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
+RUN npm install -g npm@10.2.4 && npm -g update
+################################################################################
+# End: node.js
+################################################################################
+
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
 WORKDIR /home/$USER_NAME
