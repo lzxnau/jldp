@@ -184,16 +184,15 @@ RUN npm install -g npm@10.2.4 && npm -g update
 ################################################################################
 ENV EMACS_VERSION=29.1
 
-RUN set -eux; \
-        curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
-            | tar -xzv; \
-        apt install -y \
+RUN curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
+         | tar -xzv; \
+RUN apt install -y \
 #            apt-transport-https \
 #            ca-certificates \
 #            gnupg-agent \
 #            software-properties-common \
              libgnutls28-dev \
-             libjansson-dev \
+             libjansson-dev
 #            gcc-10 libgccjit0 libgccjit-10-dev \
 #            libjansson4 libjansson-dev
 
