@@ -15,4 +15,6 @@ RUN set -eux; \
     apt-get upgrade -y; \
     apt-get autoremove
 
+USER $USER_NAME
+WORKDIR /home/$USER_NAME
 CMD ["bash"]
