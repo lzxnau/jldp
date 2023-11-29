@@ -6,7 +6,7 @@ docker build -t $PNEIMG .
 
 docker run -it --rm --name PNE -h PNE \
        --network dnet --ip 10.10.0.2 \
-       -v $JLDPDIR/pne/home:/app \
+       -v $JLDPDIR/pne/home/.bashrc:/home/pne/.bashrc \
        -e TZ=Australia/Sydney \
        $PNEIMG
 
