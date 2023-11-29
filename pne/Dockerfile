@@ -119,6 +119,11 @@ RUN set -eux; \
         rm -f get-pip.py; \
         pip --version
 
+RUN set -eux; \
+        pip install -U pip; \
+        pip install -U setuptools; \
+	pip install -U wheel
+
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
 WORKDIR /home/$USER_NAME
