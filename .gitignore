@@ -16,6 +16,7 @@
 /pne/**/*
 !/pne/Dockerfile
 !/pne/pne.run
+!/pne/home/.bashrc
 
 /cfg/**/*
 !/cfg/.readthedocs.yaml
