@@ -12,7 +12,7 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 
 RUN set -eux; \
     apt-get update; \
-    apt-get install -y sudo curl; \
+    apt-get install -y sudo curl git; \
     apt-get upgrade -y; \
     apt-get autoremove; \
     rm -rf /var/lib/apt/lists/*
