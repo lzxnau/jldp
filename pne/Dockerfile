@@ -28,8 +28,8 @@ RUN set -eux; \
         uuid-dev \
     ; \
     apt-get upgrade -y; \
-    apt-get autoremove; \
-    rm -rf /var/lib/apt/lists/*
+    apt-get autoremove
+    # rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
         wget -O python.tar.xz \
@@ -187,7 +187,15 @@ ENV EMACS_VERSION=29.1
 RUN set -eux; \
         curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
              | tar -xzv; \
-        ls
+        apt install -y \
+            apt-transport-https \
+            ca-certificates \
+            gnupg-agent \
+            software-properties-common \
+            gcc-10 libgccjit0 libgccjit-10-dev \
+            libjansson4 libjansson-dev
+
+ENV CC="gcc-10"
 
 ################################################################################
 # End: emacs
