@@ -206,6 +206,6 @@ RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 RUN bash -c "$(curl -fsSL \
 https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-RUN mkdir .emacs.d env
+RUN mkdir .emacs.d env jldp
 
 CMD ["bash"]
