@@ -199,11 +199,6 @@ RUN apt install -y --no-install-recommends sudo
 RUN apt upgrade -y && apt autoremove
 RUN rm -rf /var/lib/apt/lists/*
 
-# Python venv:
-RUN mkdir /pyvenv
-COPY requirements.txt /pyvenv/
-COPY pack.py /pyvenv/
-
 # Switch to User pne:
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME

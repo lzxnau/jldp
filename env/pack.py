@@ -6,9 +6,10 @@ JLDP Project.
 :Date:    20231119
 :Version: 1.0.2
 """
+import os
 
-
-PNAME = "requirements.txt"
+NAME = os.environ.get("VEVN")
+PNAME = NAME + ".txt"
 UNAME = "venv/up.txt"
 plist = []
 
@@ -18,7 +19,7 @@ def write_fxn(d: dict) -> bool:
     if not d:
         return False
 
-    with open(PNAME, "r", encoding="utf-8") as fr:
+    with open(PNAME, encoding="utf-8") as fr:
         lines = fr.readlines()
         for i, line in enumerate(lines):
             line = line.strip(" \n")
@@ -53,7 +54,7 @@ def check(lines: list) -> None:
 
 def get_plist() -> None:
     "Get the package list from requirements.txt."
-    with open(PNAME, "r", encoding="utf-8") as f:
+    with open(PNAME, encoding="utf-8") as f:
         lines = f.readlines()
         for line in lines:
             line = line.strip(" \n")
@@ -67,7 +68,7 @@ def get_plist() -> None:
 def main() -> None:
     "Main fxn for the pip package upgrade."
     get_plist()
-    with open(UNAME, "r", encoding="utf-8") as f:
+    with open(UNAME, encoding="utf-8") as f:
         lines = f.readlines()
         check(lines)
 
