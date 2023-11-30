@@ -208,6 +208,6 @@ RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 RUN bash -c "$(curl -fsSL \
 https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-RUN mkdir -p .emacs.d/elpa .emacs.d/eln-cache .emacs.d/snippets
+RUN mkdir .emacs.d
 
 CMD ["bash"]
