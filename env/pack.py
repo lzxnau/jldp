@@ -63,6 +63,7 @@ def get_plist() -> None:
             index = line.index("==")
             key = line[0:index]
             plist.append(key)
+    print(plist)
 
 
 def main() -> None:
