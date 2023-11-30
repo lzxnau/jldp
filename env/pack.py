@@ -3,26 +3,26 @@ Pip Package Upgrade Python Script.
 
 JLDP Project.
 :Author:  JLDP
-:Date:    20231119
-:Version: 1.0.2
+:Version:    2023.11.30.3
 """
 import os
+import sys
 
 NAME = os.environ.get("VEVN")
-PNAME = NAME + ".txt"
-UNAME = "venv/up.txt"
+PNAME = NAME + ".txt" if NAME else sys.exit()
+UNAME = NAME + "/up.txt" if NAME else sys.exit()
 plist = []
 
 
-def write_fxn(d: dict) -> bool:
-    "Update requirements.txt."
+def write_fxn(d: dict[str, str]) -> bool:
+    """Update requirements.txt."""
     if not d:
         return False
 
     with open(PNAME, encoding="utf-8") as fr:
         lines = fr.readlines()
-        for i, line in enumerate(lines):
-            line = line.strip(" \n")
+        for i, li in enumerate(lines):
+            line = li.strip(" \n")
             if not line:
                 continue
             index = line.index("==")
@@ -36,8 +36,8 @@ def write_fxn(d: dict) -> bool:
     return True
 
 
-def check(lines: list) -> None:
-    "Check if there are any update."
+def check(lines: list[str]) -> None:
+    """Check if there are any update."""
     fd = {}
     for line in lines:
         wl = line.split()
@@ -53,11 +53,11 @@ def check(lines: list) -> None:
 
 
 def get_plist() -> None:
-    "Get the package list from requirements.txt."
+    """Get the package list from requirements.txt."""
     with open(PNAME, encoding="utf-8") as f:
         lines = f.readlines()
-        for line in lines:
-            line = line.strip(" \n")
+        for li in lines:
+            line = li.strip(" \n")
             if not line:
                 continue
             index = line.index("==")
@@ -66,7 +66,7 @@ def get_plist() -> None:
 
 
 def main() -> None:
-    "Main fxn for the pip package upgrade."
+    """Run it to update new pip package versions in requirements.txt."""
     get_plist()
     with open(UNAME, encoding="utf-8") as f:
         lines = f.readlines()
