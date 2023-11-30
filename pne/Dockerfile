@@ -2,40 +2,42 @@ FROM buildpack-deps:bookworm
 
 LABEL MAINTAINER "PNE with Python Node.js and Emacs"
 
-ENV USER_NAME=pne
-ENV USER_PASSWORD=pnepne
-ENV USER_UID=1000
-ENV USER_GID=1000
+# Version:
+ENV PYTHON_VERSION 3.11.6
+ENV NODE_VERSION 20.10.0
+ENV EMACS_VERSION=29.1
 
-# ENV DEBIAN_FRONTEND=noninteractive
-# ENV TZ=Australia/Sydney
+# Download:
+ENV PYLINK=https://www.python.org/ftp/python/
+RUN wget -O python.tar.xz \
+         "$PYLINK${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz"
+RUN wget -O python.tar.xz.asc \
+         "$PYLINK${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc"
+RUN unset PYLINK
 
+ENV NJLINK=https://nodejs.org/dist/v
+RUN curl -fsSLO --compressed \
+         "$NJLINK$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz"
+RUN curl -fsSLO --compressed \
+         "$NJLINK$NODE_VERSION/SHASUMS256.txt.asc"
+RUN unset NJLINK
+
+RUN curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
+         | tar -xzv
+
+# Pre-installation:
+RUN apt update -y
+################################################################################
+
+# Install Python:
 ENV PATH /usr/local/bin:$PATH
 ENV LANG C.UTF-8
 ENV GPG_KEY A035C8C19219BA821ECEA86B64E628F8D684696D
-ENV PYTHON_VERSION 3.11.6
 
-RUN groupadd -g $USER_GID $USER_NAME && \
-    useradd -m -s /usr/bin/bash -u $USER_UID -g $USER_GID $USER_NAME && \
-    echo "$USER_NAME:$USER_PASSWORD" | chpasswd
+RUN apt install -y --no-install-recommends \
+        libbluetooth-dev tk-dev uuid-dev
 
 RUN set -eux; \
-    apt-get update; \
-    apt-get install -y --no-install-recommends \
-        sudo curl git \
-        libbluetooth-dev \
-        tk-dev \
-        uuid-dev \
-    ; \
-    apt-get upgrade -y; \
-    apt-get autoremove
-    # rm -rf /var/lib/apt/lists/*
-
-RUN set -eux; \
-        wget -O python.tar.xz \
-"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz"; \
-        wget -O python.tar.xz.asc \
-"https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc"; \
         GNUPGHOME="$(mktemp -d)"; export GNUPGHOME; \
         gpg --batch --keyserver \
         hkps://keys.openpgp.org --recv-keys "$GPG_KEY"; \
@@ -100,10 +102,11 @@ RUN set -eux; \
 
 ENV PYTHON_PIP_VERSION 23.2.1
 ENV PYTHON_SETUPTOOLS_VERSION 65.5.1
+ENV PIP=https://github.com/pypa/get-pip/raw/
 ENV PYTHON_GET_PIP_URL \
-https://github.com/pypa/get-pip/raw/4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
+           $PIP4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
 ENV PYTHON_GET_PIP_SHA256 \
-9cc01665956d22b3bf057ae8287b035827bfd895da235bcea200ab3b811790b6
+           9cc01665956d22b3bf057ae8287b035827bfd895da235bcea200ab3b811790b6
 
 RUN set -eux; \
         wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
@@ -119,16 +122,11 @@ RUN set -eux; \
         rm -f get-pip.py; \
         pip --version
 
-RUN set -eux; \
-        pip install -U pip; \
-        pip install -U setuptools; \
-        pip install -U wheel
-
+RUN unset PYTHON_VERSION PYTHON_PIP_VERSION PYTHON_SETUPTOOLS_VERSION \
+          PIP PYTHON_GET_PIP_URL PYTHON_GET_PIP_SHA256
 ################################################################################
-# Begin: node.js 20.10.0
-################################################################################
-ENV NODE_VERSION 20.10.0
 
+# Install Node.js:
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \
@@ -157,10 +155,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
       gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
       gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
   done \
-  && curl -fsSLO --compressed \
-"https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
-  && curl -fsSLO --compressed \
-  "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
   && gpgconf --kill all \
   && rm -rf "$GNUPGHOME" \
@@ -174,42 +169,53 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
-RUN npm install -g npm@10.2.4 && npm -g update
-################################################################################
-# End: node.js
+RUN unset NODE_VERSION
 ################################################################################
 
-################################################################################
-# Begin: emacs 29.1
-################################################################################
-ENV EMACS_VERSION=29.1
-
-RUN curl https://ftp.gnu.org/gnu/emacs/emacs-$EMACS_VERSION.tar.gz \
-         | tar -xzv
-
-RUN apt install -y \
-        libgccjit-12-dev \
-        libgnutls28-dev \
-        libjansson-dev
+# Install Emacs:
+RUN apt install -y --no-install-recommends \
+        libgccjit-12-dev libgnutls28-dev libjansson-dev
 
 RUN cd /emacs-$EMACS_VERSION && ./autogen.sh && \
        ./configure --with-native-compilation --without-sound --without-x \
-                   --without-compress-install --with-json --with-mailutils
+       --without-compress-install --with-json --with-mailutils
 
 RUN cd /emacs-$EMACS_VERSION && make -j 4 && make install
 
 RUN unset EMACS_VERSION
 ################################################################################
-# End: emacs
-################################################################################
 
+# Create User pne:
+ENV USER_NAME=pne
+ENV USER_PASSWORD=pnepne
+ENV USER_UID=1000
+ENV USER_GID=1000
+
+RUN groupadd -g $USER_GID $USER_NAME && \
+    useradd -m -s /usr/bin/bash -u $USER_UID -g $USER_GID $USER_NAME && \
+    echo "$USER_NAME:$USER_PASSWORD" | chpasswd
+
+# Install Packages:
+RUN set -eux; \
+        pip install -U pip; \
+        pip install -U setuptools; \
+        pip install -U wheel
+
+RUN npm install -g npm@10.2.4 && npm -g update
+
+RUN apt install -y --no-install-recommends sudo
+
+# Post-installation:
+RUN apt upgrade -y && apt autoremove
+RUN rm -rf /var/lib/apt/lists/*
+
+# Switch to User pne:
 RUN usermod -aG sudo $USER_NAME
 USER $USER_NAME
 WORKDIR /home/$USER_NAME
+RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 
 RUN bash -c "$(curl -fsSL \
 https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-ENV DEBIAN_FRONTEND=
-RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 CMD ["bash"]
