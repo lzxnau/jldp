@@ -13,7 +13,8 @@ docker run -it --rm --name PNE -h PNE \
        -v $JLDPDIR/pne/home/.emacs.d/elpa:/home/pne/.emacs.d/elpa \
        -v $JLDPDIR/pne/home/.emacs.d/eln-cache:/home/pne/.emacs.d/eln-cache \
        -v $JLDPDIR/pne/home/.emacs.d/snippets:/home/pne/.emacs.d/snippets \
+       -v $JLDPDIR/env:/home/pne/env \
        -e TZ=Australia/Sydney \
-       $PNEIMG
+       $PNEIMG bash env/pne.ini
 
 cd ..
