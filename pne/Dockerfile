@@ -17,7 +17,7 @@ RUN unset PYLINK
 
 ENV NJLINK=https://nodejs.org/dist/v
 RUN curl -fsSLO --compressed \
-         "$NJLINK$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz"
+         "$NJLINK$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz"
 RUN curl -fsSLO --compressed \
          "$NJLINK$NODE_VERSION/SHASUMS256.txt.asc"
 RUN unset NJLINK
@@ -127,17 +127,7 @@ RUN unset PYTHON_VERSION PYTHON_PIP_VERSION PYTHON_SETUPTOOLS_VERSION \
 ################################################################################
 
 # Install Node.js:
-RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
-  && case "${dpkgArch##*-}" in \
-    amd64) ARCH='x64';; \
-    ppc64el) ARCH='ppc64le';; \
-    s390x) ARCH='s390x';; \
-    arm64) ARCH='arm64';; \
-    armhf) ARCH='armv7l';; \
-    i386) ARCH='x86';; \
-    *) echo "unsupported architecture"; exit 1 ;; \
-  esac \
-  && export GNUPGHOME="$(mktemp -d)" \
+RUN export GNUPGHOME="$(mktemp -d)" \
   && set -ex \
   && for key in \
     4ED778F539E3634C779C87C6D7062848A1AB005C \
