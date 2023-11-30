@@ -157,4 +157,6 @@ lsr() {
 alias gitu="git add . && git commit -m 'update' && git push"
 alias gitp="git pull"
 
+alias venv="source /home/pne/env/pne/bin/activate"
+
 /home/pne/env/pne.ini
