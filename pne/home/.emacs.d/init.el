@@ -358,7 +358,7 @@
   :ensure t
   :config
   (pyvenv-mode t)
-  (pyvenv-activate "~/pyvenv/311/venv"))
+  (pyvenv-activate "/pyvenv/311/venv"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
