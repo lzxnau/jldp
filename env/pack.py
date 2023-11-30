@@ -8,7 +8,7 @@ JLDP Project.
 import os
 import sys
 
-NAME = os.environ.get("VEVN")
+NAME = os.environ.get("VENV")
 PNAME = NAME + ".txt" if NAME else sys.exit()
 UNAME = NAME + "/up.txt" if NAME else sys.exit()
 plist = []
@@ -63,7 +63,6 @@ def get_plist() -> None:
             index = line.index("==")
             key = line[0:index]
             plist.append(key)
-    print(plist)
 
 
 def main() -> None:
