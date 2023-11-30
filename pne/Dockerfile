@@ -101,8 +101,9 @@ RUN set -eux; \
                 ln -svT "$src" "/usr/local/bin/$dst"; \
         done
 
-ENV PYTHON_PIP_VERSION 23.2.1
-ENV PYTHON_SETUPTOOLS_VERSION 65.5.1
+ENV PYTHON_PIP_VERSION 23.3.1
+ENV PYTHON_SETUPTOOLS_VERSION 69.0.2
+ENV PYTHON_WHEEL_VERSION 0.42.0
 ENV PIP1=https://github.com/pypa/get-pip/raw/
 ENV PIP2=4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
 ENV PYTHON_GET_PIP_URL $PIP1$PIP2
@@ -119,12 +120,14 @@ RUN set -eux; \
                --no-compile \
                "pip==$PYTHON_PIP_VERSION" \
                "setuptools==$PYTHON_SETUPTOOLS_VERSION" \
+               "wheel==$PYTHON_WHEEL_VERSION" \
         ; \
         rm -f get-pip.py; \
         pip --version
 
 RUN unset PYTHON_VERSION PYTHON_PIP_VERSION PYTHON_SETUPTOOLS_VERSION \
-          PIP1 PIP2 PIP3 PYTHON_GET_PIP_URL PYTHON_GET_PIP_SHA256
+          PYTHON_WHEEL_VERSION PIP1 PIP2 PIP3 PYTHON_GET_PIP_URL \
+	  PYTHON_GET_PIP_SHA256
 ################################################################################
 
 # Install Node.js:
@@ -186,11 +189,6 @@ RUN groupadd -g $USER_GID $USER_NAME && \
     echo "$USER_NAME:$USER_PASSWORD" | chpasswd
 
 # Install Packages:
-RUN set -eux; \
-        pip install -U pip; \
-        pip install -U setuptools; \
-        pip install -U wheel
-
 RUN npm install -g npm@10.2.4 && npm -g update
 
 RUN apt install -y --no-install-recommends sudo
