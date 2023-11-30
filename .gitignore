@@ -10,35 +10,28 @@
 !/sys/
 !/pne/
 
-/doc/**/*
+/*/**/*
+!/*/**/*/
+
 !/doc/README.md
 
-/pne/**/*
 !/pne/Dockerfile
 !/pne/pne.run
-!/pne/home/
 !/pne/home/.bashrc
-!/pne/home/.emacs.d/
 !/pne/home/.emacs.d/init.el
+!/pne/home/.emacs.d/snippets/**/*
 
-/cfg/**/*
 !/cfg/.readthedocs.yaml
 !/cfg/requirements.txt
 !/cfg/*.run
 
-/img/**/*
 !/img/pack.py
-!/img/*/
 !/img/*/init.run
 !/img/*/dock.run
 !/img/*/requirements.txt
-!/img/jl/jupyter/
 !/img/jl/jupyter/jupyter_server_config.json
-!/img/jl/share/
 !/img/jl/share/notebook_secret
 
-/src/**/*
-!/src/**/*/
 !/src/conf.py
 !/src/index.md
 !/src/_static/css/*.css

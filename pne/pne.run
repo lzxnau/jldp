@@ -8,6 +8,9 @@ docker run -it --rm --name PNE -h PNE \
        --network dnet --ip 10.10.0.2 \
        -v $JLDPDIR/pne/home/.bashrc:/home/pne/.bashrc \
        -v $JLDPDIR/pne/home/.emacs.d/init.el:/home/pne/.emacs.d/init.el \
+       -v $JLDPDIR/pne/home/.emacs.d/elpa:/home/.emacs.d/elpa \
+       -v $JLDPDIR/pne/home/.emacs.d/eln-cache:/home/.emacs.d/eln-cache \
+       -v $JLDPDIR/pne/home/.emacs.d/snippets:/home/.emacs.d/snippets \
        -e TZ=Australia/Sydney \
        $PNEIMG
 
