@@ -18,6 +18,8 @@
 !/pne/pne.run
 !/pne/home/
 !/pne/home/.bashrc
+!/pne/home/.emacs.d/
+!/pne/home/.emacs.d/init.el
 
 /cfg/**/*
 !/cfg/.readthedocs.yaml
