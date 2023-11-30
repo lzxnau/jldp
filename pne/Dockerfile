@@ -3,8 +3,8 @@ FROM buildpack-deps:bookworm
 LABEL MAINTAINER "PNE with Python Node.js and Emacs"
 
 # Version:
-ENV PYTHON_VERSION 3.11.6
-ENV NODE_VERSION 20.10.0
+ENV PYTHON_VERSION=3.11.6
+ENV NODE_VERSION=20.10.0
 ENV EMACS_VERSION=29.1
 
 # Download:
@@ -102,11 +102,11 @@ RUN set -eux; \
 
 ENV PYTHON_PIP_VERSION 23.2.1
 ENV PYTHON_SETUPTOOLS_VERSION 65.5.1
-ENV PIP=https://github.com/pypa/get-pip/raw/
-ENV PYTHON_GET_PIP_URL \
-           $PIP4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
-ENV PYTHON_GET_PIP_SHA256 \
-           9cc01665956d22b3bf057ae8287b035827bfd895da235bcea200ab3b811790b6
+ENV PIP1=https://github.com/pypa/get-pip/raw/
+ENV PIP2=4cfa4081d27285bda1220a62a5ebf5b4bd749cdb/public/get-pip.py
+ENV PYTHON_GET_PIP_URL $PIP1$PIP2
+ENV PIP3=9cc01665956d22b3bf057ae8287b035827bfd895da235bcea200ab3b811790b6
+ENV PYTHON_GET_PIP_SHA256 $PIP3
 
 RUN set -eux; \
         wget -O get-pip.py "$PYTHON_GET_PIP_URL"; \
@@ -123,7 +123,7 @@ RUN set -eux; \
         pip --version
 
 RUN unset PYTHON_VERSION PYTHON_PIP_VERSION PYTHON_SETUPTOOLS_VERSION \
-          PIP PYTHON_GET_PIP_URL PYTHON_GET_PIP_SHA256
+          PIP1 PIP2 PIP3 PYTHON_GET_PIP_URL PYTHON_GET_PIP_SHA256
 ################################################################################
 
 # Install Node.js:
