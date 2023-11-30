@@ -145,7 +145,6 @@ RUN export GNUPGHOME="$(mktemp -d)" \
       gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
       gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
   done \
-
   && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
   && gpgconf --kill all \
   && rm -rf "$GNUPGHOME" \
