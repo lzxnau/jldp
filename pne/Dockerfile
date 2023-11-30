@@ -127,7 +127,7 @@ RUN set -eux; \
 
 RUN unset PYTHON_VERSION PYTHON_PIP_VERSION PYTHON_SETUPTOOLS_VERSION \
           PYTHON_WHEEL_VERSION PIP1 PIP2 PIP3 PYTHON_GET_PIP_URL \
-	  PYTHON_GET_PIP_SHA256
+          PYTHON_GET_PIP_SHA256
 ################################################################################
 
 # Install Node.js:
