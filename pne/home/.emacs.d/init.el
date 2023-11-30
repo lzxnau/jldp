@@ -1,7 +1,7 @@
-;;; package --- macOS init.el
+;;; package --- Debian Bookworm init.el
 
 ;; Author:  Jeffrey Liu
-;; Version: 2023.11.28.17
+;; Version: 2023.11.28.18
 
 ;;; Commentary:
 
@@ -358,7 +358,7 @@
   :ensure t
   :config
   (pyvenv-mode t)
-  (pyvenv-activate "/pyvenv/311/venv"))
+  (pyvenv-activate "/home/pne/env/pne"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
