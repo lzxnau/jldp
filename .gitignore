@@ -19,6 +19,7 @@
 !/pne/pne.run
 !/pne/home/.bashrc
 !/pne/home/.emacs.d/init.el
+!/pne/home/.emacs.d/.last-package-update-day
 !/pne/home/.emacs.d/snippets/**/*
 
 !/cfg/.readthedocs.yaml
