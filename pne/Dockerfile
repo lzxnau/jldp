@@ -201,7 +201,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 # Python venv:
 RUN mkdir /pyvenv
-COPY requirement.txt /pyvenv/
+COPY requirements.txt /pyvenv/
 COPY pack.py /pyvenv/
 
 # Switch to User pne:

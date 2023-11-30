@@ -17,6 +17,8 @@
 
 !/pne/Dockerfile
 !/pne/pne.run
+!/pne/requirements.txt
+!/pne/pack.py
 !/pne/home/.bashrc
 !/pne/home/.emacs.d/init.el
 !/pne/home/.emacs.d/.last-package-update-day
