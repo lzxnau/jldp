@@ -3,11 +3,11 @@
 cd $JLDPDIR/pne || exit
 export PNEIMG=pne:3.11.6.20.10.0.29.1
 
-docker run -it --rm --name MDB -h MDB \
-       --network dnet --ip 10.10.0.3 \
+docker run -it --rm --name JLS -h JLS \
+       --network dnet --ip 10.10.0.5 \
        -v $JLDPDIR/env:/home/pne/env \
        -v $JLDPDIR:/home/pne/jldp \
        -e TZ=Australia/Sydney \
-       $PNEIMG bash /home/pne/env/mdb.ini
+       $PNEIMG bash /home/pne/env/jls.ini
 
 cd ..
