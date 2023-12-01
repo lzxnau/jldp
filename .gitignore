@@ -19,6 +19,7 @@
 !/pne/Dockerfile
 !/pne/pne.run
 !/pne/mdb.run
+!/pne/ngs.run
 !/pne/jls.run
 !/pne/home/.bashrc
 !/pne/home/.emacs.d/init.el
