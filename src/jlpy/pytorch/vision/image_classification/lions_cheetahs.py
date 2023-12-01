@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns  # type: ignore
 from albumentations.pytorch import ToTensorV2  # type: ignore
+from torch import FloatTensor
 from torch.utils.data import DataLoader, Dataset
 
 # end import
@@ -143,7 +144,7 @@ class Explore:
         plt.show()
 
 
-class ImgsDataset(Dataset):
+class ImgsDataset(Dataset[tuple[FloatTensor, list[int]]]):
     """A custom subclass of Dataset for loading the images."""
 
     def __init__(self) -> None:
@@ -167,7 +168,7 @@ class ImgsDataset(Dataset):
         """
         return len(self.file_paths)
 
-    def __getitem__(self, idx: int)-> tuple[tensor,list[int]]:
+    def __getitem__(self, idx: int) -> tuple[FloatTensor, list[int]]:
         """
         Get one element of the dataset.
 
