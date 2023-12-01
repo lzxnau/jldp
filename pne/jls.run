@@ -2,7 +2,7 @@
 
 cd $JLDPDIR/pne || exit
 export PNEIMG=pne:3.11.6.20.10.0.29.1
-expoart LSJ=/.local/share/jupyter
+export LSJ=/.local/share/jupyter
 
 docker run -it --rm --name JLS -h JLS \
        --network dnet --ip 10.10.0.5 \
