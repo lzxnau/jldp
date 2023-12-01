@@ -160,5 +160,6 @@ alias gitp="git pull"
 alias venv="source /home/pne/env/pne/bin/activate"
 
 export PYTHONPATH=/home/pne/jldp/src
+export JLDPDIR=/home/pne/jldp
 
 /home/pne/env/env.ini
