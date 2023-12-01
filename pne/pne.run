@@ -17,6 +17,7 @@ docker run -it --rm --name PNE -h PNE \
        -v $JLDPDIR/pne/home/.emacs.d/snippets:/home/pne/.emacs.d/snippets \
        -v $JLDPDIR/env:/home/pne/env \
        -v $JLDPDIR:/home/pne/jldp \
+       -v ~/.ssh:/home/pne/.ssh \
        -e TZ=Australia/Sydney \
        $PNEIMG
 
