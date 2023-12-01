@@ -191,7 +191,7 @@ RUN groupadd -g $USER_GID $USER_NAME && \
 # Install Packages:
 RUN npm install -g npm@10.2.4 && npm -g update
 
-RUN apt install -y --no-install-recommends sudo
+RUN apt install -y --no-install-recommends sudo pandoc
 
 # Post-installation:
 RUN apt upgrade -y && apt autoremove
