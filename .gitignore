@@ -24,7 +24,7 @@
 !/pne/home/.emacs.d/snippets/**/*
 
 !/env/pack.py
-!/env/*.ini
+!/env/env.ini
 !/env/*.txt
 
 !/cfg/.readthedocs.yaml
