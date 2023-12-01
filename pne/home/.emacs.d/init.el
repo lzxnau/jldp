@@ -265,8 +265,8 @@
 
 (use-package flycheck
   :ensure t
-  :delight
-  (flycheck-mode)
+  ;;:delight
+  ;;(flycheck-mode)
   :hook
   (python-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
@@ -309,6 +309,7 @@
   (defvar lsp-pylsp-rename-backend 'rope)
   (defvar lsp-headerline-breadcrumb-segments '(symbols))
   (defvar lsp-headerline-breadcrumb-icons-enable nil)
+  (defvar lsp-modeline-code-actions-segments '(count))
   :bind
   ("C-c f" . lsp-format-buffer)
   :hook
@@ -321,17 +322,18 @@
   (lsp-mode .(lambda ()
             (custom-set-faces
              '(lsp-headerline-breadcrumb-symbols-face
-                ((t (:foreground "black")))))))
+                ((t (:foreground "lightyellow")))))))
   (lsp-mode .(lambda ()
             (custom-set-faces
              '(lsp-headerline-breadcrumb-separator-face
-               ((t (:foreground "green")))))))
+               ((t (:foreground "lightblue")))))))
   :config
   (setq read-process-output-max (* 1024 1024))
   (setq gc-cons-threshold 100000000)
   (setq lsp-idle-delay 0.500)
   (setq lsp-log-io nil)
   (setq lsp-semantic-tokens-enable nil)
+  (setq lsp-modeline-diagnostics-enable nil)
   (setq lsp-lens-enable nil))
 
 (use-package helm-lsp
@@ -411,10 +413,10 @@
   (setq frame-background-mode 'dark)
   (setq mode-line-frame-identification "")
   (setq-default mode-line-format
-                '("%*%l,%C"
-                  mode-line-misc-info
-                  "%b"
+                '("%*%l:%C"
                   mode-line-modes
+                  "%b"
+                  mode-line-misc-info
                   "%-"))
   (setq display-buffer-alist
         '(("^~/$\\|^~/.*/$\\|^/.*/$\\|\\*Flycheck errors\\*\\|\\*Ibuffer\\*"
