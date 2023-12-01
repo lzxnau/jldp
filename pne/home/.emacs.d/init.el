@@ -270,6 +270,7 @@
   ("C-c w f" . flycheck-list-errors)
   :hook
   (python-mode . flycheck-mode)
+  (sh-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
 
 (use-package markdown-mode
