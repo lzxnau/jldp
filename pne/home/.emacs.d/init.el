@@ -120,13 +120,14 @@
 ;; C-c c    : helm lsp code actions
 ;; C-c d    : helm lsp diagnostics
 ;; C-c e    : buffer end
+;; C-c f    : lsp python formater
 ;; C-c h    : buffer begin
 ;; C-c i    : helm imenu
 ;; C-c l    ; lsp menu
 ;; C-c m    : Set Mark
-;; C-c f    : lsp python formater
 ;; C-c s    : ace-window swap
 ;; C-c w c  : clean tabs
+;; C-c w f  : flycheck
 ;; C-c y    : YASnippets
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -265,8 +266,8 @@
 
 (use-package flycheck
   :ensure t
-  ;;:delight
-  ;;(flycheck-mode)
+  :bind
+  ("C-c w f" . flycheck-list-errors)
   :hook
   (python-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
