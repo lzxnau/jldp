@@ -18,13 +18,15 @@
 
 !/pne/Dockerfile
 !/pne/pne.run
+!/pne/mdb.run
+!/pne/jls.run
 !/pne/home/.bashrc
 !/pne/home/.emacs.d/init.el
 !/pne/home/.emacs.d/.last-package-update-day
 !/pne/home/.emacs.d/snippets/**/*
 
 !/env/pack.py
-!/env/env.ini
+!/env/*.ini
 !/env/*.txt
 
 !/cfg/.readthedocs.yaml
