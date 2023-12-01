@@ -133,6 +133,11 @@
 (use-package delight
   :ensure t)
 
+(use-package material-theme
+  :ensure t
+  :config
+  (load-theme 'material t))
+
 (use-package whitespace
   :ensure t
   :delight
@@ -405,6 +410,12 @@
   (setq initial-scratch-message ";;; Elisp")
   (setq frame-background-mode 'dark)
   (setq mode-line-frame-identification "")
+  (setq-default mode-line-format
+                '("%*%l,%C"
+                  mode-line-misc-info
+                  "%b"
+                  mode-line-modes
+                  "%-"))
   (setq display-buffer-alist
         '(("^~/$\\|^~/.*/$\\|^/.*/$\\|\\*Flycheck errors\\*\\|\\*Ibuffer\\*"
            (display-buffer-reuse-window
