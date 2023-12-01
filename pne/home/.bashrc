@@ -159,4 +159,4 @@ alias gitp="git pull"
 
 alias venv="source /home/pne/env/pne/bin/activate"
 
-/home/pne/env/pne.ini
+/home/pne/env/env.ini
