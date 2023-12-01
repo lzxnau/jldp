@@ -167,7 +167,7 @@ class ImgsDataset(Dataset):
         """
         return len(self.file_paths)
 
-    def __getitem__(self, idx: int):
+    def __getitem__(self, idx: int)-> tuple[tensor,list[int]]:
         """
         Get one element of the dataset.
 
