@@ -316,15 +316,12 @@
   ("C-c f" . lsp-format-buffer)
   :hook
   (python-mode  . lsp)
+  (sh-mode . lsp)
   (lsp-mode . lsp-enable-which-key-integration)
   (lsp-mode .(lambda ()
             (custom-set-faces
-             '(lsp-headerline-breadcrumb-path-face
-               ((t (:foreground "black")))))))
-  (lsp-mode .(lambda ()
-            (custom-set-faces
              '(lsp-headerline-breadcrumb-symbols-face
-                ((t (:foreground "lightyellow")))))))
+                ((t (:foreground "yellow")))))))
   (lsp-mode .(lambda ()
             (custom-set-faces
              '(lsp-headerline-breadcrumb-separator-face
