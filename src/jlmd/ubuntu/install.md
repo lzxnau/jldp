@@ -1,4 +1,6 @@
-# Installation
+# Ubuntu
+
+## Installation
 
 1. Ubuntu server with hwe kenerl.
 2. Ubuntu pro login.
