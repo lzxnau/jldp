@@ -261,6 +261,7 @@
   (markdown-mode . company-mode)
   (sh-mode . company-mode)
   (emacs-lisp-mode . company-mode)
+  (eshell-mode . company-mode)
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1)
@@ -277,8 +278,6 @@
 
 (use-package eshell
   :ensure t
-  :init
-  (defvar eshell-grep-prompt-display nil)
   :bind
   ("C-c g" . eshell)
   ("C-c h" . helm-eshell-history))
@@ -387,12 +386,10 @@
     (interactive)
     (split-window-right 82)
     (windmove-right)
+    (split-window-below -20)
     (split-window-right 82)
-    (windmove-right)
-    (split-window-below)
     (windmove-down)
-    (split-window-below)
-    (windmove-left)
+    (split-window-right 82)
     (windmove-left)
     )
   :bind
@@ -414,7 +411,7 @@
   (column-number-mode 1)
   (global-visual-line-mode 1)
   (global-auto-revert-mode 1)
-  (global-hl-line-mode 1)
+  ;; (global-hl-line-mode 1)
   (setq tab-width 2)
   (setq indent-tabs-mode nil)
   (setq inhibit-startup-message t)
