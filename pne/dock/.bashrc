@@ -165,5 +165,5 @@ export PATH="$JLDPDIR/pne:$PATH:$JLDPDIR/cfg"
 
 alias up="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 
-cp -fu ~/.emacs.d/init.el ~/jldp/sys/ubuntu/
-cp -fu ~/.bashrc ~/jldp/sys/ubuntu/
+cp -fu ~/.emacs.d/init.el ~/jldp/pne/dock/
+cp -fu ~/.bashrc ~/jldp/pne/dock/
