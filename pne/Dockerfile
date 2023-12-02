@@ -205,7 +205,7 @@ USER root
 RUN npm install -g npm@10.2.4 bash-language-server
 
 ARG UDATE=1
-RUN apt upgrade -y && apt autoremove
+RUN apt update && apt upgrade -y && apt autoremove
 RUN rm -rf /var/lib/apt/lists/*
 RUN npm -g update
 
