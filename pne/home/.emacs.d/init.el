@@ -117,11 +117,13 @@
 ;; :after     load after some package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; C-c a    : ace-window jump
+;; C-c b    : buffer begin
 ;; C-c c    : helm lsp code actions
 ;; C-c d    : helm lsp diagnostics
 ;; C-c e    : buffer end
 ;; C-c f    : lsp python formater
-;; C-c h    : buffer begin
+;; C-c g    : eshell
+;; C-c h    : eshell history
 ;; C-c i    : helm imenu
 ;; C-c l    ; lsp menu
 ;; C-c m    : Set Mark
@@ -272,6 +274,12 @@
   (python-mode . flycheck-mode)
   (sh-mode . flycheck-mode)
   (emacs-lisp-mode . flycheck-mode))
+
+(use-package eshell
+  :ensure t
+  :bind
+  ("C-c g" . eshell)
+  ("C-c h" . helm-eshell-history))
 
 (use-package markdown-mode
   :ensure t

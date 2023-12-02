@@ -25,6 +25,8 @@
 !/pne/home/.emacs.d/init.el
 !/pne/home/.emacs.d/.last-package-update-day
 !/pne/home/.emacs.d/snippets/**/*
+!/img/jl/jupyter/jupyter_server_config.json
+!/pne/home/share/notebook_secret
 
 !/env/pack.py
 !/env/*.ini
