@@ -1,9 +1,0 @@
-#!/usr/bin/bash
-
-source img/py/venv/bin/activate
-
-pyrun=(
-    "/app/src/jlpy/pytorch/examples/cv/ic/lions_cheetahs.py")
-
-export JLDPDIR=/app
-python ${pyrun[0]}

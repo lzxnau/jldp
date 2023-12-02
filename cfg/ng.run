@@ -1,9 +1,0 @@
-#!/usr/bin/bash
-
-cd $JLDPDIR
-docker run -it --rm --name WEB -h WEB \
-       --network dnet --ip 10.10.0.12 \
-       -p 8080:80 \
-       -v $JLDPDIR/doc/html:/usr/share/nginx/html:ro \
-       -e TZ=Australia/Sydney \
-       nginx:alpine-slim

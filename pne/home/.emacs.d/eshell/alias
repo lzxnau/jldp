@@ -1,0 +1,4 @@
+alias gitp git pull
+alias gitu git add . && git commit -m "update" && git push
+alias lsr ls -aAlhFR --color=always --group-directories-first $*
+alias lsa ls -aAlhF --color=always --group-directories-first $*

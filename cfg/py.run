@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-
-cd $JLDPDIR
-docker run -it --rm --name Python -h Python \
-       --network dnet --ip 10.10.0.14 \
-       -v $JLDPDIR:/app -w /app \
-       -e TZ=Australia/Sydney \
-       $JLDPIMG img/py/dock.run

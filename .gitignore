@@ -17,16 +17,18 @@
 !/doc/README.md
 
 !/pne/Dockerfile
-!/pne/pne.run
-!/pne/mdb.run
-!/pne/ngs.run
-!/pne/jls.run
+!/pne/*.run
 !/pne/home/.bashrc
 !/pne/home/.emacs.d/init.el
 !/pne/home/.emacs.d/.last-package-update-day
+!/pne/home/.emacs.d/.lsp-session-v1
+!/pne/home/.emacs.d/eshell/alias
 !/pne/home/.emacs.d/snippets/**/*
-!/img/jl/jupyter/jupyter_server_config.json
-!/pne/home/share/notebook_secret
+!/pne/home/.jupyter/jupyter_server_config.json
+!/pne/home/.local/share/jupyter/notebook_secret
+!/pne/dock/.bashrc
+!/pne/dock/init.el
+!/pne/dock/post.sh
 
 !/env/pack.py
 !/env/*.ini
@@ -34,14 +36,6 @@
 
 !/cfg/.readthedocs.yaml
 !/cfg/requirements.txt
-!/cfg/*.run
-
-!/img/pack.py
-!/img/*/init.run
-!/img/*/dock.run
-!/img/*/requirements.txt
-!/img/jl/jupyter/jupyter_server_config.json
-!/img/jl/share/notebook_secret
 
 !/src/conf.py
 !/src/index.md
@@ -52,11 +46,6 @@
 !/src/jlpy/**/index.rst
 !/src/jlpy/**/index.md
 !/src/jljl/**/*.ipynb
-!/src/jljl/**/index.md
-!/src/jlmd/**/*.md
-!/src/jlmd/ubuntu/init.el
-!/src/jlmd/ubuntu/bashrc
 
 /src/jljl/**/.ipynb_checkpoints/
 flycheck*
-runtime/
