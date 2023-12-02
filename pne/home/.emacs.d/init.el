@@ -1,7 +1,7 @@
 ;;; package --- Debian Bookworm init.el
 
 ;; Author:  Jeffrey Liu
-;; Version: 2023.11.28.18
+;; Version: 2023.12.02.19
 
 ;;; Commentary:
 
@@ -85,9 +85,11 @@
 
 (use-package auto-package-update
   :ensure t
-  :config
-  (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
+  :commands
+  (auto-package-update-maybe)
+  :init
+  (defvar auto-package-update-delete-old-versions t)
+  (defvar auto-package-update-hide-results t)
   (auto-package-update-maybe))
 
 (custom-set-variables
@@ -138,16 +140,17 @@
 
 (use-package material-theme
   :ensure t
-  :config
+  :init
   (load-theme 'material t))
 
 (use-package whitespace
   :ensure t
   :delight
   (global-whitespace-mode)
+  :init
+  (global-whitespace-mode t)
   :config
-  (setq whitespace-style '(face empty tabs lines-tail trailing))
-  (global-whitespace-mode t))
+  (setq whitespace-style '(face empty tabs lines-tail trailing)))
 
 (use-package helm
   :ensure t
@@ -157,9 +160,11 @@
 
 (use-package which-key
   :ensure t
+  :commands
+  (which-key-mode)
   :delight
   (which-key-mode)
-  :config
+  :init
   (which-key-mode))
 
 (use-package ace-window
@@ -170,13 +175,13 @@
    aw-select
    aw-flip-window)
   :demand t
+  :init
+  (defvar aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?w ?o))
+  (defvar aw-scope 'frame)
+  (defvar aw-dispatch-always t)
   :bind
   ("C-c a" . ace-window)
-  ("C-c s" . ace-swap-window)
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?w ?o))
-  (setq aw-scope 'frame)
-  (setq aw-dispatch-always t))
+  ("C-c s" . ace-swap-window))
 
 (use-package ibuffer
   :ensure t
@@ -256,16 +261,16 @@
   :ensure t
   :delight
   (company-mode)
+  :init
+  (defvar company-idle-delay 0)
+  (defvar company-minimum-prefix-length 1)
+  (defvar company-tooltip-limit 20)
   :hook
   (python-mode . company-mode)
   (markdown-mode . company-mode)
   (sh-mode . company-mode)
   (emacs-lisp-mode . company-mode)
-  (eshell-mode . company-mode)
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1)
-  (setq company-tooltip-limit 20))
+  (eshell-mode . company-mode))
 
 (use-package flycheck
   :ensure t
@@ -295,7 +300,7 @@
   :delight
   (lsp-mode)
   :init
-  (setq lsp-keymap-prefix "C-c l")
+  (defvar lsp-keymap-prefix "C-c l")
   (defvar lsp-pylsp-configuration-sources '("ruff"))
   (defvar lsp-pylsp-plugins-flake8-enabled nil)
   (defvar lsp-pylsp-plugins-ruff-enabled t)
@@ -321,6 +326,11 @@
   (defvar lsp-headerline-breadcrumb-segments '(symbols))
   (defvar lsp-headerline-breadcrumb-icons-enable nil)
   (defvar lsp-modeline-code-actions-segments '(count))
+  (defvar lsp-idle-delay 0.500)
+  (defvar lsp-log-io nil)
+  (defvar lsp-semantic-tokens-enable nil)
+  (defvar lsp-modeline-diagnostics-enable nil)
+  (defvar lsp-lens-enable nil)
   :bind
   ("C-c f" . lsp-format-buffer)
   :hook
@@ -337,12 +347,7 @@
                ((t (:foreground "lightblue")))))))
   :config
   (setq read-process-output-max (* 1024 1024))
-  (setq gc-cons-threshold 100000000)
-  (setq lsp-idle-delay 0.500)
-  (setq lsp-log-io nil)
-  (setq lsp-semantic-tokens-enable nil)
-  (setq lsp-modeline-diagnostics-enable nil)
-  (setq lsp-lens-enable nil))
+  (setq gc-cons-threshold 100000000))
 
 (use-package helm-lsp
   :ensure t
@@ -356,14 +361,15 @@
   (yas-reload-all)
   :delight
   (yas-minor-mode)
+  :init
+  (defvar yas-minor-mode-map)
+  (yas-reload-all)
   :bind
   (:map yas-minor-mode-map
         ("C-c y" . yas-expand))
   :hook
   (python-mode . yas-minor-mode)
-  (markdown-mode . yas-minor-mode)
-  :config
-  (yas-reload-all))
+  (markdown-mode . yas-minor-mode))
 
 (use-package yasnippet-snippets
   :ensure t
@@ -371,7 +377,9 @@
 
 (use-package pyvenv
   :ensure t
-  :config
+  :commands
+  (pyvenv-mode pyvenv-activate)
+  :init
   (pyvenv-mode t)
   (pyvenv-activate "/home/pne/env/pne"))
 
@@ -380,7 +388,24 @@
 (use-package emacs
   :commands
   (uhd)
+  :delight
+  (visual-line-mode)
+  (emacs-lisp-mode "EL")
+  (rst-mode "RST")
+  (python-mode "Py")
+  (lisp-interaction-mode "LI")
+  (eldoc-mode)
   :init
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (electric-pair-mode 1)
+  (show-paren-mode 1)
+  (winner-mode 1)
+  (line-number-mode 1)
+  (column-number-mode 1)
+  (global-visual-line-mode 1)
+  (global-auto-revert-mode 1)
+  ;; (global-hl-line-mode 1)
   (defun uhd()
     "init window layout uhd"
     (interactive)
@@ -393,7 +418,7 @@
     (windmove-left)
     )
   :bind
-  ("C-c h" . beginning-of-buffer)
+  ("C-c b" . beginning-of-buffer)
   ("C-c e" . end-of-buffer)
   ("C-c m" . set-mark-command)
   ("C-c w a" . winner-undo)
@@ -402,16 +427,6 @@
   :hook
   (find-file . read-only-mode)
   :config
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (electric-pair-mode 1)
-  (show-paren-mode 1)
-  (winner-mode 1)
-  (line-number-mode 1)
-  (column-number-mode 1)
-  (global-visual-line-mode 1)
-  (global-auto-revert-mode 1)
-  ;; (global-hl-line-mode 1)
   (setq tab-width 2)
   (setq indent-tabs-mode nil)
   (setq inhibit-startup-message t)
@@ -435,13 +450,7 @@
            display-buffer-no-window
            (allow-no-window . t))))
   (uhd)
-  :delight
-  (visual-line-mode)
-  (emacs-lisp-mode "EL")
-  (rst-mode "RST")
-  (python-mode "Py")
-  (lisp-interaction-mode "LI")
-  (eldoc-mode))
+  )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
