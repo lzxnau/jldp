@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: subclass with init and super
+# key: cis
+# --
+class $1($2):
+    """{$3:Class Description}."""
+
+    def __init__(self) -> None:
+        """Construct a class instance."""
+        super().__init__()
+        $0

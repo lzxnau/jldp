@@ -129,6 +129,7 @@
 ;; C-c i    : helm imenu
 ;; C-c l    ; lsp menu
 ;; C-c m    : Set Mark
+;; C-c n    : yas-new-snippet
 ;; C-c s    : ace-window swap
 ;; C-c w c  : clean tabs
 ;; C-c w f  : flycheck
@@ -358,18 +359,20 @@
 (use-package yasnippet
   :ensure t
   :commands
-  (yas-reload-all)
+  (yas-global-mode yas-reload-all)
   :delight
   (yas-minor-mode)
   :init
   (defvar yas-minor-mode-map)
+  (yas-global-mode 1)
   (yas-reload-all)
   :bind
+  ("C-c n" . yas-new-snippet)
   (:map yas-minor-mode-map
-        ("C-c y" . yas-expand))
-  :hook
-  (python-mode . yas-minor-mode)
-  (markdown-mode . yas-minor-mode))
+        ("C-c y" . yas-expand)))
+  ;;:hook
+  ;;(python-mode . yas-minor-mode)
+  ;;(markdown-mode . yas-minor-mode))
 
 (use-package yasnippet-snippets
   :ensure t
