@@ -178,6 +178,9 @@ RUN cd /emacs-$EMACS_VERSION && make -j 4 && make install
 RUN unset EMACS_VERSION
 ################################################################################
 
+# Install Packages:
+RUN apt install -y --no-install-recommends sudo pandoc
+
 # Create User pne:
 ENV USER_NAME=pne
 ENV USER_PASSWORD=pnepne
@@ -187,25 +190,25 @@ ENV USER_GID=1000
 RUN groupadd -g $USER_GID $USER_NAME && \
     useradd -m -s /usr/bin/bash -u $USER_UID -g $USER_GID $USER_NAME && \
     echo "$USER_NAME:$USER_PASSWORD" | chpasswd
-
-# Install Packages:
-RUN npm install -g npm@10.2.4 bash-language-server && npm -g update
-
-RUN apt install -y --no-install-recommends sudo pandoc
-
-# Post-installation:
-RUN apt upgrade -y && apt autoremove
-RUN rm -rf /var/lib/apt/lists/*
-
-# Switch to User pne:
 RUN usermod -aG sudo $USER_NAME
-USER $USER_NAME
-WORKDIR /home/$USER_NAME
 RUN unset USER_NAME USER_PASSWORD USRE_UID USER_GID
 
+# User pne setup:
+USER pne
+WORKDIR /home/pne
+RUN mkdir .emacs.d env jldp .ssh
 RUN bash -c "$(curl -fsSL \
 https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-RUN mkdir .emacs.d env jldp .ssh
+# Post-installation:
+USER root
+RUN npm install -g npm@10.2.4 bash-language-server
+
+ARG UDATE=1
+RUN apt upgrade -y && apt autoremove
+RUN rm -rf /var/lib/apt/lists/*
+RUN npm -g update
+
+USER pne
 
 CMD ["bash"]
