@@ -4,7 +4,7 @@ Linear Regression Base Implementation.
 An example shows all steps for training linear regression model from scratch.
 
 :Author:  JLDP
-:Version: 2023.12.02.01 
+:Version: 2023.12.02.01
 
 """
 from torch import nn

@@ -1,9 +1,9 @@
 # -*- mode: snippet -*-
-# name: subclass with init and super
+# name: JL: subclass with init and super
 # key: cis
 # --
 class $1($2):
-    """{$3:Class Description}."""
+    """${3:Class Description}."""
 
     def __init__(self) -> None:
         """Construct a class instance."""
