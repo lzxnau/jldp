@@ -4,12 +4,14 @@ cd $JLDPDIR/pne || exit
 export PNEIMG=pne:3.11.6.20.10.0.29.1
 export LUD=/.emacs.d/.last-package-update-day
 export LSV=/.emacs.d/.lsp-session-v1
+export ESA=/.emacs.d/eshell/alias
 docker build -t $PNEIMG .
 
 docker run -it --rm --name PNE -h PNE \
        --network dnet --ip 10.10.0.2 \
        -v $JLDPDIR/pne/home/.bashrc:/home/pne/.bashrc \
        -v $JLDPDIR/pne/home/.emacs.d/init.el:/home/pne/.emacs.d/init.el \
+       -v $JLDPDIR/pne/home$ESA:/home/pne$ESA \
        -v $JLDPDIR/pne/home$LUD:/home/pne$LUD \
        -v $JLDPDIR/pne/home$LSV:/home/pne$LSV \
        -v $JLDPDIR/pne/home/.emacs.d/elpa:/home/pne/.emacs.d/elpa \
