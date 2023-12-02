@@ -277,6 +277,8 @@
 
 (use-package eshell
   :ensure t
+  :init
+  (defvar eshell-grep-prompt-display nil)
   :bind
   ("C-c g" . eshell)
   ("C-c h" . helm-eshell-history))
