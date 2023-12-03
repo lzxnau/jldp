@@ -7,16 +7,19 @@ An example shows all steps for training linear regression model from scratch.
 :Version: 2023.12.02.01
 
 """
+import torch
 from torch import nn
 
 
 class LRModel(nn.Module):
-    """Custom Linear Regression Module."""
+    """Custom Linear Regression Model as a torch.nn.Module."""
 
-    def __init__(self) -> None:
+    def __init__(self, sigma: float = 0.01) -> None:
         """Construct a class instance."""
         super().__init__()
-        print("this is a test")
+        self.w = torch.normal(0, sigma, (100, 1), requires_grad=True)
+        self.b = torch.zeros(1, requires_grad=True)
+        print(self.b)
 
 
 if __name__ == "__main__":
