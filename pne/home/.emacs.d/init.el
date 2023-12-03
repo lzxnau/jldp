@@ -124,9 +124,10 @@
 ;; C-c d    : helm lsp diagnostics
 ;; C-c e    : buffer end
 ;; C-c f    : lsp python formater
-;; C-c g    : eshell
+;; C-c g    : magit
 ;; C-c h    : eshell history
 ;; C-c i    : helm imenu
+;; C-c j    : eshell
 ;; C-c l    ; lsp menu
 ;; C-c m    : Set Mark
 ;; C-c n    : yas-new-snippet
@@ -285,7 +286,7 @@
 (use-package eshell
   :ensure t
   :bind
-  ("C-c g" . eshell)
+  ("C-c j" . eshell)
   ("C-c h" . helm-eshell-history))
 
 (use-package markdown-mode
@@ -377,6 +378,12 @@
 (use-package yasnippet-snippets
   :ensure t
   :defer t)
+
+(use-package magit
+  :ensure t
+  :commands magit-status
+  :bind
+  ("C-x g" . magit-status))
 
 (use-package pyvenv
   :ensure t
