@@ -24,3 +24,4 @@ docker run -it --rm --name PNE -h PNE \
        $PNEIMG
 
 cd ..
+docker image prune -f
