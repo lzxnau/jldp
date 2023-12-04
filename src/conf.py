@@ -72,6 +72,8 @@ myst_enable_extensions = [
 
 mermaid_output_format = "svg"
 
+autoclass_content = "both"
+autodoc_class_signature = "separated"
 autodoc_default_options = {
     "member-order": "bysource",
     "undoc-members": True,
