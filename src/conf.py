@@ -75,6 +75,8 @@ mermaid_output_format = "svg"
 autodoc_default_options = {
     "member-order": "bysource",
     "undoc-members": True,
+    "inherited-members": False,
+    "show-inheritance": False,
 }
 
 intersphinx_mapping = {
