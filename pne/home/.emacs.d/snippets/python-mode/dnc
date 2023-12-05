@@ -1,8 +1,8 @@
 # -*- mode: snippet -*-
-# name: JL:docstring 3.normal class
+# name: JL:docstring normal class
 # key: dnc
 # --
-class $1():
+class $1:
     """
     ${2:$1 Description}.
 
