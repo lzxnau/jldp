@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: JL:docstring class method
+# key: dcm
+# --
+def $1(self) -> ${2:None}:
+"""
+${3:Run a method}.
+
+$0:param ${4:x}: ${5:Description}.
+:type $4: ${6:None}
+:return: ${7:None}
+:rtype: $2
+"""

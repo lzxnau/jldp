@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: JL:docstring normal class
+# key: dnc
+# --
+class $1():
+    """
+    ${2:$1 Description}.
+
+    ${3:$1 Details}.
+
+    .. card::
+    """
+
+    def __init__(self) -> None:
+        """Construct a class instance."""
+        $0

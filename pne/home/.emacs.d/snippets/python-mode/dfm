@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: JL: file or module docstring
-# key: fmd
+# name: JL:docstring file or module
+# key: dfm
 # --
 """
 ${1:File or Module Docstring}.
