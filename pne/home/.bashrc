@@ -162,4 +162,4 @@ alias venv="source /home/pne/env/pne/bin/activate"
 export PYTHONPATH=/home/pne/jldp/src
 export JLDPDIR=/home/pne/jldp
 
-/home/pne/env/env.ini
+alias up='/home/pne/env/env.ini'
