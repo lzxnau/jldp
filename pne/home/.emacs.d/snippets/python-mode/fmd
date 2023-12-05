@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: JL: file or module docstring
+# key: fmd
+# --
+"""
+${1:File or Module Docstring}.
+
+${2:Description.}
+:Author:  JLDP
+:Version: `(format-time-string "%Y.%m.%d.")`${3:1}
+"""
+$0

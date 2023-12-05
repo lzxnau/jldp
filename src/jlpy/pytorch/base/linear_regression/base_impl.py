@@ -28,7 +28,7 @@ class LRModel(nn.Module):
         y: Tensor = torch.matmul(x, self.w) + self.b
         return y
 
-    def loss(self, y_hat: Tensor, y: Tensor) -> Tensor:
+    def loss(self, y: Tensor, y_hat: Tensor) -> Tensor:
         """
         Calculate the avaerage squared loss between real y and predicted y_hat.
 

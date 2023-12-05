@@ -128,6 +128,7 @@
 ;; C-c h    : eshell history
 ;; C-c i    : helm imenu
 ;; C-c j    : eshell
+;; C-c k    : helm company
 ;; C-c l    ; lsp menu
 ;; C-c m    : Set Mark
 ;; C-c n    : yas-new-snippet
@@ -156,6 +157,12 @@
 
 (use-package helm
   :ensure t
+  :delight
+  (helm-mode)
+  :commands
+  (helm-mode)
+  :init
+  (helm-mode 1)
   :bind
   ("M-x" . helm-M-x)
   ("C-c i" . helm-imenu))
@@ -263,16 +270,27 @@
   :ensure t
   :delight
   (company-mode)
+  :commands
+  (global-company-mode)
   :init
-  (defvar company-idle-delay 0)
+  (defvar company-idle-delay 0.2)
   (defvar company-minimum-prefix-length 1)
+  (defvar company-selection-wrap-around t)
+  (defvar company-tooltip-align-annotations t)
   (defvar company-tooltip-limit 20)
-  :hook
-  (python-mode . company-mode)
-  (markdown-mode . company-mode)
-  (sh-mode . company-mode)
-  (emacs-lisp-mode . company-mode)
-  (eshell-mode . company-mode))
+  (global-company-mode 1))
+
+(use-package helm-company
+  :ensure t
+  :after (helm company)
+  :init
+  (defvar company-mode-map)
+  (defvar company-active-map)
+  :bind
+  (:map company-mode-map
+        ("C-c k" . helm-company))
+  (:map company-active-map
+        ("C-c k" . helm-company)))
 
 (use-package flycheck
   :ensure t
@@ -368,12 +386,9 @@
   (yas-global-mode 1)
   (yas-reload-all)
   :bind
-  ("C-c n" . yas-new-snippet)
-  (:map yas-minor-mode-map
-        ("C-c y" . yas-expand)))
-  ;;:hook
-  ;;(python-mode . yas-minor-mode)
-  ;;(markdown-mode . yas-minor-mode))
+  ("C-c n" . yas-new-snippet))
+  ;;(:map yas-minor-mode-map
+    ;;    ("C-c y" . yas-expand)))
 
 (use-package yasnippet-snippets
   :ensure t
@@ -384,6 +399,13 @@
   :commands magit-status
   :bind
   ("C-c g" . magit-status))
+
+(use-package helm-c-yasnippet
+  :ensure t
+  :init
+  (defvar helm-yas-space-match-any-greedy t)
+  :bind
+  ("C-c y" . helm-yas-complete))
 
 (use-package pyvenv
   :ensure t
