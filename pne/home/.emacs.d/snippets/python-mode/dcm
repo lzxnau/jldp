@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: JL:docstring class method
+# name: JL:docstring 4.class method
 # key: dcm
 # --
 def $1(self) -> ${2:None}:

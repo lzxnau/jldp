@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: JL:docstring subclass
+# name: JL:docstring 3.subclass
 # key: dsc
 # --
 class $1($2):
