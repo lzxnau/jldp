@@ -71,7 +71,7 @@ myst_enable_extensions = [
 ]
 
 mermaid_output_format = "svg"
-mermaid_cmd = "mmdc --without-sandbox"
+mermaid_cmd = "mmdc"
 
 # autoclass_content = "both"
 autodoc_class_signature = "separated"
