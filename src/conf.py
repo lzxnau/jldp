@@ -70,7 +70,7 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
-mermaid_output_format = "svg"
+# mermaid_output_format = "svg"
 
 # autoclass_content = "both"
 autodoc_class_signature = "separated"
