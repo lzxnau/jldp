@@ -12,7 +12,11 @@ from torch import Tensor, nn
 
 
 class LRModel(nn.Module):
-    """Custom Linear Regression Model as a torch.nn.Module."""
+    """
+    Custom Linear Regression Model as a torch.nn.Module.
+
+    .. card::
+    """
 
     def __init__(self, features: int = 10, sigma: float = 0.01) -> None:
         """Construct a class instance."""
