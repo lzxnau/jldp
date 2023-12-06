@@ -202,7 +202,7 @@ https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
 # Post-installation:
 USER root
-RUN npm install -g npm@10.2.4 bash-language-server
+RUN npm install -g npm@10.2.4 bash-language-server @mermaid-js/mermaid-cli
 
 ARG UDATE=1
 RUN apt update && apt upgrade -y && apt autoremove
