@@ -9,6 +9,7 @@ An example shows all steps for training linear regression model from scratch.
 """
 import torch
 from torch import Tensor, nn
+from torch.utils.data import Dataset, DataLoader
 
 
 class LRData:
