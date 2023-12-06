@@ -163,6 +163,10 @@
   (helm-mode)
   :init
   (helm-mode 1)
+  (defvar helm-dir-entry-directory)
+  (customize-face helm-dir-entry-directory
+                  :background nil
+                  :foreground "lightblue")
   :bind
   ("M-x" . helm-M-x)
   ("C-c i" . helm-imenu))
