@@ -164,4 +164,5 @@ export JLDPDIR=/home/pne/jldp
 
 alias up='/home/pne/env/env.ini'
 
-cd /home/pne/jldp && emacs
+cd /home/pne/jldp
+
