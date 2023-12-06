@@ -167,8 +167,8 @@
   ("M-x" . helm-M-x)
   ("C-c i" . helm-imenu)
   :custom-face
-  (helm-dir-entry-directory
-   ((t (:foreground "blue" :background "black")))))
+  (helm-ff-directory
+   ((t (:foreground "yellow" :background nil)))))
 
 (use-package which-key
   :ensure t
