@@ -36,7 +36,6 @@
 
 !/cfg/.readthedocs.yaml
 !/cfg/requirements.txt
-!/cfg/puppeteer-config.json
 
 !/src/conf.py
 !/src/index.md
