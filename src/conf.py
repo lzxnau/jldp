@@ -2,7 +2,7 @@
 Sphinx and MyST Project Configuration.
 
 Author: JLDP
-Version: 2023.11.27.05
+Version: 2023.12.07.06
 """
 import os
 import sys
@@ -14,8 +14,8 @@ sys.path.insert(0, pypath)
 project = "JLDP"
 copyright = "2023, JLDP"
 author = "JLDP"
-release = "2023.11.24"
-version = "2023.11.24.5"
+release = "2023.12.07"
+version = "2023.12.07.06"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
