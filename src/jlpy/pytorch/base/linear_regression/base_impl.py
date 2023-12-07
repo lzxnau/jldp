@@ -39,9 +39,7 @@ class LRData:
 
 class LRDataset(Dataset[tuple[list[float], float]]):
     """
-    LRDataset Description.
-
-    LRDataset Details.
+    Training dataset or validation dataset for the linear regression.
 
     .. card::
     """
@@ -58,7 +56,7 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         :param idx: Index of the subscription.
         :type idx: int
         :retrn: Return one element from the dataset.
-        :rtype: Tensor
+        :rtype: tuple[list[float], float]
         """
         if self.isval:
             idx += self.data.num_train
@@ -68,9 +66,9 @@ class LRDataset(Dataset[tuple[list[float], float]]):
 
     def __len__(self) -> int:
         """
-        Run a method.
+        Length of the dataset.
 
-        :return: None
+        :return: Length of the dataset.
         :rtype: int
         """
         rt = self.data.num_train
