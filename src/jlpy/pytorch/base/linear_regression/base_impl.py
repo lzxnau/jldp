@@ -35,8 +35,6 @@ class LRData:
             torch.matmul(self.x, self.w.reshape((-1, 1))) + self.b + self.noise
             # reshape w to match the output of y
         )
-        print(self.x)
-        print(self.y)
 
 
 class LRDataset(Dataset[tuple[list[float], float]]):
@@ -67,6 +65,18 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         a = self.data.x[idx].tolist()
         b = self.data.y[idx].item()  # type: ignore
         return a, b
+
+    def __len__(self) -> int:
+        """
+        Run a method.
+
+        :return: None
+        :rtype: int
+        """
+        rt = self.data.num_train
+        if self.isval:
+            rt = self.data.num_val
+        return rt
 
 
 class LRModel(nn.Module):
@@ -124,7 +134,7 @@ class BaseImpl:
         self.vdata = LRDataset(data, isval=True)
         self.loader = DataLoader(self.tdata)
 
-        print(self.tdata[1])
+        print(len(self.tdata))
 
 
 if __name__ == "__main__":
