@@ -36,10 +36,10 @@
 
 !/cfg/.readthedocs.yaml
 !/cfg/requirements.txt
+!/cfg/puppeteer-config.json
 
 !/src/conf.py
 !/src/index.md
-!/src/puppeteer-config.json
 !/src/_static/css/*.css
 !/src/_static/js/*.js
 !/src/_templates/autosummary/*.rst
