@@ -181,6 +181,11 @@ RUN unset EMACS_VERSION
 # Install Packages:
 RUN apt install -y --no-install-recommends sudo pandoc
 
+# Packages for mermaid
+RUN apt install -y --no-install-recommends libnss3 libatk1.0-0 \
+    libatk-bridge2.0-0 libcups2 libdrm2 libxcomposite1 libxdamage1 libxfixes3 \
+    libxrandr2 libgbm1 libxkbcommon0 libasound2
+
 # Create User pne:
 ENV USER_NAME=pne
 ENV USER_PASSWORD=pnepne
@@ -202,7 +207,7 @@ https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
 # Post-installation:
 USER root
-RUN npm install -g npm@10.2.4 bash-language-server
+RUN npm install -g npm@10.2.4 bash-language-server @mermaid-js/mermaid-cli
 
 ARG UDATE=1
 RUN apt update && apt upgrade -y && apt autoremove
