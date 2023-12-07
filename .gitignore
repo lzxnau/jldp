@@ -39,6 +39,7 @@
 
 !/src/conf.py
 !/src/index.md
+!/src/puppeteer-config.json
 !/src/_static/css/*.css
 !/src/_static/js/*.js
 !/src/_templates/autosummary/*.rst
