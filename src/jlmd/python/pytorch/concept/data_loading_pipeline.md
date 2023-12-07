@@ -41,7 +41,7 @@ Batching-->Feeding
 end
 DataLoader--iter-->Model
 :::
-:::{image} dlp_img1.svg
+:::{image} dlp_img1.png
 :align: center
 :::
 :::bls
