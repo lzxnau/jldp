@@ -77,7 +77,7 @@ autodoc_class_signature = "separated"
 autodoc_default_options = {
     "member-order": "bysource",
     "undoc-members": True,
-    # "inherited-members": False,
+    "inherited-members": None,
     # "show-inheritance": False,
 }
 
