@@ -7,9 +7,6 @@ build:
   tools:
     python: "3.11"
     nodejs: "20"
-  jobs:
-    pre_create_environment:
-      - npm -g i @mermaid-js/mermaid-cli
 
 sphinx:
   configuration: src/conf.py

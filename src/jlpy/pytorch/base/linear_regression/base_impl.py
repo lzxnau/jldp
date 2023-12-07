@@ -9,7 +9,7 @@ An example shows all steps for training linear regression model from scratch.
 """
 import torch
 from torch import Tensor, nn
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader, Dataset
 
 
 class LRData:
@@ -35,6 +35,38 @@ class LRData:
             torch.matmul(self.x, self.w.reshape((-1, 1))) + self.b + self.noise
             # reshape w to match the output of y
         )
+        print(self.x)
+        print(self.y)
+
+
+class LRDataset(Dataset[tuple[list[float], float]]):
+    """
+    LRDataset Description.
+
+    LRDataset Details.
+
+    .. card::
+    """
+
+    def __init__(self, data: LRData, *, isval: bool = False) -> None:
+        """Construct a class instance."""
+        self.data = data
+        self.isval = isval
+
+    def __getitem__(self, idx: int) -> tuple[list[float], float]:
+        """
+        Subscription method for the dataset.
+
+        :param idx: Index of the subscription.
+        :type idx: int
+        :retrn: Return one element from the dataset.
+        :rtype: Tensor
+        """
+        if self.isval:
+            idx += self.data.num_train
+        a = self.data.x[idx].tolist()
+        b = self.data.y[idx].item()  # type: ignore
+        return a, b
 
 
 class LRModel(nn.Module):
@@ -87,8 +119,13 @@ class BaseImpl:
 
     def __init__(self) -> None:
         """Construct a class instance."""
-        ...
+        data = LRData()
+        self.tdata = LRDataset(data)
+        self.vdata = LRDataset(data, isval=True)
+        self.loader = DataLoader(self.tdata)
+
+        print(self.tdata[1])
 
 
 if __name__ == "__main__":
-    lrm = LRModel()
+    bi = BaseImpl()
