@@ -142,6 +142,9 @@ Batching-->Feeding
 end
 DataLoader--iter-->Model
 :::
+:::{image} dlp_img2.png
+:align: center
+:::
 :::bls
 
 1. [IterableDataset]{.pcls}: Iterable-style Dataset Subclass
