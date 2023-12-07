@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 
 cd $JLDPDIR/pne || exit
-export PNEIMG=pne:3.11.6.20.10.0.29.1
+export PNEIMG=pne:3.11.7.20.10.0.29.1
 export LUD=/.emacs.d/.last-package-update-day
 export LSV=/.emacs.d/.lsp-session-v1
 export ESA=/.emacs.d/eshell/alias
