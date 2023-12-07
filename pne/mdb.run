@@ -2,11 +2,13 @@
 
 cd $JLDPDIR/pne || exit
 export PNEIMG=pne:3.11.6.20.10.0.29.1
+export MPC=.config/mmdc/puppeteer-config.json
 
 docker run -it --rm --name MDB -h MDB \
        --network dnet --ip 10.10.0.3 \
        -v $JLDPDIR/env:/home/pne/env \
        -v $JLDPDIR:/home/pne/jldp \
+       -v $JLDPDIR/pne/home/$MPC:/home/pne/$MPC \
        -e TZ=Australia/Sydney \
        $PNEIMG bash /home/pne/env/mdb.ini
 
