@@ -41,6 +41,9 @@ Batching-->Feeding
 end
 DataLoader--iter-->Model
 :::
+:::{image} dlp_img1.svg
+:align: center
+:::
 :::bls
 
 1. [Dataset]{.pcls}: Map-Style Dataset Subclass
