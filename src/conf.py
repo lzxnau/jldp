@@ -77,8 +77,8 @@ autodoc_class_signature = "separated"
 autodoc_default_options = {
     "member-order": "bysource",
     "undoc-members": True,
-    "inherited-members": False,
-    "show-inheritance": False,
+    # "inherited-members": False,
+    # "show-inheritance": False,
 }
 
 intersphinx_mapping = {
