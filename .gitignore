@@ -43,6 +43,7 @@
 !/src/_static/js/*.js
 !/src/_templates/autosummary/*.rst
 !/src/jlmd/**/*.md
+!/src/jlmd/**/*.png
 !/src/jlpy/**/index.md
 !/src/jlpy/**/*.py
 !/src/jljl/**/index.md
