@@ -14,7 +14,7 @@
 /*/**/*
 !/*/**/*/
 
-!/doc/README.md
+!README.md
 
 !/pne/Dockerfile
 !/pne/*.run
@@ -42,9 +42,10 @@
 !/src/_static/css/*.css
 !/src/_static/js/*.js
 !/src/_templates/autosummary/*.rst
-!/src/jlpy/**/*.py
-!/src/jlpy/**/index.rst
+!/src/jlmd/**/*.md
 !/src/jlpy/**/index.md
+!/src/jlpy/**/*.py
+!/src/jljl/**/index.md
 !/src/jljl/**/*.ipynb
 
 /src/jljl/**/.ipynb_checkpoints/
