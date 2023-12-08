@@ -77,7 +77,7 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         return rt
 
 
-class LRSampler(Sampler):
+class LRSampler(Sampler[int]):
     """
     LRSampler Description.
 
