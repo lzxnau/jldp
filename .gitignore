@@ -14,7 +14,7 @@
 /*/**/*
 !/*/**/*/
 
-!README.md
+!/doc/README.md
 
 !/pne/Dockerfile
 !/pne/*.run
