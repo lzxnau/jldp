@@ -93,6 +93,9 @@ DataLoader--iter-->Model
         * If there is no custom Sampler or built-in Sampler setup, the built-in
           sampler will be used over the dataset in a sequential order, without
           shuffling.
+        * Batch_size, shuffle and drop_last for built-in sampler.
+        * Batch_size and drop_last for custom sampler.
+        * Batch_sampler controls itself.
 
     * [\_\_iter\_\_()]{.pfxn}: Iterator
 
