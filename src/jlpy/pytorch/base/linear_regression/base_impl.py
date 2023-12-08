@@ -9,7 +9,7 @@ An example shows all steps for training linear regression model from scratch.
 """
 import torch
 from torch import Tensor, nn
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, Sampler
 
 
 class LRData:
@@ -75,6 +75,21 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         if self.isval:
             rt = self.data.num_val
         return rt
+
+
+class LRSampler(Sampler):
+    """
+    LRSampler Description.
+
+    LRSampler Details.
+
+    .. card::
+    """
+
+    def __init__(self) -> None:
+        """Construct a class instance."""
+        super().__init__()
+        ...
 
 
 class LRModel(nn.Module):
