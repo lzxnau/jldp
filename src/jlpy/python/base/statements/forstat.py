@@ -2,7 +2,8 @@
 Python For Statement Test Module.
 
 .. card::
-   Iterable Object.
+   * Iterable Object.
+
    ^^^
    * __iter__():
       1. Return a iterator which implements __next__().
