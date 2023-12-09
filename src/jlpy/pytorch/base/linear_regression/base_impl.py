@@ -40,7 +40,7 @@ class LRData:
         self.y: Tensor = wx + self.b + self.noise  # type: ignore
 
 
-class LRDataset(Dataset[tuple[Tensor, Tensor]]):
+class LRDataset(Dataset[list[Tensor]]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -52,7 +52,7 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         self.data = data
         self.isval = isval
 
-    def __getitem__(self, idx: int) -> tuple[Tensor, Tensor]:
+    def __getitem__(self, idx: int) -> list[Tensor]:
         """
         Subscription method for the dataset.
 
@@ -63,7 +63,8 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         """
         if self.isval:
             idx += self.data.num_train
-        return self.data.x[idx], self.data.y[idx]
+        print(idx)
+        return [self.data.x[idx], self.data.y[idx]]
 
     def __len__(self) -> int:
         """
@@ -132,6 +133,7 @@ class LRSampler(Sampler[list[Tensor]]):
             except IndexError:
                 ilist = idx[i : len(self.dataset)]
             bidx = torch.tensor(ilist)
+            print(bidx)
             if self.dataset.isval:
                 bidx += self.dataset.data.num_train  # type: ignore
             yield [self.dataset.data.x[bidx], self.dataset.data.y[bidx]]
@@ -190,7 +192,7 @@ class BaseImpl:
         data = LRData()
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
-        self.tsamp = LRSampler(self.tdata, batch_size=2)
+        self.tsamp = LRSampler(self.tdata)
         self.loader = DataLoader(self.tdata, batch_sampler=self.tsamp)
 
         samp = 0
