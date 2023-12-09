@@ -3,8 +3,7 @@ Python For Statement Test Module.
 
 .. card::
 
-   * Iterable Object.
-
+   Iterable Object
    ^^^
    * __iter__():
       1. Return a iterator which implements __next__().
@@ -18,9 +17,10 @@ Python For Statement Test Module.
          itself as a iterable object.
 
    +++
-   * for item in iterable_object: loop through iterable object.
-   * for idx, item in enumerate(iterable_object): loop through iterable \
-      object with index.
+   * for item in iterable_object:
+      * Looping through iterable object.
+   * for idx, item in enumerate(iterable_object):
+      * Looping through iterable object with index.
 
 :Author:  JLDP
 :Version: 2023.12.09.1
