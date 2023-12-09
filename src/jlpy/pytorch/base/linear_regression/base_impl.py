@@ -7,6 +7,10 @@ An example shows all steps for training linear regression model from scratch.
 :Version: 2023.12.02.01
 
 """
+import math
+import random
+from collections.abc import Iterator
+
 import torch
 from torch import Tensor, nn
 from torch.utils.data import DataLoader, Dataset, Sampler
@@ -29,15 +33,14 @@ class LRData:
         self.num_val = 1000
         self.n = self.num_train + self.num_val  # put two sets altogether
 
-        self.x = torch.randn(self.n, len(self.w))
+        self.x: Tensor = torch.randn(self.n, len(self.w))
         self.noise = torch.randn(self.n, 1) * self.noise
-        self.y = (
-            torch.matmul(self.x, self.w.reshape((-1, 1))) + self.b + self.noise
-            # reshape w to match the output of y
-        )
+        wx = torch.matmul(self.x, self.w.reshape((-1, 1)))
+        # reshape w to match the output of y
+        self.y: Tensor = wx + self.b + self.noise  # type: ignore
 
 
-class LRDataset(Dataset[tuple[list[float], float]]):
+class LRDataset(Dataset[tuple[Tensor, Tensor]]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -49,20 +52,18 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         self.data = data
         self.isval = isval
 
-    def __getitem__(self, idx: int) -> tuple[list[float], float]:
+    def __getitem__(self, idx: int) -> tuple[Tensor, Tensor]:
         """
         Subscription method for the dataset.
 
         :param idx: Index of the subscription.
         :type idx: int
         :retrn: Return one element from the dataset.
-        :rtype: tuple[list[float], float]
+        :rtype: tuple[Tensor, Tensor]
         """
         if self.isval:
             idx += self.data.num_train
-        a = self.data.x[idx].tolist()
-        b = self.data.y[idx].item()  # type: ignore
-        return a, b
+        return self.data.x[idx], self.data.y[idx]
 
     def __len__(self) -> int:
         """
@@ -77,7 +78,7 @@ class LRDataset(Dataset[tuple[list[float], float]]):
         return rt
 
 
-class LRSampler(Sampler[int]):
+class LRSampler(Sampler[list[Tensor]]):
     """
     LRSampler Description.
 
@@ -86,10 +87,54 @@ class LRSampler(Sampler[int]):
     .. card::
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        dataset: LRDataset,
+        batch_size: int = 32,
+        shuffle: bool = False,
+        drop_last: bool = True,
+    ) -> None:
         """Construct a class instance."""
-        super().__init__()
-        ...
+        self.dataset = dataset
+        self.batch_size = batch_size
+        self.shuffle = shuffle
+        self.drop_last = drop_last
+        size = math.ceil(len(self.dataset) / self.batch_size)
+        rest = len(self.dataset) / self.batch_size
+        if rest > 0 and self.drop_last:
+            size -= 1
+        self.size = size
+        self.rest = rest
+
+    def __len__(self) -> int:
+        """
+        Get the size of the batches.
+
+        :return: the length of the batches.
+        :rtype: int
+        """
+        return self.size
+
+    def __iter__(self) -> Iterator[list[Tensor]]:
+        """
+        Run a method.
+
+        :return: None
+        :rtype: None
+        """
+        idx = list(range(0, len(self.dataset)))
+        if self.shuffle:
+            random.shuffle(idx)
+
+        for i in range(0, self.size, self.batch_size):
+            try:
+                ilist = idx[i : i + self.batch_size]
+            except IndexError:
+                ilist = idx[i : len(self.dataset)]
+            bidx = torch.tensor(ilist)
+            if self.dataset.isval:
+                bidx += self.dataset.data.num_train  # type: ignore
+            yield [self.dataset.data.x[bidx], self.dataset.data.y[bidx]]
 
 
 class LRModel(nn.Module):
@@ -145,9 +190,14 @@ class BaseImpl:
         data = LRData()
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
-        self.loader = DataLoader(self.tdata)
+        self.tsamp = LRSampler(self.tdata, batch_size=2)
+        self.loader = DataLoader(self.tdata, batch_sampler=self.tsamp)
 
-        print(len(self.tdata))
+        samp = 0
+        for idx, mbatch in enumerate(self.loader):
+            print(mbatch)
+            if idx > samp:
+                break
 
 
 if __name__ == "__main__":
