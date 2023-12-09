@@ -2,6 +2,7 @@
 Python For Statement Test Module.
 
 .. card::
+
    * Iterable Object.
 
    ^^^
@@ -17,8 +18,8 @@ Python For Statement Test Module.
          itself as a iterable object.
 
    +++
-   1. for item in iterable_object: loop through iterable object.
-   2. for idx, item in enumerate(iterable_object): loop through iterable \
+   * for item in iterable_object: loop through iterable object.
+   * for idx, item in enumerate(iterable_object): loop through iterable \
       object with index.
 
 :Author:  JLDP
