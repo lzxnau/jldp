@@ -4,13 +4,13 @@ Python For Statement Test Module.
 .. card::
    * Iterable Object.
    ^^^
-   :__iter__():
+   * __iter__():
       1. Return a iterator which implements __next__().
       2. Class implements the __next__().
       3. Work with yield which turns to a generator.
       4. All objects above are iterable objects.
 
-   :__getitem__():
+   * __getitem__():
       1. Container holds a collection of iterable objects.
       2. Container implements this method for subscription. It also turns \
          itself as a iterable object.
