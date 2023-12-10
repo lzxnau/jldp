@@ -4,7 +4,7 @@ Linear Regression Base Implementation.
 An example shows all steps for training linear regression model from scratch.
 
 :Author:  JLDP
-:Version: 2023.12.02.01
+:Version: 2023.12.10.02
 
 """
 import math
@@ -38,9 +38,10 @@ class LRData:
         wx = torch.matmul(self.x, self.w.reshape((-1, 1)))
         # reshape w to match the output of y
         self.y: Tensor = wx + self.b + self.noise  # type: ignore
+        self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
-class LRDataset(Dataset[list[Tensor]]):
+class LRDataset(Dataset[Tensor]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -52,19 +53,37 @@ class LRDataset(Dataset[list[Tensor]]):
         self.data = data
         self.isval = isval
 
-    def __getitem__(self, idx: int) -> list[Tensor]:
+    def __getitem__(self, idx: int) -> Tensor:
         """
         Subscription method for the dataset.
 
         :param idx: Index of the subscription.
         :type idx: int
         :retrn: Return one element from the dataset.
-        :rtype: tuple[Tensor, Tensor]
+        :rtype: Tensor
         """
         if self.isval:
             idx += self.data.num_train
         print(idx)
-        return [self.data.x[idx], self.data.y[idx]]
+        ret: Tensor = self.data.s[idx]
+        return ret
+
+    def __getitems__(self, idx: list[int]) -> Tensor:
+        """
+        Batch subscription method for the dataset.
+
+        :param idx: A list of indices.
+        :type idx: list[int]
+        :retrn: Return a batch of elements from the dataset.
+        :rtype: Tensor
+        """
+        idx = torch.tensor(idx, dtype=torch.long)
+        if self.isval:
+            idx += self.data.num_train  # type: ignore
+        print("items")
+        print(idx)
+        ret: Tensor = self.data.s[idx]
+        return ret
 
     def __len__(self) -> int:
         """
@@ -79,7 +98,7 @@ class LRDataset(Dataset[list[Tensor]]):
         return rt
 
 
-class LRSampler(Sampler[list[Tensor]]):
+class LRSampler(Sampler[list[int]]):
     """
     LRSampler Description.
 
@@ -116,7 +135,7 @@ class LRSampler(Sampler[list[Tensor]]):
         """
         return self.size
 
-    def __iter__(self) -> Iterator[list[Tensor]]:
+    def __iter__(self) -> list[int]:
         """
         Run a method.
 
@@ -132,11 +151,7 @@ class LRSampler(Sampler[list[Tensor]]):
                 ilist = idx[i : i + self.batch_size]
             except IndexError:
                 ilist = idx[i : len(self.dataset)]
-            bidx = torch.tensor(ilist)
-            print(bidx)
-            if self.dataset.isval:
-                bidx += self.dataset.data.num_train  # type: ignore
-            yield [self.dataset.data.x[bidx], self.dataset.data.y[bidx]]
+            yield ilist
 
 
 class LRModel(nn.Module):
@@ -190,10 +205,19 @@ class BaseImpl:
     def __init__(self) -> None:
         """Construct a class instance."""
         data = LRData()
+        print(data.x)
+        print(data.y)
+        print(data.s)
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
-        self.tsamp = LRSampler(self.tdata)
-        self.loader = DataLoader(self.tdata, batch_sampler=self.tsamp)
+        # self.tsamp = LRSampler(self.tdata)
+        self.loader = DataLoader(
+            self.tdata,
+            batch_size=1,
+            shuffle=False,
+            drop_last=False,
+            num_workers=0,
+        )
 
         samp = 0
         for idx, mbatch in enumerate(self.loader):
