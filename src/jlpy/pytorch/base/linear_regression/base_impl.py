@@ -41,7 +41,7 @@ class LRData:
         self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
-class LRDataset(Dataset[Tensor]):
+class LRDataset(Dataset[tuple[Tensor, Tensor]]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -68,7 +68,7 @@ class LRDataset(Dataset[Tensor]):
         ret: Tensor = self.data.s[idx]
         return ret
 
-    def __getitems__(self, idx: list[int]) -> Tensor:
+    def __getitems__(self, idx: list[int]) -> tuple[Tensor, Tensor]:
         """
         Batch subscription method for the dataset.
 
@@ -82,8 +82,7 @@ class LRDataset(Dataset[Tensor]):
             idx += self.data.num_train  # type: ignore
         print("items")
         print(idx)
-        ret: Tensor = self.data.s[idx]
-        return ret
+        return self.data.x[idx], self.data.y[idx]
 
     def __len__(self) -> int:
         """
@@ -135,7 +134,7 @@ class LRSampler(Sampler[list[int]]):
         """
         return self.size
 
-    def __iter__(self) -> list[int]:
+    def __iter__(self) -> Iterator[list[int]]:
         """
         Run a method.
 
@@ -216,7 +215,6 @@ class BaseImpl:
             batch_size=1,
             shuffle=False,
             drop_last=False,
-            num_workers=0,
         )
 
         samp = 0
