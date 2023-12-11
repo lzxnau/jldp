@@ -5,6 +5,7 @@ export PNEIMG=pne:3.11.7.20.10.0.29.1
 export LSJ=/.local/share/jupyter
 
 docker run -it --rm --name JLS -h JLS \
+       --cpus=4 --memory=16g \
        --network dnet --ip 10.10.0.5 \
        -p 8888:8888 \
        -v $JLDPDIR/pne/home/.jupyter:/home/pne/.jupyter \

@@ -8,6 +8,7 @@ export ESA=/.emacs.d/eshell/alias
 docker build --build-arg UDATE=$(date +%Y%m%d) -t $PNEIMG .
 
 docker run -it --rm --name PNE -h PNE \
+       --cpus=8 --memory=32g \
        --network dnet --ip 10.10.0.2 \
        -v $JLDPDIR/pne/home/.bashrc:/home/pne/.bashrc \
        -v $JLDPDIR/pne/home/.emacs.d/init.el:/home/pne/.emacs.d/init.el \
