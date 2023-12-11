@@ -100,6 +100,14 @@ class LRDataset(Dataset[Tensor]):
         """
         Collate batch input to output without any changes.
 
+        * Default collate:
+            * Merge a list of one element from the dataset to a Tensor \
+              collection format.
+
+        * Custom collate:
+            * If there is a way to load batched samplers from database, \
+              bypass the default collate method.
+
         :param batch: Batch input returned from __getitems__().
         :type batch: Tensor
         :return: Return the original input.
@@ -125,6 +133,8 @@ class LRSampler(Sampler[list[int]]):
     * Sampler __iter__():
         * Return a list of indices.
         * Using the list of indices to get elements from Dataset class.
+        * Sampler will call __getitems__() first, then fall back to call \
+          __getitem__().
 
     * Dataset class:
         * Sampler class only need to get the len of the dataset.
