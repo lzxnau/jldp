@@ -41,7 +41,7 @@ class LRData:
         self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
-class LRDataset(Dataset[tuple[Tensor, Tensor]]):
+class LRDataset(Dataset[Tensor]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -77,12 +77,9 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         :retrn: Return a batch of elements from the dataset.
         :rtype: Tensor
         """
-        print(idx)
         idx = torch.tensor(idx, dtype=torch.long)
         if self.isval:
             idx += self.data.num_train  # type: ignore
-        print("items")
-        print(idx)
         ret: Tensor = self.data.s[idx]
         return ret
 
@@ -101,12 +98,12 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
     @staticmethod
     def custom_collate(batch: Tensor) -> Tensor:
         """
-        Run a method.
+        Collate batch input to output without any changes.
 
-        :param x: Description.
-        :type x: None
-        :return: None
-        :rtype: None
+        :param batch: Batch input returned from __getitems__().
+        :type batch: Tensor
+        :return: Return the original input.
+        :rtype: Tensor
         """
         return batch
 
@@ -226,7 +223,7 @@ class BaseImpl:
             batch_size=3,
             shuffle=False,
             drop_last=False,
-            collate_fn=LRDataset.custom_collate, # type: ignore
+            collate_fn=LRDataset.custom_collate,  # type: ignore
         )
 
         samp = 0
