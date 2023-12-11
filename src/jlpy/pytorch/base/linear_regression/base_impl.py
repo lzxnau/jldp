@@ -68,7 +68,7 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         ret: Tensor = self.data.s[idx]
         return ret
 
-    def __getitems__(self, idx: list[int]) -> tuple[Tensor, Tensor]:
+    def __getitems__(self, idx: list[int]) -> Tensor:
         """
         Batch subscription method for the dataset.
 
@@ -82,7 +82,8 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
             idx += self.data.num_train  # type: ignore
         print("items")
         print(idx)
-        return self.data.x[idx], self.data.y[idx]
+        ret: Tensor = self.data.s[idx]
+        return ret
 
     def __len__(self) -> int:
         """
@@ -95,6 +96,18 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         if self.isval:
             rt = self.data.num_val
         return rt
+
+    @staticmethod
+    def custom_collate(batch: Tensor) -> Tensor:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        return batch
 
 
 class LRSampler(Sampler[list[int]]):
@@ -204,17 +217,15 @@ class BaseImpl:
     def __init__(self) -> None:
         """Construct a class instance."""
         data = LRData()
-        print(data.x)
-        print(data.y)
-        print(data.s)
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
         # self.tsamp = LRSampler(self.tdata)
         self.loader = DataLoader(
             self.tdata,
-            batch_size=1,
+            batch_size=3,
             shuffle=False,
             drop_last=False,
+            collate_fn=LRDataset.custom_collate, # type: ignore
         )
 
         samp = 0
