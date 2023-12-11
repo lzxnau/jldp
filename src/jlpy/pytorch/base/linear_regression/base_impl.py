@@ -41,7 +41,7 @@ class LRData:
         self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
-class LRDataset(Dataset[Tensor]):
+class LRDataset(Dataset[tuple[Tensor, Tensor]]):
     """
     Training dataset or validation dataset for the linear regression.
 
@@ -53,35 +53,32 @@ class LRDataset(Dataset[Tensor]):
         self.data = data
         self.isval = isval
 
-    def __getitem__(self, idx: int) -> Tensor:
+    def __getitem__(self, idx: int) -> tuple[Tensor, Tensor]:
         """
         Subscription method for the dataset.
 
         :param idx: Index of the subscription.
         :type idx: int
         :retrn: Return one element from the dataset.
-        :rtype: Tensor
+        :rtype: tuple[Tensor, Tensor]
         """
         if self.isval:
             idx += self.data.num_train
-        print(idx)
-        ret: Tensor = self.data.s[idx]
-        return ret
+        return self.data.x[idx], self.data.y[idx]
 
-    def __getitems__(self, idx: list[int]) -> Tensor:
+    def __getitems__(self, idx: list[int]) -> tuple[Tensor, Tensor]:
         """
         Batch subscription method for the dataset.
 
         :param idx: A list of indices.
         :type idx: list[int]
         :retrn: Return a batch of elements from the dataset.
-        :rtype: Tensor
+        :rtype: tuple[Tensor, Tensor]
         """
         idx = torch.tensor(idx, dtype=torch.long)
         if self.isval:
             idx += self.data.num_train  # type: ignore
-        ret: Tensor = self.data.s[idx]
-        return ret
+        return self.data.x[idx], self.data.y[idx]
 
     def __len__(self) -> int:
         """
@@ -96,7 +93,7 @@ class LRDataset(Dataset[Tensor]):
         return rt
 
     @staticmethod
-    def custom_collate(batch: Tensor) -> Tensor:
+    def custom_collate(batch: tuple[Tensor, Tensor]) -> tuple[Tensor, Tensor]:
         """
         Collate batch input to output without any changes.
 
@@ -109,9 +106,9 @@ class LRDataset(Dataset[Tensor]):
               bypass the default collate method.
 
         :param batch: Batch input returned from __getitems__().
-        :type batch: Tensor
+        :type batch: tuple[Tensor, Tensor]
         :return: Return the original input.
-        :rtype: Tensor
+        :rtype: tuple[Tensor, Tensor]
         """
         return batch
 
