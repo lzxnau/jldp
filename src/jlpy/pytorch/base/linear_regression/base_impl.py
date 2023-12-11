@@ -110,27 +110,45 @@ class LRDataset(Dataset[Tensor]):
 
 class LRSampler(Sampler[list[int]]):
     """
-    LRSampler Description.
+    A custom torch batched Sampler - LRSampler.
 
-    LRSampler Details.
+    * Custom Sampler:
+        * Controlling how to shuffle.
+        * Return the size for iteration.
+
+    * Custom batched sampler:
+        * Control how to shuffle.
+        * Control batch size.
+        * Control the drop_last.
+        * Return the size for batched iteration.
+
+    * Sampler __iter__():
+        * Return a list of indices.
+        * Using the list of indices to get elements from Dataset class.
+
+    * Dataset class:
+        * Sampler class only need to get the len of the dataset.
+        * According to the len of the dataset, Sampler will procee all the \
+          rest itself.
+        * Dataloader will iterate the Sampler and get the samples from Dataset.
 
     .. card::
     """
 
     def __init__(
         self,
-        dataset: LRDataset,
+        dsize: int,
         batch_size: int = 32,
         shuffle: bool = False,
         drop_last: bool = True,
     ) -> None:
         """Construct a class instance."""
-        self.dataset = dataset
+        self.dsize = dsize
         self.batch_size = batch_size
         self.shuffle = shuffle
         self.drop_last = drop_last
-        size = math.ceil(len(self.dataset) / self.batch_size)
-        rest = len(self.dataset) / self.batch_size
+        size = math.ceil(self.dsize / self.batch_size)
+        rest = dsize / self.batch_size
         if rest > 0 and self.drop_last:
             size -= 1
         self.size = size
@@ -147,12 +165,12 @@ class LRSampler(Sampler[list[int]]):
 
     def __iter__(self) -> Iterator[list[int]]:
         """
-        Run a method.
+        Iterate to get elements from Dataset.
 
-        :return: None
-        :rtype: None
+        :return: Return a list of indices.
+        :rtype: Iterator[list[int]]
         """
-        idx = list(range(0, len(self.dataset)))
+        idx = list(range(0, self.dsize))
         if self.shuffle:
             random.shuffle(idx)
 
@@ -160,7 +178,7 @@ class LRSampler(Sampler[list[int]]):
             try:
                 ilist = idx[i : i + self.batch_size]
             except IndexError:
-                ilist = idx[i : len(self.dataset)]
+                ilist = idx[i : self.dsize]
             yield ilist
 
 
@@ -217,8 +235,8 @@ class BaseImpl:
         data = LRData()
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
-        # self.tsamp = LRSampler(self.tdata)
-        self.loader = DataLoader(
+        # self.tsamp = LRSampler(len(self.tdata))
+        self.tloader = DataLoader(
             self.tdata,
             batch_size=3,
             shuffle=False,
@@ -227,7 +245,7 @@ class BaseImpl:
         )
 
         samp = 0
-        for idx, mbatch in enumerate(self.loader):
+        for idx, mbatch in enumerate(self.tloader):
             print(mbatch)
             if idx > samp:
                 break
