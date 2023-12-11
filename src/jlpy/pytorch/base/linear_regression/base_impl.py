@@ -77,6 +77,7 @@ class LRDataset(Dataset[tuple[Tensor, Tensor]]):
         :retrn: Return a batch of elements from the dataset.
         :rtype: Tensor
         """
+        print(idx)
         idx = torch.tensor(idx, dtype=torch.long)
         if self.isval:
             idx += self.data.num_train  # type: ignore
