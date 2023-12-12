@@ -10,10 +10,13 @@ An example shows all steps for training linear regression model from scratch.
 import math
 import random
 from collections.abc import Iterator
+from typing import TypeVar
 
 import torch
 from torch import Tensor, nn
 from torch.utils.data import DataLoader, Dataset, Sampler
+
+T = TypeVar("T")
 
 
 class LRData:
@@ -257,7 +260,7 @@ class BaseImpl:
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
 
-    def show(self, data: Tensor, samp: int = 0) -> None:
+    def show(self, data: DataLoader[T], samp: int = 0) -> None:
         """
         Run a method.
 
