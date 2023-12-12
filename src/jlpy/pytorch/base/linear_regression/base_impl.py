@@ -257,7 +257,7 @@ class BaseImpl:
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
 
-    def show(self, data:Tensor, samp:int = 0) -> None:
+    def show(self, data: Tensor, samp: int = 0) -> None:
         """
         Run a method.
 
@@ -291,16 +291,8 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        samp = 0
-        for idx, mbatch in enumerate(self.tloader):
-            print(mbatch)
-            if idx > samp:
-                break
-        samp = 0
-        for idx, mbatch in enumerate(self.vloader):
-            print(mbatch)
-            if idx > samp:
-                break
+        self.show(self.tloader)
+        self.show(self.vloader)
 
 
 if __name__ == "__main__":
