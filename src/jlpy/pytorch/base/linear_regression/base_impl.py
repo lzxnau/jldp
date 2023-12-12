@@ -242,17 +242,62 @@ class BaseImpl:
         data = LRData()
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
-        # self.tsamp = LRSampler(len(self.tdata))
         self.tloader = DataLoader(
             self.tdata,
-            batch_size=3,
+            batch_size=32,
+            shuffle=True,
+            drop_last=True,
+            collate_fn=LRDataset.custom_collate,  # type: ignore
+        )
+        self.vloader = DataLoader(
+            self.vdata,
+            batch_size=32,
             shuffle=False,
-            drop_last=False,
+            drop_last=True,
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
 
+    def show(self, data:Tensor, samp:int = 0) -> None:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        for idx, value in enumerate(data):
+            if idx > samp:
+                break
+            print(value)
+
+    def fit(self) -> None:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        ...
+
+    def demo(self) -> None:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
         samp = 0
         for idx, mbatch in enumerate(self.tloader):
+            print(mbatch)
+            if idx > samp:
+                break
+        samp = 0
+        for idx, mbatch in enumerate(self.vloader):
             print(mbatch)
             if idx > samp:
                 break
@@ -260,3 +305,4 @@ class BaseImpl:
 
 if __name__ == "__main__":
     bi = BaseImpl()
+    bi.demo()
