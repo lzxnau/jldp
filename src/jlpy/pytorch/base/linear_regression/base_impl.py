@@ -14,6 +14,8 @@ from typing import TypeVar
 
 import torch
 from torch import Tensor, nn
+from torch.nn.functional import mse_loss
+from torch.optim import SGD
 from torch.utils.data import DataLoader, Dataset, Sampler
 
 T = TypeVar("T")
@@ -199,13 +201,9 @@ class LRModel(nn.Module):
     .. card::
     """
 
-    def __init__(
-        self, features: int, lr: float = 0.03, sigma: float = 0.01
-    ) -> None:
+    def __init__(self, features: int, sigma: float = 0.01) -> None:
         """Construct a class instance."""
         super().__init__()
-        self.loss = nn.MSELoss()
-        self.lr = lr
         self.w: Tensor = torch.normal(
             0, sigma, (features, 1), requires_grad=True
         )
@@ -240,27 +238,29 @@ class BaseImpl:
     .. card::
     """
 
-    def __init__(self) -> None:
+    def __init__(self, bsize: int = 32, nepoch: int = 1) -> None:
         """Construct a class instance."""
         data = LRData()
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
         self.tloader = DataLoader(
             self.tdata,
-            batch_size=32,
+            batch_size=bsize,
             shuffle=True,
             drop_last=True,
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
         self.vloader = DataLoader(
             self.vdata,
-            batch_size=32,
+            batch_size=bsize,
             shuffle=False,
             drop_last=True,
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
-        print(len(data.w))
+        self.num_epoch = nepoch
+        self.lr = 0.01
         self.model = LRModel(len(data.w))
+        self.optim = SGD([self.model.w, self.model.b], self.lr)
 
     def show(self, data: DataLoader[T], samp: int = 0) -> None:
         """
@@ -285,7 +285,15 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        ...
+        for e in range(self.num_epoch):
+            self.model.train()
+            for batch in self.tloader:
+                y_hat = self.model(batch[0])
+                loss = mse_loss(y_hat, batch[1])
+                self.optim.zero_grad()
+                print(loss)
+                print(self.optim)
+                break
 
     def demo(self) -> None:
         """
@@ -296,7 +304,7 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        pass
+        self.fit()
 
 
 if __name__ == "__main__":
