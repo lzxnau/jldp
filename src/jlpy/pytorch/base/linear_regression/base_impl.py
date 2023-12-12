@@ -200,7 +200,7 @@ class LRModel(nn.Module):
     """
 
     def __init__(
-        self, features: int = 10, lr: float = 0.03, sigma: float = 0.01
+        self, features: int, lr: float = 0.03, sigma: float = 0.01
     ) -> None:
         """Construct a class instance."""
         super().__init__()
@@ -259,6 +259,8 @@ class BaseImpl:
             drop_last=True,
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
+        print(len(data.w))
+        self.model = LRModel(len(data.w))
 
     def show(self, data: DataLoader[T], samp: int = 0) -> None:
         """
@@ -294,8 +296,7 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        self.show(self.tloader)
-        self.show(self.vloader)
+        pass
 
 
 if __name__ == "__main__":
