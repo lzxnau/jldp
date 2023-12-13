@@ -291,13 +291,14 @@ class BaseImpl:
                 y_hat = self.model(batch[0])
                 loss = mse_loss(y_hat, batch[1])
                 self.optim.zero_grad()
-                print(self.model.w)
-                print(self.model.b)
                 with torch.no_grad():
                     loss.backward()  # noqa: no-untyped-call
                     self.optim.step()
-                print(self.model.w)
-                print(self.model.b)
+            self.model.eval()
+            for batch in self.vloader:
+                with torch.no_grad():
+                    y_hat = self.model(batch[0])
+                    loss = mse_loss(y_hat, batch[1])
 
     def demo(self) -> None:
         """
