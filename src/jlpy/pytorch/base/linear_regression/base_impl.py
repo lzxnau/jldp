@@ -278,19 +278,21 @@ class BaseImpl:
         :rtype: None
         """
         fig, axs = plt.subplots(2, 2, figsize=(10, 8))
-        fig.suptitle('Four Plots from DataFrame')
+        fig.suptitle("Four Plots from DataFrame")
 
-        axs[0, 0].plot(self.df['Weight1'])
-        axs[0, 0].set_title('Weight1')
+        axs[0, 0].plot(self.df["Weight1"])
+        axs[0, 0].set_title("Weight1")
 
-        axs[0, 1].plot(self.df['Weight2'])
-        axs[0, 1].set_title('Weight2')
+        axs[0, 1].plot(self.df["Weight2"])
+        axs[0, 1].set_title("Weight2")
 
-        axs[1, 0].plot(self.df['Bias'])
-        axs[1, 0].set_title('Bias')
+        axs[1, 0].plot(self.df["Bias"])
+        axs[1, 0].set_title("Bias")
 
-        axs[1, 1].plot(self.df['Loss'])
-        axs[1, 1].set_title('Loss')
+        axs[1, 1].plot(self.df["LossT"], label="Training Loss")
+        axs[1, 1].plot(self.df["LossV"], label="Validation Loss")
+        axs[1, 1].set_title("Loss")
+        axs[1, 1].legend()
 
         plt.show()
 
@@ -302,15 +304,15 @@ class BaseImpl:
         :rtype: None
         """
         rows = np.arange(0.02, self.num_epoch, 0.02)
-        cols = ["Weight1", "Weight2", "Bias", "Loss"]
+        cols = ["Weight1", "Weight2", "Bias", "LossT", "LossV"]
         self.df = pd.DataFrame(index=rows, columns=cols)
-        wl1, wl2, bl, ll = ([] for _ in range(4))
+        wl1, wl2, bl, ltl, lvl = ([] for _ in range(5))
         for e in range(self.num_epoch):
             self.model.train()
             for batch in self.tloader:
                 y_hat = self.model(batch[0])
                 loss = mse_loss(y_hat, batch[1])
-                ll.append(loss.item())
+                ltl.append(loss.item())
                 self.optim.zero_grad()
                 with torch.no_grad():
                     loss.backward()  # type: ignore
@@ -323,7 +325,9 @@ class BaseImpl:
                 with torch.no_grad():
                     y_hat = self.model(batch[0])
                     loss = mse_loss(y_hat, batch[1])
-        self.df["Loss"] = ll
+                    lvl.append(loss.item())
+        self.df["LossT"] = ltl
+        self.df["LossV"] = lvl
         self.df["Weight1"] = wl1
         self.df["Weight2"] = wl2
         self.df["Bias"] = bl
