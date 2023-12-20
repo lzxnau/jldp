@@ -31,14 +31,14 @@ class LRData:
     .. card::
     """
 
-    def __init__(self) -> None:
+    def __init__(self, bsize: int = 32) -> None:
         """Construct a class instance."""
         self.w = torch.tensor([2, -3.4])  # w is one dimention vector
         self.b = 4.2
         self.noise = 0.01
 
-        self.num_train = 32 * 50
-        self.num_val = 32 * 50
+        self.num_train = bsize * 50
+        self.num_val = bsize * 50
         self.n = self.num_train + self.num_val  # put two sets altogether
 
         self.x: Tensor = torch.randn(self.n, len(self.w))
