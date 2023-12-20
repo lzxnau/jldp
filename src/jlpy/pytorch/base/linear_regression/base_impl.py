@@ -230,7 +230,7 @@ class BaseImpl:
     .. card::
     """
 
-    def __init__(self, bsize: int = 32, nepoch: int = 5) -> None:
+    def __init__(self, *, bsize: int = 32, nepoch: int = 2) -> None:
         """Construct a class instance."""
         data = LRData()
         self.tdata = LRDataset(data)
