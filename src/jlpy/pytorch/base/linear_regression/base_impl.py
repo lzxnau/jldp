@@ -201,29 +201,18 @@ class LRModel(nn.Module):
     .. card::
     """
 
-    def __init__(self, features: int, sigma: float = 0.01) -> None:
+    def __init__(self) -> None:
         """Construct a class instance."""
         super().__init__()
-        self.w: Tensor = torch.normal(
-            0, sigma, (features, 1), requires_grad=True
-        )
-        self.b: Tensor = torch.zeros(1, requires_grad=True)
+        self.net = nn.LazyLinear(1)
 
     def forward(self, x: Tensor) -> Tensor:
         """Matrix x product with weights w plus bisa b."""
-        y: Tensor = torch.matmul(x, self.w) + self.b
-        return y
-
-    def backward(self) -> None:
-        """
-        Run a method.
-
-        :param x: Description.
-        :type x: None
-        :return: None
-        :rtype: None
-        """
-        ...
+        y = self.net(x)
+        if isinstance(y, Tensor):
+            return y
+        else:
+            raise TypeError("Output  must be a Tensor.")
 
 
 class BaseImpl:
@@ -238,7 +227,7 @@ class BaseImpl:
     .. card::
     """
 
-    def __init__(self, bsize: int = 32, nepoch: int = 1) -> None:
+    def __init__(self, bsize: int = 32, nepoch: int = 5) -> None:
         """Construct a class instance."""
         data = LRData()
         self.tdata = LRDataset(data)
@@ -259,10 +248,10 @@ class BaseImpl:
         )
         self.num_epoch = nepoch
         self.lr = 0.01
-        self.model = LRModel(len(data.w))
-        self.optim = SGD([self.model.w, self.model.b], self.lr)
+        self.model = LRModel()
+        self.optim = SGD([self.model.net.weight, self.model.net.bias], self.lr)
 
-    def show(self, data: DataLoader[T], samp: int = 0) -> None:
+    def show(self, data: DataLoader[T], loop: int = 0) -> None:
         """
         Run a method.
 
@@ -272,7 +261,7 @@ class BaseImpl:
         :rtype: None
         """
         for idx, value in enumerate(data):
-            if idx > samp:
+            if idx > loop:
                 break
             print(value)
 
@@ -280,8 +269,6 @@ class BaseImpl:
         """
         Run a method.
 
-        :param x: Description.
-        :type x: None
         :return: None
         :rtype: None
         """
@@ -292,26 +279,17 @@ class BaseImpl:
                 loss = mse_loss(y_hat, batch[1])
                 self.optim.zero_grad()
                 with torch.no_grad():
-                    loss.backward()  # noqa: no-untyped-call
+                    loss.backward()  # type: ignore
                     self.optim.step()
+            print(self.model.net.weight)
+            print(self.model.net.bias)
             self.model.eval()
             for batch in self.vloader:
                 with torch.no_grad():
                     y_hat = self.model(batch[0])
                     loss = mse_loss(y_hat, batch[1])
 
-    def demo(self) -> None:
-        """
-        Run a method.
-
-        :param x: Description.
-        :type x: None
-        :return: None
-        :rtype: None
-        """
-        self.fit()
-
 
 if __name__ == "__main__":
     bi = BaseImpl()
-    bi.demo()
+    bi.fit()
