@@ -42,7 +42,7 @@ class LRData:
         w2 = kwargs.get("w2") if kwargs.get("w2") else -3.4
         b = kwargs.get("b") if kwargs.get("b") else 4.2
         n = kwargs.get("n") if kwargs.get("n") else 0.01
-        
+
         self.w = torch.tensor([w1, w2])  # w is one dimention vector
         self.b = b
         self.noise = n
