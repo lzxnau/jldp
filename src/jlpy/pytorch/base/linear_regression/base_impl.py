@@ -31,14 +31,24 @@ class LRData:
     .. card::
     """
 
-    def __init__(self, bsize: int = 32) -> None:
+    def __init__(
+        self,
+        bsize: int = 32,
+        gap: int = 50,
+            **kwargs,
+    ) -> None:
         """Construct a class instance."""
-        self.w = torch.tensor([2, -3.4])  # w is one dimention vector
-        self.b = 4.2
-        self.noise = 0.01
+        w1 = kwargs.get("w1") if kwargs.get("w1") else 2
+        w2 = kwargs.get("w2") if kwargs.get("w2") else -3.4
+        b = kwargs.get("b") if kwargs.get("b") else 4.2
+        n = kwargs.get("n") if kwargs.get("n") else 0.01
+        
+        self.w = torch.tensor([w1, w2])  # w is one dimention vector
+        self.b = b
+        self.noise = n
 
-        self.num_train = bsize * 50
-        self.num_val = bsize * 50
+        self.num_train = bsize * gap
+        self.num_val = bsize * gap
         self.n = self.num_train + self.num_val  # put two sets altogether
 
         self.x: Tensor = torch.randn(self.n, len(self.w))
@@ -230,9 +240,21 @@ class BaseImpl:
     .. card::
     """
 
-    def __init__(self, *, bsize: int = 32, nepoch: int = 2) -> None:
+    def __init__(
+        self,
+        *,
+        bsize: int = 32,
+        nepoch: int = 2,
+        gap: int = 50,
+        **kwargs,
+    ) -> None:
         """Construct a class instance."""
-        data = LRData()
+        w1 = kwargs.get("w1") if kwargs.get("w1") else 2
+        w2 = kwargs.get("w2") if kwargs.get("w2") else -3.4
+        b = kwargs.get("b") if kwargs.get("b") else 4.2
+        n = kwargs.get("n") if kwargs.get("n") else 0.01
+
+        data = LRData(w1, w2, b, n, bsize, gap)
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
         self.tloader = DataLoader(
@@ -250,6 +272,7 @@ class BaseImpl:
             collate_fn=LRDataset.custom_collate,  # type: ignore
         )
         self.num_epoch = nepoch
+        self.gap = gap
         self.lr = 0.01
         self.model = LRModel()
         self.optim = SGD([self.model.net.weight, self.model.net.bias], self.lr)
@@ -303,7 +326,8 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        rows = np.arange(0.02, self.num_epoch, 0.02)
+        it = 1 / self.gap
+        rows = np.arange(it, self.num_epoch + it, it)
         cols = ["Weight1", "Weight2", "Bias", "LossT", "LossV"]
         self.df = pd.DataFrame(index=rows, columns=cols)
         wl1, wl2, bl, ltl, lvl = ([] for _ in range(5))
@@ -334,5 +358,5 @@ class BaseImpl:
 
 
 if __name__ == "__main__":
-    bi = BaseImpl()
+    bi = BaseImpl(w1=2, w2=-3.4, b=4.2, n=0.01, bsize=8, nepoch=3, gap=10)
     bi.fit()
