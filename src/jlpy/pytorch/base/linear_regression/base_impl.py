@@ -35,13 +35,13 @@ class LRData:
         self,
         bsize: int = 32,
         gap: int = 50,
-            **kwargs,
+        **kwargs: float,
     ) -> None:
         """Construct a class instance."""
-        w1 = kwargs.get("w1") if kwargs.get("w1") else 2
-        w2 = kwargs.get("w2") if kwargs.get("w2") else -3.4
-        b = kwargs.get("b") if kwargs.get("b") else 4.2
-        n = kwargs.get("n") if kwargs.get("n") else 0.01
+        w1:float = kwargs.get("w1") if kwargs.get("w1") else 2
+        w2:float = kwargs.get("w2") if kwargs.get("w2") else -3.4
+        b:float = kwargs.get("b") if kwargs.get("b") else 4.2
+        n:float = kwargs.get("n") if kwargs.get("n") else 0.01
 
         self.w = torch.tensor([w1, w2])  # w is one dimention vector
         self.b = b
@@ -55,7 +55,7 @@ class LRData:
         self.noise = torch.randn(self.n, 1) * self.noise
         wx = torch.matmul(self.x, self.w.reshape((-1, 1)))
         # reshape w to match the output of y
-        self.y: Tensor = wx + self.b + self.noise  # type: ignore
+        self.y: Tensor = wx + self.b + self.noise
         self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
@@ -246,15 +246,15 @@ class BaseImpl:
         bsize: int = 32,
         nepoch: int = 2,
         gap: int = 50,
-        **kwargs,
+        **kwargs:float,
     ) -> None:
         """Construct a class instance."""
-        w1 = kwargs.get("w1") if kwargs.get("w1") else 2
-        w2 = kwargs.get("w2") if kwargs.get("w2") else -3.4
-        b = kwargs.get("b") if kwargs.get("b") else 4.2
-        n = kwargs.get("n") if kwargs.get("n") else 0.01
+        w1:float = kwargs.get("w1") if kwargs.get("w1") else 2
+        w2:float = kwargs.get("w2") if kwargs.get("w2") else -3.4
+        b:float = kwargs.get("b") if kwargs.get("b") else 4.2
+        n:float = kwargs.get("n") if kwargs.get("n") else 0.01
 
-        data = LRData(w1, w2, b, n, bsize, gap)
+        data = LRData(bsize, gap, w1=w1, w2=w2, b=b, n=n)
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
         self.tloader = DataLoader(
