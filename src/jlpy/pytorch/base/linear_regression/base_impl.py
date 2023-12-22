@@ -235,6 +235,8 @@ class LRModel(nn.Module):
     """
     Custom Linear Regression Model as a torch.nn.Module.
 
+    :Ins net: Linear regression layer.
+
     .. card::
     """
 
@@ -256,10 +258,25 @@ class BaseImpl:
     """
     Deep Learning Linear Regression Base Implemetation.
 
-    1. Generate a demo training dataset.
+    1. Generate a demo training and validation dataset.
     2. Build a linear regression model.
     3. Train the LRModel.
-    4. Show and save the result.
+
+        * Iterate over epoch.
+        * Setup training mode.
+            * Iterate over mini-batch of training set.
+            * Optim.zero_grad.
+            * Model forward.
+            * Loss function.
+            * Loss backward.
+            * Optim step.
+        * Setup validation mode.
+            * Torch.no_grad.
+            * Iterate over mini-batch of validation set.
+            * Model forward.
+            * Loss function.
+
+    4. Plot the result.
 
     .. card::
     """
