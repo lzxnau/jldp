@@ -28,9 +28,15 @@ class LRData:
     """
     Synthetic data for linear regression.
 
-    :self w: Vector of the weights.
-    :self b: Scalar of the bias.
-    
+    :Ins w: Tensor-Vector --> Weights.
+    :Ins b: Tensor-Scalar --> Bias.
+    :Ins noise: Tensor-Vector --> Noise.
+    :Ins num_train: Size --> Training set.
+    :Ins Num_val: Size --> Validation set.
+    :Ins n: Size --> Dataset.
+    :Ins x: Tensor-Matrix --> Input.
+    :Ins y: Tensor-Vector --> Output.
+
     .. card::
     """
 
