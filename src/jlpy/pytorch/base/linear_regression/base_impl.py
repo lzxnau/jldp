@@ -253,6 +253,7 @@ class BaseImpl:
         w2 = _ if (_ := kwargs.get("w2")) else -3.4
         b = _ if (_ := kwargs.get("b")) else 4.2
         n = _ if (_ := kwargs.get("n")) else 0.01
+        wd = _ if (_ := kwargs.get("wd")) else 0
 
         data = LRData(bsize, gap, w1=w1, w2=w2, b=b, n=n)
         self.tdata = LRDataset(data)
@@ -275,7 +276,11 @@ class BaseImpl:
         self.gap = gap
         self.lr = 0.01
         self.model = LRModel()
-        self.optim = SGD([self.model.net.weight, self.model.net.bias], self.lr)
+        self.optim = SGD(
+            [self.model.net.weight, self.model.net.bias],
+            lr=self.lr,
+            weight_decay=wd,
+        )
 
     def show(self, data: DataLoader[T], loop: int = 0) -> None:
         """
