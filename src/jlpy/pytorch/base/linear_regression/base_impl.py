@@ -339,19 +339,18 @@ class BaseImpl:
         for e in range(self.num_epoch):
             self.model.train()
             for batch in self.tloader:
+                self.optim.zero_grad()
                 y_hat = self.model(batch[0])
                 loss = mse_loss(y_hat, batch[1])
                 ltl.append(loss.item())
-                self.optim.zero_grad()
-                with torch.no_grad():
-                    loss.backward()  # type: ignore
-                    self.optim.step()
+                loss.backward()  # type: ignore
+                self.optim.step()
                 wl1.append(self.model.net.weight.tolist()[0][0])
                 wl2.append(self.model.net.weight.tolist()[0][1])
                 bl.append(self.model.net.bias.item())
             self.model.eval()
-            for batch in self.vloader:
-                with torch.no_grad():
+            with torch.no_grad():
+                for batch in self.vloader:
                     y_hat = self.model(batch[0])
                     loss = mse_loss(y_hat, batch[1])
                     lvl.append(loss.item())
@@ -363,5 +362,5 @@ class BaseImpl:
 
 
 if __name__ == "__main__":
-    bi = BaseImpl(bsize=8, nepoch=3, gap=10, w1=2, w2=-3.4, b=4.2, n=0.01)
+    bi = BaseImpl(bsize=8, nepoch=3, gap=10, w1=2, w2=-3.4, b=4.2, n=0.01, wd=0)
     bi.fit()
