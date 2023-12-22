@@ -44,6 +44,7 @@ class LRData:
         self,
         bsize: int = 32,
         gap: int = 50,
+        ws: list[float] = [2, -3.4],
         **kwargs: float,
     ) -> None:
         """
@@ -53,21 +54,17 @@ class LRData:
         :type bsize: int
         :param gap: The plot gap for one epoch, default is 50.
         :type gap: int
-        :param w1: Weight1, default is 2.
-        :type w1: float
-        :param w2: Weight2, default is -3.4.
-        :type w2: float
+        :param ws: List of the weights, default is [2, -3.4].
+        :type ws: list[float]
         :param b: Bias, default is 4.2.
         :type b: float
         :param n: Noise, default is 0.01.
         :type n: float
         """
-        w1 = _ if (_ := kwargs.get("w1")) else 2
-        w2 = _ if (_ := kwargs.get("w2")) else -3.4
         b = _ if (_ := kwargs.get("b")) else 4.2
         n = _ if (_ := kwargs.get("n")) else 0.01
 
-        self.w = torch.tensor([w1, w2])  # w is one dimention vector
+        self.w = torch.tensor(ws)  # w is one dimention vector
         self.b = b
         self.noise = n
 
@@ -287,16 +284,15 @@ class BaseImpl:
         bsize: int = 32,
         nepoch: int = 2,
         gap: int = 50,
+        ws: list[float] = [2, -3.4],
         **kwargs: float,
     ) -> None:
         """Construct a class instance."""
-        w1 = _ if (_ := kwargs.get("w1")) else 2
-        w2 = _ if (_ := kwargs.get("w2")) else -3.4
         b = _ if (_ := kwargs.get("b")) else 4.2
         n = _ if (_ := kwargs.get("n")) else 0.01
         wd = _ if (_ := kwargs.get("wd")) else 0
 
-        data = LRData(bsize, gap, w1=w1, w2=w2, b=b, n=n)
+        data = LRData(bsize, gap, ws=ws, b=b, n=n)
         self.tdata = LRDataset(data)
         self.vdata = LRDataset(data, isval=True)
         self.tloader = DataLoader(
@@ -346,23 +342,12 @@ class BaseImpl:
         :return: None
         :rtype: None
         """
-        fig, axs = plt.subplots(2, 2, figsize=(10, 8))
-        fig.suptitle("Four Plots from DataFrame")
-
-        axs[0, 0].plot(self.df["Weight1"])
-        axs[0, 0].set_title("Weight1")
-
-        axs[0, 1].plot(self.df["Weight2"])
-        axs[0, 1].set_title("Weight2")
-
-        axs[1, 0].plot(self.df["Bias"])
-        axs[1, 0].set_title("Bias")
-
-        axs[1, 1].plot(self.df["LossT"], label="Training Loss")
-        axs[1, 1].plot(self.df["LossV"], label="Validation Loss")
-        axs[1, 1].set_title("Loss")
-        axs[1, 1].legend()
-
+        plt.plot(self.df["LossT"], label="Training Loss")
+        plt.plot(self.df["LossV"], label="Validation Loss")
+        plt.title("Loss")
+        plt.xlabel("epoch")
+        plt.ylabel("loss")
+        plt.legend()
         plt.show()
 
     def fit(self) -> None:
@@ -374,9 +359,9 @@ class BaseImpl:
         """
         it = 1 / self.gap
         rows = np.arange(it, self.num_epoch + it, it)
-        cols = ["Weight1", "Weight2", "Bias", "LossT", "LossV"]
+        cols = ["LossT", "LossV"]
         self.df = pd.DataFrame(index=rows, columns=cols)
-        wl1, wl2, bl, ltl, lvl = ([] for _ in range(5))
+        ltl, lvl = ([] for _ in range(2))
         for e in range(self.num_epoch):
             self.model.train()
             for batch in self.tloader:
@@ -386,9 +371,6 @@ class BaseImpl:
                 ltl.append(loss.item())
                 loss.backward()  # type: ignore
                 self.optim.step()
-                wl1.append(self.model.net.weight.tolist()[0][0])
-                wl2.append(self.model.net.weight.tolist()[0][1])
-                bl.append(self.model.net.bias.item())
             self.model.eval()
             with torch.no_grad():
                 for batch in self.vloader:
@@ -397,11 +379,8 @@ class BaseImpl:
                     lvl.append(loss.item())
         self.df["LossT"] = ltl
         self.df["LossV"] = lvl
-        self.df["Weight1"] = wl1
-        self.df["Weight2"] = wl2
-        self.df["Bias"] = bl
 
 
 if __name__ == "__main__":
-    bi = BaseImpl(bsize=8, nepoch=3, gap=10, w1=2, w2=-3.4, b=4.2, n=0.01, wd=0)
+    bi = BaseImpl(bsize=8, nepoch=3, gap=10, ws=[2, -3.4], b=4.2, n=0.01, wd=0)
     bi.fit()
