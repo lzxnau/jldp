@@ -4,7 +4,7 @@ Linear Regression Base Implementation.
 An example shows all steps for training linear regression model from scratch.
 
 :Author:  JLDP
-:Version: 2023.12.10.02
+:Version: 2023.12.22.03
 
 """
 import math
@@ -28,6 +28,9 @@ class LRData:
     """
     Synthetic data for linear regression.
 
+    :self w: Vector of the weights.
+    :self b: Scalar of the bias.
+    
     .. card::
     """
 
