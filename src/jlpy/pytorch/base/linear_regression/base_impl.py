@@ -32,7 +32,7 @@ class LRData:
     :Ins b: Tensor-Scalar --> Bias.
     :Ins noise: Tensor-Vector --> Noise.
     :Ins num_train: Size --> Training set.
-    :Ins Num_val: Size --> Validation set.
+    :Ins num_val: Size --> Validation set.
     :Ins n: Size --> Dataset.
     :Ins x: Tensor-Matrix --> Input.
     :Ins y: Tensor-Vector --> Output.
@@ -46,7 +46,22 @@ class LRData:
         gap: int = 50,
         **kwargs: float,
     ) -> None:
-        """Construct a class instance."""
+        """
+        Construct a class instance.
+
+        :param bsize: Batch size, default is 32.
+        :type bsize: int
+        :param gap: The plot gap for one epoch, default is 50.
+        :type gap: int
+        :param w1: Weight1, default is 2.
+        :type w1: float
+        :param w2: Weight2, default is -3.4.
+        :type w2: float
+        :param b: Bias, default is 4.2.
+        :type b: float
+        :param n: Noise, default is 0.01.
+        :type n: float
+        """
         w1 = _ if (_ := kwargs.get("w1")) else 2
         w2 = _ if (_ := kwargs.get("w2")) else -3.4
         b = _ if (_ := kwargs.get("b")) else 4.2
@@ -65,7 +80,7 @@ class LRData:
         wx = torch.matmul(self.x, self.w.reshape((-1, 1)))
         # reshape w to match the output of y
         self.y: Tensor = wx + self.b + self.noise  # type: ignore
-        self.s: Tensor = torch.cat([self.x, self.y], dim=1)
+        # self.s: Tensor = torch.cat([self.x, self.y], dim=1)
 
 
 class LRDataset(Dataset[tuple[Tensor, Tensor]]):
