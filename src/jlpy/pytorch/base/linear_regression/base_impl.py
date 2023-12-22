@@ -38,10 +38,10 @@ class LRData:
         **kwargs: float,
     ) -> None:
         """Construct a class instance."""
-        w1: float = kwargs.get("w1") if kwargs.get("w1") else 2  # type: ignore
-        w2: float = kwargs.get("w2") if kwargs.get("w2") else -3  # type: ignore
-        b: float = kwargs.get("b") if kwargs.get("b") else 4.2  # type: ignore
-        n: float = kwargs.get("n") if kwargs.get("n") else 0.01  # type: ignore
+        w1 = _ if (_ := kwargs.get("w1")) else 2
+        w2 = _ if (_ := kwargs.get("w2")) else -3.4
+        b = _ if (_ := kwargs.get("b")) else 4.2
+        n = _ if (_ := kwargs.get("n")) else 0.01
 
         self.w = torch.tensor([w1, w2])  # w is one dimention vector
         self.b = b
@@ -249,10 +249,10 @@ class BaseImpl:
         **kwargs: float,
     ) -> None:
         """Construct a class instance."""
-        w1: float = kwargs.get("w1") if kwargs.get("w1") else 2  # type: ignore
-        w2: float = kwargs.get("w2") if kwargs.get("w2") else -3  # type: ignore
-        b: float = kwargs.get("b") if kwargs.get("b") else 4.2  # type: ignore
-        n: float = kwargs.get("n") if kwargs.get("n") else 0.01  # type: ignore
+        w1 = _ if (_ := kwargs.get("w1")) else 2
+        w2 = _ if (_ := kwargs.get("w2")) else -3.4
+        b = _ if (_ := kwargs.get("b")) else 4.2
+        n = _ if (_ := kwargs.get("n")) else 0.01
 
         data = LRData(bsize, gap, w1=w1, w2=w2, b=b, n=n)
         self.tdata = LRDataset(data)
@@ -358,5 +358,5 @@ class BaseImpl:
 
 
 if __name__ == "__main__":
-    bi = BaseImpl(w1=2, w2=-3.4, b=4.2, n=0.01, bsize=8, nepoch=3, gap=10)
+    bi = BaseImpl(bsize=8, nepoch=3, gap=10, w1=2, w2=-3.4, b=4.2, n=0.01)
     bi.fit()
