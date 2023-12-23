@@ -321,10 +321,12 @@ class BaseImpl:
 
     def show(self, data: DataLoader[T], loop: int = 0) -> None:
         """
-        Run a method.
+        Show the dataset.
 
-        :param x: Description.
-        :type x: None
+        :param data: Dataset.
+        :type data: DataLoader[T]
+        :param loop: Loops for iterate over dataset.
+        :type loop: int
         :return: None
         :rtype: None
         """
@@ -335,10 +337,8 @@ class BaseImpl:
 
     def plot(self) -> None:
         """
-        Run a method.
+        Plot the loss.
 
-        :param x: Description.
-        :type x: None
         :return: None
         :rtype: None
         """
@@ -352,7 +352,7 @@ class BaseImpl:
 
     def fit(self) -> None:
         """
-        Run a method.
+        Train the model.
 
         :return: None
         :rtype: None
