@@ -1,10 +1,10 @@
 pip==23.3.2
 setuptools==69.0.3
 wheel==0.42.0
-pipdeptree==2.13.1
+pipdeptree==2.13.2
 python-lsp-server==1.9.0
-ruff==0.1.11
-python-lsp-ruff==2.0.1
+ruff==0.1.12
+python-lsp-ruff==2.0.2
 rope==1.11.0
 pylsp-rope==0.1.11
 mypy==1.8.0
