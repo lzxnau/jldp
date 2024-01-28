@@ -5,7 +5,7 @@ LABEL MAINTAINER "PNE with Python Node.js and Emacs"
 # Version:
 ENV PYTHON_VERSION=3.11.7
 ENV NODE_VERSION=20.11.0
-ENV EMACS_VERSION=29.1
+ENV EMACS_VERSION=29.2
 
 # Download:
 ENV PYLINK=https://www.python.org/ftp/python/
