@@ -10,7 +10,10 @@ import sys
 
 NAME = os.environ.get("VENV")
 PNAME = NAME + ".txt" if NAME else sys.exit()
-UNAME = NAME + "/up.txt" if NAME else sys.exit()
+UNAME = os.environ.get("UNAME")
+if UNAME is None:
+    UNAME = NAME + "/up.txt"
+
 plist = []
 
 
