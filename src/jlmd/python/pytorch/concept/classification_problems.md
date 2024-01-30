@@ -37,6 +37,11 @@ Cross-Entropy
   H(P, Q) = \sum_j - P(j) \log Q(j).
   :::
 
+Cross-Entropy Loss
+: :::{math}
+  l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j.
+  :::
+
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
 2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
 3. l >= 0, when p_i = 1 = y, l = 0.
