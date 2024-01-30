@@ -24,3 +24,14 @@
    * Optimization: Differentiable nature of softmax function allows for
                    efficient use of gradient-based optimization algorithms
                    during model training.
+
+## Cross-Entropy Loss
+
+Entropy
+: :::{math}
+  H[P] = \sum_j - P(j) \log P(j).
+  :::
+
+1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
+2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
+3. l >= 0, when p_i = 1 = y, l = 0.
