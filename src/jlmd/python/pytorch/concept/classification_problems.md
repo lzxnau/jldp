@@ -29,12 +29,12 @@
 
 Entropy
 : :::{math}
-  H[P] = \sum_j - P(j) \log P(j).
+  H[P] = - \sum_j P(j) \log P(j).
   :::
 
 Cross-Entropy
 : :::{math}
-  H(P, Q) = \sum_j - P(j) \log Q(j).
+  H(P, Q) = - \sum_j P(j) \log Q(j).
   :::
 
 Cross-Entropy Loss
