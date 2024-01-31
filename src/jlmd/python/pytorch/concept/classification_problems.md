@@ -31,16 +31,25 @@ Entropy
 : :::{math}
   H[P] = - \sum_j P(j) \log P(j).
   :::
+  1. P(j): Probability of j.
+  2. -log P(j): Least coding bits of P(j).
 
 Cross-Entropy
 : :::{math}
   H(P, Q) = - \sum_j P(j) \log Q(j).
   :::
+  1. P(j): Real probability of j.
+  2. Q(j): Predicted probability of j.
+  3. For P(j), the least coding bits will be -log P(j).
+  4. -log Q(j) >= -log P(j)
+  5. H(P, Q) >= H(P) >= 0
 
 Cross-Entropy Loss
 : :::{math}
   l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j.
   :::
+  1. y: Real probability distribution.
+  2. {math}'\hat{y}': Predicted probability distribution.
 
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
 2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
