@@ -50,6 +50,7 @@ Cross-Entropy Loss
   :::
   1. {math}`\mathbf{y}`: Real probability distribution.
   2. {math}`\hat{\mathbf{y}}`: Predicted probability distribution.
+  3. {math}`l(\mathbf{y}, \hat{\mathbf{y}})` >= {math}`l(\mathbf{y})` >= 0
 
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
 2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
