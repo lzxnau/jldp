@@ -48,8 +48,8 @@ Cross-Entropy Loss
 : :::{math}
   l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j.
   :::
-  1. y: Real probability distribution.
-  2. {math}`\hat{y}`: Predicted probability distribution.
+  1. {math}`\mathbf{y}`: Real probability distribution.
+  2. {math}`\hat{\mathbf{y}}`: Predicted probability distribution.
 
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
 2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
