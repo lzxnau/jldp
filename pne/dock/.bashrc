@@ -165,5 +165,7 @@ export PATH="$JLDPDIR/pne:$PATH:$JLDPDIR/cfg"
 
 alias up="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 
+alias run="cd ~/jldp && gitp && mdb.run && ngs.run"
+
 cp -fu ~/.emacs.d/init.el ~/jldp/pne/dock/
 cp -fu ~/.bashrc ~/jldp/pne/dock/
