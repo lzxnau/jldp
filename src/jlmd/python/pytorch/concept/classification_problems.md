@@ -52,6 +52,11 @@ Cross-Entropy Loss
   2. {math}`\hat{\mathbf{y}}`: Predicted probability distribution.
   3. {math}`l(\mathbf{y}, \hat{\mathbf{y}})` >= {math}`l(\mathbf{y})` >= 0
 
+Softmax
+: :::{math}
+  \hat{y}_i = \frac{\exp(o_i)}{\sum_j \exp(o_j)}
+  :::
+
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
 2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
 3. l >= 0, when p_i = 1 = y, l = 0.
