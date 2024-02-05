@@ -73,7 +73,7 @@ Derivative with respect to any logit {math}`o_j`
   \frac{\exp(o_j)}{\sum_{k=1}^q \exp(o_k)} - y_j =
   \mathrm{softmax}(\mathbf{o})_j - y_j
   :::
+  1. The gradient of the linear regresion: {math}`\hat{\mathbf{y}} - \mathbf{y}`
+  2. The gradient of the softmax regrestion:
+  {math}`\mathrm{softmax}(\mathbr{o}) - y`
 
-1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
-2. y is a one-hot vector of length i: l(p, y) = -log(p_i)
-3. l >= 0, when p_i = 1 = y, l = 0.
