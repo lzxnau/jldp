@@ -29,14 +29,14 @@
 
 Entropy
 : :::{math}
-  H[P] = - \sum_j P(j) \log P(j).
+  H[P] = - \sum_j P(j) \log P(j)
   :::
   1. P(j): Probability of j.
   2. -log P(j): Least coding bits of P(j).
 
 Cross-Entropy
 : :::{math}
-  H(P, Q) = - \sum_j P(j) \log Q(j).
+  H(P, Q) = - \sum_j P(j) \log Q(j)
   :::
   1. P(j): Real probability of j.
   2. Q(j): Predicted probability of j.
@@ -46,7 +46,7 @@ Cross-Entropy
 
 Cross-Entropy Loss
 : :::{math}
-  l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j.
+  l(\mathbf{y}, \hat{\mathbf{y}}) = - \sum_{j=1}^q y_j \log \hat{y}_j
   :::
   1. {math}`\mathbf{y}`: Real probability distribution.
   2. {math}`\hat{\mathbf{y}}`: Predicted probability distribution.
@@ -55,6 +55,15 @@ Cross-Entropy Loss
 Softmax
 : :::{math}
   \hat{y}_i = \frac{\exp(o_i)}{\sum_j \exp(o_j)}
+  :::
+
+Softmax and Cross-Entropy Loss
+: :::{math}
+  \begin{aligned}
+   l(\mathbf{y}, \hat{\mathbf{y}}) &=  - \sum_{j=1}^q y_j \log   \frac{\exp(o_j)}{\sum_{k=1}^q \exp(o_k)} \\
+   &= \sum_{j=1}^q y_j \log \sum_{k=1}^q \exp(o_k) - \sum_{j=1}^q y_j o_j \\
+   &= \log \sum_{k=1}^q \exp(o_k) - \sum_{j=1}^q y_j o_j.
+   \end{aligned}
   :::
 
 1. Mathematical Definition: H(p, y) = - Σ y_i * log(p_i)
