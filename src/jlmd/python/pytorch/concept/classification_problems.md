@@ -75,5 +75,4 @@ Derivative with respect to any logit {math}`o_j`
   :::
   1. The gradient of the linear regresion: {math}`\hat{\mathbf{y}} - \mathbf{y}`
   2. The gradient of the softmax regrestion:
-  {math}`\mathrm{softmax}(\mathbr{o}) - y`
-
+  {math}`\mathrm{softmax}(\mathbf{o}) - y`
