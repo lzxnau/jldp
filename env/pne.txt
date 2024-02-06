@@ -1,4 +1,4 @@
-pip==23.3.2
+pip==24.0
 setuptools==69.0.3
 wheel==0.42.0
 pipdeptree==2.13.2
@@ -7,7 +7,7 @@ python-lsp-ruff==2.0.2
 pylsp-rope==0.1.11
 mypy==1.8.0
 pylsp-mypy==0.6.8
-numpy==1.26.3
+numpy==1.26.4
 pandas==2.2.0
 pandas-stubs==2.1.4.231227
 matplotlib==3.8.2
