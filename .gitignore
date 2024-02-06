@@ -44,6 +44,7 @@
 !/src/_templates/autosummary/*.rst
 !/src/jlmd/**/*.md
 !/src/jlmd/**/*.png
+!/src/jlmd/**/*.svg
 !/src/jlpy/**/index.md
 !/src/jlpy/**/*.py
 !/src/jljl/**/index.md
