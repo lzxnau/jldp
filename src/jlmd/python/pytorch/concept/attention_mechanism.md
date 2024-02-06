@@ -14,3 +14,8 @@ Definition
 	 \textrm{Attention}(\mathbf{q}, \mathcal{D}) \stackrel{\textrm{def}}{=}
 	 \sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i,
 	 :::
+
+Figure
+: :::{image} am_img1.svg
+  :align: center
+  :::
