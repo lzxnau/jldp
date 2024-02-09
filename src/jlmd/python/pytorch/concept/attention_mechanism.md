@@ -19,3 +19,11 @@ Figure
 : :::{image} am_img1.svg
   :align: center
   :::
+
+# Kernel Regression
+
+1. Non-parametric Model: Captures complex, non-linear relationships.
+2. Focus on Similarity: Kernel shape and bandwidth control how it adapts
+   to local data structure.
+3. Kernel Function: Less sensitive to outliers than parametric models.
+
