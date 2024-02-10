@@ -28,6 +28,18 @@ Figure
   :::{image} am_img4.svg
   :align: center
   :::
+  :::{image} am_img5.svg
+  :align: center
+  :::
+  :::{image} am_img6.svg
+  :align: center
+  :::
+  :::{image} am_img7.svg
+  :align: center
+  :::
+  :::{image} am_img8.svg
+  :align: center
+  :::
 
 # Kernel Regression
 
