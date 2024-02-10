@@ -22,6 +22,9 @@ Figure
   :::{image} am_img2.svg
   :align: center
   :::
+  :::{image} am_img3.svg
+  :align: center
+  :::
 
 # Kernel Regression
 
