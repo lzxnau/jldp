@@ -44,16 +44,21 @@ Figure
 ## Large-Scale Pretraining with Transformers
 
 1. Encoder-Only
-   ::::{card} Pretraining BERT
+   ::::{card}
+   Pretraining BERT
+   ^^^
    :::{image} am_img9.svg
    :align: center
    :::
    ::::
 
+   ::::{card}
    Fine-Tuning BERT
-   : :::{image} am_img10.svg
-     :align: center
-     :::
+   ^^^
+   :::{image} am_img10.svg
+   :align: center
+   :::
+   ::::
 
 2. Encoder–Decoder
 
