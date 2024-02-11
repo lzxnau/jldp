@@ -15,31 +15,69 @@ Definition
 	 \sum_{i=1}^m \alpha(\mathbf{q}, \mathbf{k}_i) \mathbf{v}_i,
 	 :::
 
-Figure
-: :::{image} am_img1.svg
-  :align: center
-  :::
-  :::{image} am_img2.svg
-  :align: center
-  :::
-  :::{image} am_img3.svg
-  :align: center
-  :::
-  :::{image} am_img4.svg
-  :align: center
-  :::
-  :::{image} am_img5.svg
-  :align: center
-  :::
-  :::{image} am_img6.svg
-  :align: center
-  :::
-  :::{image} am_img7.svg
-  :align: center
-  :::
-  :::{image} am_img8.svg
-  :align: center
-  :::
+::::{card}
+Attention Pooling by Similarity
+^^^
+:::{image} am_img1.svg
+:align: center
+:::
+::::
+
+::::{card}
+Attention Scoring Function
+^^^
+:::{image} am_img2.svg
+:align: center
+:::
+::::
+
+::::{card}
+Sequence-to-sequence Model
+^^^
+:::{image} am_img3.svg
+:align: center
+:::
+::::
+
+::::{card}
+The Bahdanau Attention Mechanism
+^^^
+:::{image} am_img4.svg
+:align: center
+:::
+::::
+
+::::{card}
+Multi-Head Attention
+^^^
+:::{image} am_img5.svg
+:align: center
+:::
+::::
+
+::::{card}
+CNNs, RNNs, and Self-Attention
+^^^
+:::{image} am_img6.svg
+:align: center
+:::
+::::
+
+::::{card}
+The Transformer Architecture
+^^^
+:::{image} am_img7.svg
+:align: center
+:::
+::::
+
+::::{card}
+The vision Transformer Architecture
+^^^
+:::{image} am_img8.svg
+:align: center
+:::
+::::
 
 ## Large-Scale Pretraining with Transformers
 
