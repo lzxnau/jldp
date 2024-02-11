@@ -72,7 +72,7 @@ The Transformer Architecture
 ::::
 
 ::::{card}
-The vision Transformer Architecture
+The Vision Transformer Architecture
 ^^^
 :::{image} am_img8.svg
 :align: center
