@@ -62,27 +62,39 @@ Figure
 
 2. Encoder–Decoder
 
+   ::::{card}
    Pretraining T5
-   : :::{image} am_img11.svg
-     :align: center
-     :::
+   ^^^
+   :::{image} am_img11.svg
+   :align: center
+   :::
+   ::::
 
+   ::::{card}
    Fine-Tuning T5
-   : :::{image} am_img12.svg
-     :align: center
-     :::
+   ^^^
+   :::{image} am_img12.svg
+   :align: center
+   :::
+   ::::
 
 3. Decoder-Only
 
+   ::::{card}
    GPT-2
-   : :::{image} am_img13.svg
-     :align: center
-     :::
+   ^^^
+   :::{image} am_img13.svg
+   :align: center
+   :::
+   ::::
 
+   ::::{card}
    GPT-3
-   : :::{image} am_img14.svg
-     :align: center
-     :::
+   ^^^
+   :::{image} am_img14.svg
+   :align: center
+   :::
+   ::::
 
 # Kernel Regression
 
