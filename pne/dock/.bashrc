@@ -167,5 +167,9 @@ alias up="sudo apt update && sudo apt upgrade -y && sudo apt autoremove"
 
 alias run="cd ~/jldp && gitp && mdb.run && ngs.run"
 
+alias wolw="sudo etherwake -b -i enp86s0 00:01:2e:85:21:04"
+alias wolm="sudo etherwake -b -i enp86s0 78:7B:8A:CC:9A:FD"
+
+
 cp -fu ~/.emacs.d/init.el ~/jldp/pne/dock/
 cp -fu ~/.bashrc ~/jldp/pne/dock/
