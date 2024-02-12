@@ -7,6 +7,7 @@ Attention mechanism module for testing purposes.
 :Version: 2024.02.12.01
 
 """
+import matplotlib.pyplot as plt
 import torch
 from torch import Tensor
 
@@ -22,7 +23,13 @@ class AMBase:
         """Construct a class instance."""
         pass
 
-    def show_heatmap(self, ts: Tensor) -> None:
+    def show_heatmap(
+        self,
+        ts: Tensor,
+        title: str = "Attention Mechanism Heatmap",
+        xlable: str = "Keys",
+        ylable: str = "Queries",
+    ) -> None:
         """
         Plot a heat map chart.
 
@@ -31,11 +38,27 @@ class AMBase:
         :return: None
         :rtype: None
         """
-        print(ts)
+        fig, ax = plt.subplots()
+        heatmap = ax.imshow(ts, cmap="hot", interpolation="nearest")
+
+        # Add a colorbar to indicate value ranges
+        fig.colorbar(heatmap)
+
+        # Set labels
+        ax.set_xlabel(xlable)
+        ax.set_ylabel(ylable)
+
+        # Set title
+        ax.set_title(title)
+
+        plt.show()
 
 
 if __name__ == "__main__":
     amb = AMBase()
 
-    ts = torch.eye(10).reshape((1, 1, 10, 10))
+    ts = torch.eye(10)
+    print(ts)
+    ts1 = ts.reshape((1, 1, 10, 10))
+    print(ts1)
     amb.show_heatmap(ts)
