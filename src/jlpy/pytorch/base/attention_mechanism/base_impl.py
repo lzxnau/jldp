@@ -26,9 +26,7 @@ class AMBase:
     def show_heatmap(
         self,
         ts: Tensor,
-        title: str = "Attention Mechanism Heatmap",
-        xlable: str = "Keys",
-        ylable: str = "Queries",
+        **kwargs: str,
     ) -> None:
         """
         Plot a heat map chart.
@@ -38,15 +36,22 @@ class AMBase:
         :return: None
         :rtype: None
         """
+        # init dict
+        tstr = "Attention Mechanism Heatmap"
+        title: str = _ if (_ := kwargs.get("title")) else tstr
+        xlabel: str = _ if (_ := kwargs.get("xlabel")) else "Keys"
+        ylabel: str = _ if (_ := kwargs.get("ylabel")) else "Queries"
+        cmap: str = _ if (_ := kwargs.get("cmap")) else "Reds"
+
         fig, ax = plt.subplots()
-        heatmap = ax.imshow(ts, cmap="hot", interpolation="nearest")
+        heatmap = ax.imshow(ts, cmap=cmap, interpolation="nearest")
 
         # Add a colorbar to indicate value ranges
         fig.colorbar(heatmap)
 
         # Set labels
-        ax.set_xlabel(xlable)
-        ax.set_ylabel(ylable)
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
 
         # Set title
         ax.set_title(title)
