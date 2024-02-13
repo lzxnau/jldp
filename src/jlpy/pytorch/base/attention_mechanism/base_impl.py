@@ -47,7 +47,7 @@ class AMBase:
         heatmap = ax.imshow(ts, cmap=cmap, interpolation="nearest")
 
         # Add a colorbar to indicate value ranges
-        fig.colorbar(heatmap)
+        fig.colorbar(heatmap, shrink=0.6)
 
         # Set labels
         ax.set_xlabel(xlabel)
