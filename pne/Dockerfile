@@ -3,7 +3,7 @@ FROM buildpack-deps:bookworm
 LABEL MAINTAINER "PNE with Python Node.js and Emacs"
 
 # Version:
-ENV PYTHON_VERSION=3.11.7
+ENV PYTHON_VERSION=3.11.8
 ENV NODE_VERSION=20.11.0
 ENV EMACS_VERSION=29.2
 
