@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 cd $JLDPDIR/pne || exit
-export PNEIMG=pne:3.11.8.20.11.0.29.2
+export PNEIMG=pne:3.11.8.20.11.1.29.2
 export LSJ=/.local/share/jupyter
 
 docker run -it --rm --name JLS -h JLS \
