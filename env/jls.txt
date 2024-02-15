@@ -1,14 +1,14 @@
 pip==24.0
 setuptools==69.1.0
 wheel==0.42.0
-pipdeptree==2.13.2
+pipdeptree==2.14.0
 jupyterlab==4.1.1
 jupyter_server_fileid==0.9.1
 jupyter_server_ydoc==0.8.0
 nbclassic==1.0.0
 numpy==1.26.4
 pandas==2.2.0
-matplotlib==3.8.2
+matplotlib==3.8.3
 seaborn==0.13.2
 scipy==1.12.0
 torch==2.2.0
