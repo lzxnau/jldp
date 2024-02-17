@@ -8,4 +8,5 @@
    :recursive:
 
    jlpy.pytorch.base.linear_regression
+   jlpy.pytorch.base.transformer
 ```
