@@ -21,7 +21,7 @@ class EBlock(nn.Module):
 
     def __init__(self, p1: None, p2: None) -> None:
         """
-        Construct a class instance.
+        Construct an encoder block instance.
 
         :param p1: Parameter 1.
         :type p1: None
@@ -34,7 +34,7 @@ class EBlock(nn.Module):
 
     def forward(self, p1: None, p2: None) -> None:
         """
-        Override module's forward method.
+        Override forward method of the pytorch module.
 
         :param p1: Parameter 1.
         :type p1: None
