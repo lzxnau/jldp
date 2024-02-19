@@ -21,26 +21,26 @@ class PositionalEncoding(nn.Module):
 
     def __init__(self, p1: None, p2: None) -> None:
         """
-	Construct a pytorch module instance.
+        Construct a pytorch module instance.
 
         :param p1: Parameter 1.
         :type p1: None
-	:param p2: Parameter 2.
+        :param p2: Parameter 2.
         :type p2: None
-	"""
+        """
         super().__init__()
-	self.p1 = p1
-	self.p2 = p2
+        self.p1 = p1
+        self.p2 = p2
 
     def forward(self, p1: None, p2: None) -> None:
         """
-	Override forward method of the pytorch module.
+        Override forward method of the pytorch module.
 
         :param p1: Parameter 1.
         :type p1: None
-	:param p2: Parameter 2.
+        :param p2: Parameter 2.
         :type p2: None
-	:return: Return
-	:rtype: None
+        :return: Return
+        :rtype: None
         """
         return None
