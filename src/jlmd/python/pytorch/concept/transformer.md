@@ -11,6 +11,9 @@ Hidden dim
   layers. This represents the model's internal working memory and capacity to
   process relationships between words in the sequence.
 
+Embeddings start with relatively lower dimensionality and are projected into a
+higher-dimensional space for computation within the attention mechanisms.
+
 ## Positional Encoding
 
 ## Multi-Head Attention
