@@ -11,7 +11,6 @@ Hidden Dim
   layers. This represents the model's internal working memory and capacity to
   process relationships between words in the sequence.
 
-
 Padding Idx
 : During text processing, sequences often need to be padded to a uniform
   length. The padding_idx identifies which index within your word/token
@@ -34,14 +33,13 @@ Dropout
   creates the risk of the model overly relying on  exact positional
   representations, potentially hindering generalization.
 
-## Positional Embedding
-
-Word embedding + Postional Encoding
+## Positional Embedding - Word embedding + Postional Encoding
 
 1. embedding = nn.Embedding(vocab_size, d_model)
 2. pos_encoder = PositionalEncoding(d_model)
 3. x = embedding(input_tokens)
 4. x = pos_encoder(x)
+5. input -> embedding layer -> pos_encoding layer -> dropout layer -> output
 
 ## Multi-Head Attention
 
