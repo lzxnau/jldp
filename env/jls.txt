@@ -2,7 +2,7 @@ pip==24.0
 setuptools==69.1.0
 wheel==0.42.0
 pipdeptree==2.14.0
-jupyterlab==4.1.1
+jupyterlab==4.1.2
 jupyter_server_fileid==0.9.1
 jupyter_server_ydoc==0.8.0
 nbclassic==1.0.0
