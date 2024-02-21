@@ -47,6 +47,8 @@ num_heads
 : Number of parallel attention heads. Note that embed_dim will be split
   across num_heads.
 
+## Self-Attention
+
 ## Masked Multi-Head Attention
 
 ## Residual Connection
