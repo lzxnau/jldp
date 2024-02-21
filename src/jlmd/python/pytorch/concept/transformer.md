@@ -41,17 +41,32 @@ Dropout
 4. x = pos_encoder(x)
 5. input -> embedding layer -> pos_encoding layer -> dropout layer -> output
 
+## Self-Attention
+
+The model is attending to different positions within the same input sequence.
+Query, key, and value vectors for each word/token are derived from the initial
+word/token embeddings within the same sequence. When using this same sequence
+as input for nn.MultiheadAttention, the model handles self-attention with
+multiple heads.
+
 ## Multi-Head Attention - nn.MultiheadAttention
 
 num_heads
 : Number of parallel attention heads. Note that embed_dim will be split
   across num_heads.
 
-## Self-Attention
+Each head operates on smaller, projected representations of the input.
+These multiple parallel heads enable the model to focus on different aspects
+or 'subspaces' of the input simultaneously, enriching the representations it
+learns.
 
 ## Masked Multi-Head Attention
 
 ## Residual Connection
+
+The output of the multihead attention will be added back to this original input
+before proceeding to the next layer. This helps stabilize training and allows
+information to flow more easily through gradients.
 
 ## Layer Normalization
 
