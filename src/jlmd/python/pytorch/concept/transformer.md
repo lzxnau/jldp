@@ -41,7 +41,11 @@ Dropout
 4. x = pos_encoder(x)
 5. input -> embedding layer -> pos_encoding layer -> dropout layer -> output
 
-## Multi-Head Attention
+## Multi-Head Attention - nn.MultiheadAttention
+
+num_heads
+: Number of parallel attention heads. Note that embed_dim will be split
+  across num_heads.
 
 ## Masked Multi-Head Attention
 
