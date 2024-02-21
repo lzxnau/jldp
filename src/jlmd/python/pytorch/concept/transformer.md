@@ -70,4 +70,19 @@ information to flow more easily through gradients.
 
 ## Layer Normalization
 
+Focus on a Single Sample
+: Layer Normalization operates independently on each data point
+  (e.g., each image or each sentence) within a batch.
+
+Element-Wise Standardization
+: Element is feature or dimension. By normalizing across features within each
+  data point, LN ensures that no single feature dominates the subsequent
+  calculations in the layer. This creates better stability during training.
+
+Batch Independence
+: Since each sample is normalized independently, the input sequence length or
+  varying batch sizes won't destabilize Layer Normalization.
+
+Caculate mean, caculate variance and Normalization.
+
 ## Positionwise Feed-Forward Network
