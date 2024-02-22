@@ -60,7 +60,29 @@ These multiple parallel heads enable the model to focus on different aspects
 or 'subspaces' of the input simultaneously, enriching the representations it
 learns.
 
-## Masked Multi-Head Attention
+## Masked Multi-Head Attention(Decoder)
+
+Autoregressive Generation
+: The decoder generates text (or other sequences) one token at a time.
+  During generation, it must avoid attending to future tokens it hasn't
+  yet predicted – this would "leak" information and break the logic of
+  the model.
+
+Causal Generation
+: Masked multi-head attention enforces a causal language modeling structure,
+  ensuring the decoder's prediction at each step relies only on previous tokens.
+
+## Encoder-Decoder Attention(Decoder)
+
+Encoder Outputs
+: The final output of the encoder contains rich contextual representations
+  for each token in the input sequence. These outputs serve as the keys (K)
+  and values (V) for the decoder's multi-head attention.
+
+Decoder Self-Attention Outputs
+: The output of the decoder's first masked multi-head attention layer. This
+  carries information about what the decoder has generated so far. It serve
+  as the Query (Q) for decoder's second multi-head attention.
 
 ## Residual Connection
 
