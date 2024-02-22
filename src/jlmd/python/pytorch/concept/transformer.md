@@ -136,5 +136,4 @@ Sequential Linear Transformations
 
 During training, the decoder needs to know the correct word to predict and
 the words that came before it. Shifting the target sequence right by one
-position and inserting a "<start>" token achieves this.
-
+position and inserting a "start" token achieves this.
