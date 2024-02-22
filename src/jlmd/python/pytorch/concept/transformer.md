@@ -86,3 +86,26 @@ Batch Independence
 Caculate mean, caculate variance and Normalization.
 
 ## Positionwise Feed-Forward Network
+
+Position-Wise
+: Processes each token's embedding vector independently.
+
+Non-Linear Transformation
+: While self-attention excels at capturing relationships within a sequence,
+  it's inherently linear. The FFN adds non-linearity to the model, allowing
+  it to learn more complex transformations on the representations produced
+  by self-attention.
+
+Feature Processing
+: The FFN acts independently upon each token's representation from the
+  preceding self-attention layer. This means it can refine features within
+  each position of the sequence.
+
+Feed-Forward Network
+: The FFN in a Transformer operates independently on the representation of
+  each token in the sequence. You can think of each token having its own
+  tiny, private feed-forward network.
+
+Sequential Linear Transformations
+: The core of the FFN comprises two linear (fully-connected) layers. Data
+  for each token undergoes these transformations sequentially.
