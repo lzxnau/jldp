@@ -131,3 +131,10 @@ Feed-Forward Network
 Sequential Linear Transformations
 : The core of the FFN comprises two linear (fully-connected) layers. Data
   for each token undergoes these transformations sequentially.
+
+## Targets Shifted Right
+
+During training, the decoder needs to know the correct word to predict and
+the words that came before it. Shifting the target sequence right by one
+position and inserting a "<start>" token achieves this.
+
