@@ -72,7 +72,7 @@ Causal Generation
 : Masked multi-head attention enforces a causal language modeling structure,
   ensuring the decoder's prediction at each step relies only on previous tokens.
 
-## Encoder-Decoder Attention(Decoder)
+## Encoder-Decoder Attention(Decoder) Cross-Attention
 
 Encoder Outputs
 : The final output of the encoder contains rich contextual representations
