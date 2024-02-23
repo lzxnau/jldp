@@ -60,7 +60,7 @@ These multiple parallel heads enable the model to focus on different aspects
 or 'subspaces' of the input simultaneously, enriching the representations it
 learns.
 
-## Masked Multi-Head Attention(Decoder)
+## Masked Multi-Head Attention(Decoder) Causal-Attention
 
 Autoregressive Generation
 : The decoder generates text (or other sequences) one token at a time.
