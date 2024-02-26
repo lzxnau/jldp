@@ -7,5 +7,5 @@
    :toctree: _modules
    :recursive:
 
-   jlpy.project.hrrd.hrrd
+   jlpy.project.hrrd
 ```
