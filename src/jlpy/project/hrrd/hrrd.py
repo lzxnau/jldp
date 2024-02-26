@@ -7,6 +7,8 @@ Main module for the project HRRD
 :Version: 2024.02.27.01
 
 """
+import requests
+from googleapiclient.discovery import build
 
 
 class Main:
@@ -20,4 +22,29 @@ class Main:
 
     def __init__(self) -> None:
         """Construct a class instance."""
-        pass
+        api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
+        self.youtube = build("youtube", "v3", developerKey=api_key)
+
+   def search(self) -> None:
+       """
+       Run a method.
+
+       :param x: Description.
+       :type x: None
+       :return: None
+       :rtype: None
+       """
+       request = self.youtube.search().list(
+           part="snippet",
+           q="Reinforcement Learning"
+       )
+
+       response = request.execute()
+
+       for item in response["items"]:
+           print(item["snippet"]["title"])
+
+
+if __name__ == "__main__":
+    m = Main()
+    m.search
