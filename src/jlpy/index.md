@@ -6,4 +6,5 @@ JLPY Python Package API Documents
 :maxdepth: 2
 python/index
 pytorch/index
+project/index
 :::
