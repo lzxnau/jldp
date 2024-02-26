@@ -47,4 +47,4 @@ class Main:
 
 if __name__ == "__main__":
     m = Main()
-    m.search
+    m.search()
