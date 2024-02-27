@@ -36,9 +36,10 @@ class Main:
         rlist = []
         request = self.youtube.search().list(
             part="id, snippet",
-            q="贵州",
+            q="贵州山火",
             publishedAfter="2024-02-20T00:00:00Z",
             order="date",
+            maxResults="20",
             relevanceLanguage="zh-Hans",
             type="video, channel",
         )
