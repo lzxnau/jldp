@@ -86,8 +86,8 @@ class Main:
 
         response = request.execute()
         rlist = []
-        vlist = []
         for item in response["items"]:
+            vlist = []
             vlist.append("ViewCount: " + item["statistics"]["viewCount"])
             rlist.append(vlist)
 
