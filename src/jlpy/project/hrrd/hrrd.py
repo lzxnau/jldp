@@ -55,11 +55,11 @@ class Main:
                 .replace("T", " ")
                 .replace("Z", "")
             )
-            slist.append("   Time: " + pt)
-            slist.append("     ID: " + item["id"]["videoId"])
+            slist.append("    Time: " + pt)
+            slist.append("      ID: " + item["id"]["videoId"])
             vids += item["id"]["videoId"] + ","
-            slist.append("Channel: " + item["snippet"]["channelTitle"])
-            slist.append("  Title: " + item["snippet"]["title"])
+            slist.append(" Channel: " + item["snippet"]["channelTitle"])
+            slist.append("   Title: " + item["snippet"]["title"])
             rlist.append(slist)
 
         vlist = self.videos(vids)
@@ -81,7 +81,7 @@ class Main:
         :rtype: None
         """
         request = self.youtube.videos().list(
-            part="statistics",
+            part="contentDetails, statistics",
             id=ids,
         )
 
@@ -89,9 +89,10 @@ class Main:
         rlist = []
         for item in response["items"]:
             vlist = []
-            vlist.append("   View: " + item["statistics"]["viewCount"])
-            vlist.append("   Like: " + item["statistics"]["likeCount"])
-            vlist.append("Comment: " + item["statistics"]["commentCount"])
+            vlist.append("Duration: " + item["contentDetails"]["duration"])
+            vlist.append("    View: " + item["statistics"]["viewCount"])
+            vlist.append("    Like: " + item["statistics"]["likeCount"])
+            vlist.append(" Comment: " + item["statistics"]["commentCount"])
             rlist.append(vlist)
 
         return rlist
