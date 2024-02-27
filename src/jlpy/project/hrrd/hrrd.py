@@ -36,8 +36,8 @@ class Main:
         rlist = []
         request = self.youtube.search().list(
             part="id, snippet",
-            q="金门",
-            publishedAfter="2024-02-25T00:00:00Z",
+            q="贵州",
+            publishedAfter="2024-02-20T00:00:00Z",
             order="date",
             relevanceLanguage="zh-Hans",
             type="video, channel",
