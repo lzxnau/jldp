@@ -35,7 +35,7 @@ class Main:
         """
         request = self.youtube.search().list(
             part="snippet",
-            q="胡塞",
+            q="金门",
             publishedAfter="2024-02-25T00:00:00Z",
             order="date",
             relevanceLanguage="zh-Hans",
