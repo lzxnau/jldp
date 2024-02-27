@@ -68,8 +68,7 @@ class Main:
         for r in rlist:
             for v in r:
                 print(v)
-
-        print("")
+            print("")
 
     def videos(self, ids: str) -> list:
         """
