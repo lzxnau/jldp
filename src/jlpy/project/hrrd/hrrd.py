@@ -46,7 +46,9 @@ class Main:
 
         for item in response["items"]:
             pt = (
-                item["snippet"]["publishTime"].replace("T", "").replace("Z", "")
+                item["snippet"]["publishTime"]
+                .replace("T", " ")
+                .replace("Z", "")
             )
             print("PublishTime: " + pt)
             print("ChannelTitle: " + item["snippet"]["channelTitle"])
