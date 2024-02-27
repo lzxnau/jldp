@@ -90,7 +90,6 @@ class Main:
             vlist = []
             vlist.append("   View: " + item["statistics"]["viewCount"])
             vlist.append("   Like: " + item["statistics"]["likeCount"])
-            vlist.append("Dislike: " + item["statistics"]["dislikeCount"])
             vlist.append("Comment: " + item["statistics"]["commentCount"])
             rlist.append(vlist)
 
