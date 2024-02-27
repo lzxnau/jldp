@@ -34,13 +34,20 @@ class Main:
         :rtype: None
         """
         request = self.youtube.search().list(
-            part="snippet", q="Reinforcement Learning"
+            part="snippet",
+            q="胡塞",
+            publishedAfter="2024-02-25T00:00:00Z",
+            order="date",
+            relevanceLanguage="zh-Hans",
+            type="video, channel",
         )
 
         response = request.execute()
 
         for item in response["items"]:
-            print(item["snippet"]["title"])
+            print("publishTime: " + item["snippet"]["publishTime"])
+            print("channelTitle: " + item["snippet"]["channelTitle"])
+            print("title: " + item["snippet"]["title"] + "\n")
 
 
 if __name__ == "__main__":
