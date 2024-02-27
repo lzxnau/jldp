@@ -33,6 +33,7 @@ class Main:
         :return: None
         :rtype: None
         """
+        rlist = []
         request = self.youtube.search().list(
             part="id, snippet",
             q="金门",
@@ -44,16 +45,54 @@ class Main:
 
         response = request.execute()
 
+        rlist = []
+        slist = []
+        vids = ""
         for item in response["items"]:
             pt = (
                 item["snippet"]["publishTime"]
                 .replace("T", " ")
                 .replace("Z", "")
             )
-            print("PublishTime: " + pt)
-            print("ID: " + item["id"]["videoId"])
-            print("ChannelTitle: " + item["snippet"]["channelTitle"])
-            print("Title: " + item["snippet"]["title"] + "\n")
+            slist.append("PublishTime: " + pt)
+            slist.append("ID: " + item["id"]["videoId"])
+            vids += item["id"]["videoId"] + ","
+            slist.append("ChannelTitle: " + item["snippet"]["channelTitle"])
+            slist.append("Title: " + item["snippet"]["title"])
+            rlist.append(slist)
+
+        vlist = self.videos(vids)
+        for i, v in enumerate(vlist):
+            rlist[i].extend(v)
+
+        for r in rlist:
+            for v in r:
+                print(v)
+
+        print("")
+
+    def videos(self, ids: str) -> list:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        request = self.youtube.videos().list(
+            part="statistics",
+            id=ids,
+        )
+
+        response = request.execute()
+        rlist = []
+        vlist = []
+        for item in response["items"]:
+            vlist.append("ViewCount: " + item["statistics"]["viewCount"])
+            rlist.append(vlist)
+
+        return rlist
 
 
 if __name__ == "__main__":
