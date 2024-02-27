@@ -112,6 +112,7 @@ class Main:
         ltime = datetime.datetime.now()
         utime = ltime.astimezone(datetime.timezone.utc)
         rtime = utime - datetime.timedelta(hours=gap)
+        rstr = rtime.isoformat().replace("+00:00", "Z")
         print(ltime)
         print(utime)
         print(rtime)
