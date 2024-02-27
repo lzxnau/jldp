@@ -46,9 +46,9 @@ class Main:
         response = request.execute()
 
         rlist = []
-        slist = []
         vids = ""
         for item in response["items"]:
+            slist = []
             pt = (
                 item["snippet"]["publishTime"]
                 .replace("T", " ")
