@@ -34,7 +34,7 @@ class Main:
         :rtype: None
         """
         request = self.youtube.search().list(
-            part="snippet",
+            part="id, snippet",
             q="金门",
             publishedAfter="2024-02-25T00:00:00Z",
             order="date",
@@ -51,6 +51,7 @@ class Main:
                 .replace("Z", "")
             )
             print("PublishTime: " + pt)
+            print("ID: " + item["id"]["videoId"])
             print("ChannelTitle: " + item["snippet"]["channelTitle"])
             print("Title: " + item["snippet"]["title"] + "\n")
 
