@@ -38,8 +38,8 @@ class Main:
             part="id, snippet",
             q="贵州山火",
             publishedAfter="2024-02-20T00:00:00Z",
-            order="date",
-            maxResults="20",
+            order="viewCount",
+            maxResults="10",
             relevanceLanguage="zh-Hans",
             type="video, channel",
         )
