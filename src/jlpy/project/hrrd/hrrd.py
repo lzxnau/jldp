@@ -45,9 +45,12 @@ class Main:
         response = request.execute()
 
         for item in response["items"]:
-            print("publishTime: " + item["snippet"]["publishTime"])
-            print("channelTitle: " + item["snippet"]["channelTitle"])
-            print("title: " + item["snippet"]["title"] + "\n")
+            pt = (
+                item["snippet"]["publishTime"].replace("T", "").replace("Z", "")
+            )
+            print("PublishTime: " + pt)
+            print("ChannelTitle: " + item["snippet"]["channelTitle"])
+            print("Title: " + item["snippet"]["title"] + "\n")
 
 
 if __name__ == "__main__":
