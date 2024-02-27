@@ -100,27 +100,30 @@ class Main:
 
         return rlist
 
-    def UTCTime(self, gap: int = 24) -> str:
+    def UTCTimeframe(self, gap1: int = 0, gap2: int = 24) -> tuple<str>:
         """
-        Run a method.
+        Get an UTC timeframe from local time.
 
-        :param x: Description.
-        :type x: None
-        :return: None
-        :rtype: None
+        :param gap1: How many hours before the local time.
+        :type gap1: int
+        :param gap2: How many hours before the gap1 time.
+        :type gap2: int
+        :return: The RFC 3339 time format from local time with a gap.
+        :rtype: tuple<str>
         """
         ltime = datetime.datetime.now()
         utime = ltime.astimezone(datetime.timezone.utc)
-        rtime = utime - datetime.timedelta(hours=gap)
-        rstr = rtime.isoformat().replace("+00:00", "Z")
-        print(ltime)
-        print(utime)
-        print(rtime)
+        rtime1 = utime - datetime.timedelta(hours=gap1)
+        rtime2 = rtime1 - datetime.timedelta(hours=gap2)
+        rstr1 = rtime1.isoformat()
+        rstr1 = rstr1[: rstr1.index(".")] + "Z"
+        rstr2 = rtime2.isoformat()
+        rstr2 = rstr2[: rstr2.index(".")] + "Z"
 
-        return ""
+        return rstr1, rstr2
 
 
 if __name__ == "__main__":
     m = Main()
     # m.search()
-    m.UTCTime()
+    print(m.UTCTime())
