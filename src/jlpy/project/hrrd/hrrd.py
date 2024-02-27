@@ -8,6 +8,7 @@ Main module for the project HRRD
 
 """
 import datetime
+from typing import Tuple
 from googleapiclient.discovery import build
 
 
@@ -100,7 +101,7 @@ class Main:
 
         return rlist
 
-    def UTCTimeframe(self, gap1: int = 0, gap2: int = 24) -> tuple<str>:
+    def UTCTimeframe(self, gap1: int = 0, gap2: int = 24) -> tuple[str, str]:
         """
         Get an UTC timeframe from local time.
 
