@@ -81,7 +81,7 @@ class Main:
         :rtype: None
         """
         request = self.youtube.videos().list(
-            part="contentDetails, statistics",
+            part="contentDetails, statistics, snippet",
             id=ids,
         )
 
@@ -93,6 +93,8 @@ class Main:
             vlist.append("    View: " + item["statistics"]["viewCount"])
             vlist.append("    Like: " + item["statistics"]["likeCount"])
             vlist.append(" Comment: " + item["statistics"]["commentCount"])
+            vlist.append("   Audio: " + item["snippet"]["defaultAudioLanguage"])
+            vlist.append(" Caption: " + item["contentDetails"]["caption"])
             rlist.append(vlist)
 
         return rlist
