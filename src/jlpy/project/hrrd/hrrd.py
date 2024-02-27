@@ -7,6 +7,7 @@ Main module for the project HRRD
 :Version: 2024.02.27.01
 
 """
+import datetime
 from googleapiclient.discovery import build
 
 
@@ -99,7 +100,26 @@ class Main:
 
         return rlist
 
+    def UTCTime(self, gap: int = 24) -> str:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        ltime = datetime.datetime.now()
+        utime = ltime.astimezone(datetime.timezone.utc)
+        rtime = utime - datetime.timedelta(hours=gap)
+        print(ltime)
+        print(utime)
+        print(rtime)
+
+        return ""
+
 
 if __name__ == "__main__":
     m = Main()
-    m.search()
+    # m.search()
+    m.UTCTime()
