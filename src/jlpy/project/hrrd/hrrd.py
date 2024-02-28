@@ -21,10 +21,16 @@ class Main:
     .. card::
     """
 
-    def __init__(self) -> None:
+    def __init__(
+        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24
+    ) -> None:
         """Construct a class instance."""
         api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
         self.youtube = build("youtube", "v3", developerKey=api_key)
+        self.fstr = fstr
+        self.order = order
+        self.gap1 = gap1
+        self.gap2 = gap2
 
     def search(self) -> None:
         """
@@ -36,14 +42,17 @@ class Main:
         :rtype: None
         """
         rlist = []
+        uframe = self.UTCTimeframe(self.gap1, self.gap2)
+        order = "viewCount" if self.order > 0 else "date"
         request = self.youtube.search().list(
             part="id, snippet",
-            q="贵州山火",
-            publishedAfter="2024-02-20T00:00:00Z",
-            order="viewCount",
-            maxResults="10",
+            q=self.fstr,
+            publishedBefore=uframe[0],
+            publishedAfter=uframe[1],
+            order=order,
+            maxResults="20",
             relevanceLanguage="zh-Hans",
-            type="video, channel",
+            type="video",
         )
 
         response = request.execute()
@@ -57,11 +66,11 @@ class Main:
                 .replace("T", " ")
                 .replace("Z", "")
             )
-            slist.append("    Time: " + pt)
+            slist.append("Time: " + pt)
             slist.append("      ID: " + item["id"]["videoId"])
             vids += item["id"]["videoId"] + ","
-            slist.append(" Channel: " + item["snippet"]["channelTitle"])
-            slist.append("   Title: " + item["snippet"]["title"])
+            slist.append("Chan: " + item["snippet"]["channelTitle"])
+            slist.append("Titl: " + item["snippet"]["title"])
             rlist.append(slist)
 
         vlist = self.videos(vids)
@@ -91,12 +100,9 @@ class Main:
         rlist = []
         for item in response["items"]:
             vlist = []
-            vlist.append("Duration: " + item["contentDetails"]["duration"])
-            vlist.append("    View: " + item["statistics"]["viewCount"])
-            vlist.append("    Like: " + item["statistics"]["likeCount"])
-            vlist.append(" Comment: " + item["statistics"]["commentCount"])
-            vlist.append("   Audio: " + item["snippet"]["defaultAudioLanguage"])
-            vlist.append(" Caption: " + item["contentDetails"]["caption"])
+            vlist.append("Last: " + item["contentDetails"]["duration"])
+            vlist.append("View: " + item["statistics"]["viewCount"])
+            vlist.append("Like: " + item["statistics"]["likeCount"])
             rlist.append(vlist)
 
         return rlist
@@ -125,6 +131,7 @@ class Main:
 
 
 if __name__ == "__main__":
-    m = Main()
-    # m.search()
-    print(m.UTCTime())
+    m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
+    m.search()
+    m = Main("沥心沙大桥", order=1, gap1=24 * 2, gap2=24 * 6)
+    m.search()
