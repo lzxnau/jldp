@@ -9,7 +9,6 @@ Main module for the project HRRD
 """
 import datetime
 import time
-from dateutil import tz
 from typing import Tuple
 from googleapiclient.discovery import build
 
@@ -24,7 +23,7 @@ class Main:
     """
 
     def __init__(
-        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24
+        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24, tz=0
     ) -> None:
         """Construct a class instance."""
         api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
@@ -33,6 +32,7 @@ class Main:
         self.order = order
         self.gap1 = gap1
         self.gap2 = gap2
+        self.tz = tz
 
     def search(self) -> None:
         """
@@ -64,7 +64,8 @@ class Main:
         for item in response["items"]:
             slist = []
             pt = self.LocalTime(item["snippet"]["publishTime"])
-            slist.append("Time: " + pt)
+            slist.append("Time: " + pt[0])
+            slist.append("SrcT: " + pt[1])
             slist.append("  ID: " + item["id"]["videoId"])
             vids += item["id"]["videoId"] + ","
             slist.append("Chan: " + item["snippet"]["channelTitle"])
@@ -75,7 +76,8 @@ class Main:
         for i, v in enumerate(vlist):
             rlist[i].extend(v)
 
-        for r in rlist:
+        for i, r in enumerate(rlist):
+            print("  NO: " + str(i + 1))
             for v in r:
                 print(v)
             print("")
@@ -127,7 +129,7 @@ class Main:
 
         return rstr1, rstr2
 
-    def LocalTime(self, ustr: str) -> str:
+    def LocalTime(self, ustr: str) -> Tuple[str]:
         """
         Run a method.
 
@@ -137,14 +139,17 @@ class Main:
         :rtype: None
         """
         utime = datetime.datetime.strptime(ustr, "%Y-%m-%dT%H:%M:%S%z")
-        os = datetime.timedelta(seconds=time.timezone)
-        ltime = utime - os
+        osl = datetime.timedelta(seconds=time.timezone)
+        ost = datetime.timedelta(seconds=-self.tz * 3600)
+        ltime = utime - osl
+        ttime = utime - ost
         lstr = ltime.strftime("%Y-%m-%d %H:%M:%S")
-        return lstr
+        tstr = ttime.strftime("%Y-%m-%d %H:%M:%S")
+        return lstr, tstr
 
 
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 6 + 1, gap2=24 * 2)
+    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2, tz=8)
     m.search()
