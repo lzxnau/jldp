@@ -23,7 +23,7 @@ class Main:
     """
 
     def __init__(
-        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24, tz=0
+        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24, stz=0
     ) -> None:
         """Construct a class instance."""
         api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
@@ -32,7 +32,10 @@ class Main:
         self.order = order
         self.gap1 = gap1
         self.gap2 = gap2
-        self.tz = tz
+        self.stz = int(3600 * stz)
+        utc_now = datetime.datetime.utcnow()
+        loc_now = datetime.datetime.now()
+        self.ltz = int((loc_now - utc_now).total_seconds())
 
     def search(self) -> None:
         """
@@ -139,17 +142,52 @@ class Main:
         :rtype: None
         """
         utime = datetime.datetime.strptime(ustr, "%Y-%m-%dT%H:%M:%S%z")
-        osl = datetime.timedelta(seconds=time.timezone)
-        ost = datetime.timedelta(seconds=-self.tz * 3600)
+        osl = datetime.timedelta(seconds=-self.ltz)
+        ost = datetime.timedelta(seconds=-self.stz)
         ltime = utime - osl
         ttime = utime - ost
         lstr = ltime.strftime("%Y-%m-%d %H:%M:%S")
         tstr = ttime.strftime("%Y-%m-%d %H:%M:%S")
         return lstr, tstr
 
+    def checkDS(self, itime: str, dtime: str, ida: bool = True) -> None:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        pass
+
+    @classmethod
+    def initDS(cls, lcode: str = "au", scode: str = "cn") -> None:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: None
+        :rtype: None
+        """
+        match lcode:
+            case "au":
+                cls.ldst = ""
+                cls.lida = False
+            case _:
+                cls.lids = False
+
+        match scode:
+            case "cn":
+                cls.stz = 3600 * 8
+                cls.sids = False
+            case _:
+                cls.sids = False
+
 
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2, tz=8)
+    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2, stz=8)
     m.search()
