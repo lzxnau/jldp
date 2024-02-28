@@ -146,5 +146,5 @@ class Main:
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 6 + 6, gap2=24 * 2)
+    m = Main("沥心沙大桥", gap1=24 * 6 + 1, gap2=24 * 2)
     m.search()
