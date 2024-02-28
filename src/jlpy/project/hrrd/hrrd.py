@@ -22,17 +22,26 @@ class Main:
     .. card::
     """
 
+    dst_au = "2024-04-06 16:00:00+00:00"
+    ida_au = False
+
     def __init__(
-        self, fstr: str, order: int = 0, gap1: int = 0, gap2: int = 24, stz=0
+        self,
+        fstr: str,
+        order: int = 0,
+        gap1: int = 0,
+        gap2: int = 24 * 2,
+        lcode: str = "au",
+        scode: str = "cn",
     ) -> None:
         """Construct a class instance."""
         api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
         self.youtube = build("youtube", "v3", developerKey=api_key)
+        self.initDS(lcode=lcode, scode=scode)
         self.fstr = fstr
         self.order = order
         self.gap1 = gap1
         self.gap2 = gap2
-        self.stz = int(3600 * stz)
         utc_now = datetime.datetime.utcnow()
         loc_now = datetime.datetime.now()
         self.ltz = int((loc_now - utc_now).total_seconds())
@@ -142,15 +151,23 @@ class Main:
         :rtype: None
         """
         utime = datetime.datetime.strptime(ustr, "%Y-%m-%dT%H:%M:%S%z")
-        osl = datetime.timedelta(seconds=-self.ltz)
-        ost = datetime.timedelta(seconds=-self.stz)
+        osl = datetime.timedelta(seconds=-self.lsos)
+        if self.lhds:
+            dtime = datetime.datetime.strptime(self.ldst, "%Y-%m-%d %H:%M:%S%z")
+            osl = self.checkDS(utime, dtime, self.lida, self.lsos, self.lgap)
+            print(utime)
+            print(dtime)
+            print(osl)
+        ost = datetime.timedelta(seconds=-self.ssos)
         ltime = utime - osl
         ttime = utime - ost
         lstr = ltime.strftime("%Y-%m-%d %H:%M:%S")
         tstr = ttime.strftime("%Y-%m-%d %H:%M:%S")
         return lstr, tstr
 
-    def checkDS(self, itime: str, dtime: str, ida: bool = True) -> None:
+    def checkDS(
+        self, itime: datetime, dtime: datetime, ida: bool, sos: int, gap: int
+    ) -> datetime:
         """
         Run a method.
 
@@ -159,10 +176,17 @@ class Main:
         :return: None
         :rtype: None
         """
-        pass
+        os = sos
+        if not ida:
+            os += gap
+        ost = datetime.timedelta(seconds=-os)
+        print(itime - ost)
+        if itime - ost < dtime:
+            if ida:
+                pass
+        return itime
 
-    @classmethod
-    def initDS(cls, lcode: str = "au", scode: str = "cn") -> None:
+    def initDS(self, lcode: str = "au", scode: str = "cn") -> None:
         """
         Run a method.
 
@@ -173,21 +197,29 @@ class Main:
         """
         match lcode:
             case "au":
-                cls.ldst = ""
-                cls.lida = False
-            case _:
-                cls.lids = False
+                self.lhds = True  # has datelight saving
+                self.ldst = Main.dst_au  # datelight saving time
+                self.lida = Main.ida_au  # is datelight saving after the time
+                self.lsos = 3600 * 10  # standard timezone offset
+                self.lgap = 3600
+            case "cn":
+                self.lhds = False
+                self.lsos = 3600 * 8
 
         match scode:
+            case "au":
+                self.shds = True
+                self.sdst = Main.dst_au
+                self.sida = Main.ida_au
+                self.ssos = 3600 * 10
+                self.sgap = 3600
             case "cn":
-                cls.stz = 3600 * 8
-                cls.sids = False
-            case _:
-                cls.sids = False
+                self.shds = False
+                self.ssos = 3600 * 8
 
 
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2, stz=8)
+    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2)
     m.search()
