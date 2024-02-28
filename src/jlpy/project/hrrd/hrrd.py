@@ -8,6 +8,8 @@ Main module for the project HRRD
 
 """
 import datetime
+import time
+from dateutil import tz
 from typing import Tuple
 from googleapiclient.discovery import build
 
@@ -61,13 +63,9 @@ class Main:
         vids = ""
         for item in response["items"]:
             slist = []
-            pt = (
-                item["snippet"]["publishTime"]
-                .replace("T", " ")
-                .replace("Z", "")
-            )
+            pt = self.LocalTime(item["snippet"]["publishTime"])
             slist.append("Time: " + pt)
-            slist.append("      ID: " + item["id"]["videoId"])
+            slist.append("  ID: " + item["id"]["videoId"])
             vids += item["id"]["videoId"] + ","
             slist.append("Chan: " + item["snippet"]["channelTitle"])
             slist.append("Titl: " + item["snippet"]["title"])
@@ -107,7 +105,7 @@ class Main:
 
         return rlist
 
-    def UTCTimeframe(self, gap1: int = 0, gap2: int = 24) -> tuple[str, str]:
+    def UTCTimeframe(self, gap1: int = 0, gap2: int = 24) -> tuple[str]:
         """
         Get an UTC timeframe from local time.
 
@@ -129,9 +127,24 @@ class Main:
 
         return rstr1, rstr2
 
+    def LocalTime(self, ustr: str) -> str:
+        """
+        Run a method.
+
+        :param x: Description.
+        :type x: None
+        :return: f
+        :rtype: None
+        """
+        utime = datetime.datetime.strptime(ustr, "%Y-%m-%dT%H:%M:%S%z")
+        os = datetime.timedelta(seconds=time.timezone)
+        ltime = utime - os
+        lstr = ltime.strftime("%Y-%m-%d %H:%M:%S")
+        return lstr
+
 
 if __name__ == "__main__":
-    m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
-    m.search()
-    m = Main("沥心沙大桥", order=1, gap1=24 * 2, gap2=24 * 6)
+    # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
+    # m.search()
+    m = Main("沥心沙大桥", gap1=24 * 6 + 6, gap2=24 * 2)
     m.search()
