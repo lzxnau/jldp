@@ -158,16 +158,18 @@ class Main:
         :rtype: None
         """
         utime = datetime.datetime.strptime(ustr, "%Y-%m-%dT%H:%M:%S%z")
-        osl = datetime.timedelta(seconds=-self.lsos)
         if self.lhds:
             dtime = datetime.datetime.strptime(self.ldst, "%Y-%m-%d %H:%M:%S%z")
             osl = self.checkDS(utime, dtime, self.lida, self.lsos, self.lgap)
-            print(utime)
-            print(dtime)
-            print(osl)
-        ost = datetime.timedelta(seconds=-self.ssos)
-        ltime = utime - osl
-        ttime = utime - ost
+        else:
+            osl = datetime.timedelta(seconds=self.lsos)
+        if self.shds:
+            dtime = datetime.datetime.strptime(self.sdst, "%Y-%m-%d %H:%M:%S%z")
+            ost = self.checkDS(utime, dtime, self.sida, self.ssos, self.sgap)
+        else:
+            ost = datetime.timedelta(seconds=self.ssos)
+        ltime = utime + osl
+        ttime = utime + ost
         lstr = ltime.strftime("%Y-%m-%d %H:%M:%S")
         tstr = ttime.strftime("%Y-%m-%d %H:%M:%S")
         return lstr, tstr
@@ -186,12 +188,13 @@ class Main:
         os = sos
         if not ida:
             os += gap
-        ost = datetime.timedelta(seconds=-os)
-        print(itime - ost)
-        if itime - ost < dtime:
-            if ida:
-                pass
-        return itime
+        ost = datetime.timedelta(seconds=os)
+        if itime + ost > dtime:
+            if not ida:
+                ost = datetime.timedelta(seconds=sos)
+            else:
+                ost = datetime.timedelta(seconds=sos + gap)
+        return ost
 
     def initDS(self, lcode: str = "au", scode: str = "cn") -> None:
         """
@@ -228,5 +231,5 @@ class Main:
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 6 + 2, gap2=24 * 2)
+    m = Main("沥心沙大桥", gap1=24 * 7 + 3, gap2=24 * 2)
     m.search()
