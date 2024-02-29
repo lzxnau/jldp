@@ -74,6 +74,7 @@ class Main:
             maxResults="20",
             relevanceLanguage="zh-Hans",
             type="video",
+            videoCategoryId="28",
         )
 
         response = request.execute()
@@ -119,9 +120,11 @@ class Main:
         rlist = []
         for item in response["items"]:
             vlist = []
+            vlist.append("Cate: " + item["snippet"]["categoryId"])
             vlist.append("Last: " + item["contentDetails"]["duration"])
             vlist.append("View: " + item["statistics"]["viewCount"])
-            vlist.append("Like: " + item["statistics"]["likeCount"])
+            lcs = lc if lc:= item["statistics"]["likeCount"] else "None"
+            vlist.append("Like: " + lcs)
             rlist.append(vlist)
 
         return rlist
@@ -231,5 +234,5 @@ class Main:
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", gap1=24 * 7 + 3, gap2=24 * 2)
+    m = Main("沥心沙大桥", order=0, gap1=24 * 0 + 4, gap2=24 * 10)
     m.search()
