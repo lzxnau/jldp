@@ -22,6 +22,7 @@ class Main:
     .. card::
     """
 
+    keyfile = "cfg/hrrd.key"
     dst_au = "2024-04-06 16:00:00+00:00"
     ida_au = False
 
@@ -35,8 +36,14 @@ class Main:
         scode: str = "cn",
     ) -> None:
         """Construct a class instance."""
-        api_key = "AIzaSyD9cTuxH_P4bOnaTz0sQIz7l9SGWYOb0sk"
-        self.youtube = build("youtube", "v3", developerKey=api_key)
+        self.keys = {}
+        with open(Main.keyfile, "r") as file:
+            for line in file:
+                key, value = line.strip().split("=")
+                self.keys[key] = value
+        self.youtube = build(
+            "youtube", "v3", developerKey=self.keys.get("youtube")
+        )
         self.initDS(lcode=lcode, scode=scode)
         self.fstr = fstr
         self.order = order
