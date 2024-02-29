@@ -22,38 +22,42 @@ class Main:
     .. card::
     """
 
+    inifile = "cfg/hrrd.ini"
     keyfile = "cfg/hrrd.key"
-    dst_au = "2024-04-06 16:00:00+00:00"
-    ida_au = False
+    dst_au = "2024-04-06 16:00:00+00:00"  # AU daylight saving time for UTC
+    ida_au = False  # Is daylight saving after the time
 
-    def __init__(
-        self,
-        fstr: str,
-        order: int = 0,
-        gap1: int = 0,
-        gap2: int = 24 * 2,
-        lcode: str = "au",
-        scode: str = "cn",
-    ) -> None:
+    def __init__(self) -> None:
         """Construct a class instance."""
+        # Read configurations from file
+        self.cfgs = {}
+        with open(Main.inifile, "r") as file:
+            for line in file:
+                key, value = line.strip().split("=")
+                self.cfgs[key] = value
+
+        # Read api keys from file
         self.keys = {}
         with open(Main.keyfile, "r") as file:
             for line in file:
                 key, value = line.strip().split("=")
                 self.keys[key] = value
+
+        # Create youtube connection
         self.youtube = build(
             "youtube", "v3", developerKey=self.keys.get("youtube")
         )
+
+        # Init timezone and daylight saving status for
+        # both local and source locations
         self.initDS(lcode=lcode, scode=scode)
-        self.fstr = fstr
-        self.order = order
-        self.gap1 = gap1
-        self.gap2 = gap2
+
+        # Get the gap in seconds between local timezone and UTC
         utc_now = datetime.datetime.utcnow()
         loc_now = datetime.datetime.now()
         self.ltz = int((loc_now - utc_now).total_seconds())
 
-    def search(self) -> None:
+    def search(self, mr: int = 49) -> None:
         """
         Run a method.
 
@@ -71,10 +75,11 @@ class Main:
             publishedBefore=uframe[0],
             publishedAfter=uframe[1],
             order=order,
-            maxResults="20",
+            maxResults=str(mr),
             relevanceLanguage="zh-Hans",
             type="video",
-            videoCategoryId="28",
+            # videoCategoryId="28",
+            # 1, 22 vlog, 23, 24 ente, 25 news, 28 tech
         )
 
         response = request.execute()
@@ -123,7 +128,9 @@ class Main:
             vlist.append("Cate: " + item["snippet"]["categoryId"])
             vlist.append("Last: " + item["contentDetails"]["duration"])
             vlist.append("View: " + item["statistics"]["viewCount"])
-            lcs = lc if (lc := item["statistics"]["likeCount"]) else "None"
+            lcs = "None"
+            if item["statistics"].get("likeCount") is not None:
+                lcs = item["statistics"]["likeCount"]
             vlist.append("Like: " + lcs)
             rlist.append(vlist)
 
@@ -234,5 +241,5 @@ class Main:
 if __name__ == "__main__":
     # m = Main("沥心沙大桥", gap1=24 * 2, gap2=24 * 6)
     # m.search()
-    m = Main("沥心沙大桥", order=0, gap1=24 * 0 + 4, gap2=24 * 10)
+    m = Main("沥心沙大桥", order=1, gap1=24 * 0 + 0, gap2=24 * 10)
     m.search()
