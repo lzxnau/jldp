@@ -123,7 +123,7 @@ class Main:
             vlist.append("Cate: " + item["snippet"]["categoryId"])
             vlist.append("Last: " + item["contentDetails"]["duration"])
             vlist.append("View: " + item["statistics"]["viewCount"])
-            lcs = lc if lc:= item["statistics"]["likeCount"] else "None"
+            lcs = lc if (lc := item["statistics"]["likeCount"]) else "None"
             vlist.append("Like: " + lcs)
             rlist.append(vlist)
 
